@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 
 import { AuthenticationService } from '../user/authentication.component.service';
+import { User } from '../user/user.component.model';
 //import {AuthenticationService} from '../_services/authentication.service';
 
 
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     error = '';
+    private user = new User();
+    
 
     constructor(
         private router: Router,
@@ -30,8 +33,10 @@ export class LoginComponent implements OnInit {
     
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
+        this.authenticationService.login(this.user)
             .subscribe(result => {
+
+                console.log('Resultado: ', result);
                 if (result === true) {
                     this.router.navigate(['/']);
                 } else {

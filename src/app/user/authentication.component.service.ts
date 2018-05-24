@@ -21,14 +21,9 @@ export class AuthenticationService {
 
     //return this.http.get(this.env.api + "/beneficiario").map(res => res.json()).catch(BeneficiarioService.handleError);
 
-    login(username: string, password: string) {
+    login(user) {
 
-        this.user.username = username;
-        this.user.password = password;
-        console.log('Autorizacion');
-        //return this.http.post(this.env.api + "/beneficiario", beneficiario).map(res => res);
-        return this.http.post(this.env.api +'/api/authenticate', JSON.stringify({ username: username, password: password }))
-        //return this.http.post(this.env.api +'/api/authenticate', this.user)
+        return this.http.post(this.env.api +'/api/authenticate', user)
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let token = response.json() && response.json().token;
@@ -37,7 +32,7 @@ export class AuthenticationService {
                     this.token = token;
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
+                    localStorage.setItem('currentUser', JSON.stringify({ username: user.username, token: token }));
 
                     // return true to indicate successful login
                     return true;
@@ -45,7 +40,10 @@ export class AuthenticationService {
                     // return false to indicate failed login
                     return false;
                 }
-            });
+            }, (err) => {
+                return false;
+            }
+        );
     }
 
     logout(): void {

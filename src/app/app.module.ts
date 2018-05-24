@@ -36,9 +36,9 @@ import { SearchBeneficiarioPipe }     from './pipe/beneficiario.filter.pipe';
 
 import { ParentescoService }        from './parentesco/parentesco.component.service';	
 
-import { fakeBackendProvider } from './helpers/fake-backend';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
+//import { fakeBackendProvider } from './helpers/fake-backend';
+//import { MockBackend, MockConnection } from '@angular/http/testing';
+//import { BaseRequestOptions } from '@angular/http';
 
 /* Routing Module */
 import { AppRoutingModule }    from './app-routing.module';
@@ -70,9 +70,9 @@ import { UserService }           from './user/user.component.service';
 				AuthGuard,
 				AuthenticationService,
 				UserService,
-				fakeBackendProvider,
-        		MockBackend,
-        		BaseRequestOptions
+				//fakeBackendProvider,
+        		//MockBackend,
+        		//BaseRequestOptions
                   ],
     declarations: [ 		
 				TipopensionMngComponent,

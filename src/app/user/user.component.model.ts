@@ -1,6 +1,10 @@
+import { Authority } from "./authorities.component.model";
+
 export class User {
-    id : Number;
-    username: string;
+    idUser : Number;
+    userName: string;
     password: string;
-    role: string;
+    rol: string;
+    token: string;
+    authorities: Authority;
 }
