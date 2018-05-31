@@ -59,16 +59,16 @@ const homeRoutes: Routes = [
 		{ path: 'tipopension', component : TipopensionComponent, canActivate: [AuthGuard] },
 		{ path: 'tipopension_mgmnt', component : TipopensionMngComponent, canActivate: [AuthGuard] },
 		
-		{ path: 'user', component : UserComponent },
-		{ path: 'user_mgmnt', component : UserMngComponent },
-		{ path: 'modulo', component : ModuloComponent},
-		{ path: 'modulo_mgmnt', component : ModuloMngComponent },
-		{ path: 'accion', component : AccionComponent},
-		{ path: 'accion_mgmnt', component : AccionMngComponent},
-		{ path: 'authority', component : AuthorityComponent},
-		{ path: 'authority_mgmnt', component : AuthorityMngComponent},
-		{ path: 'userAuthority', component : UserAuthorityComponent},
-		{ path: 'modulo_accion', component : ModuloAccionComponent}
+		{ path: 'user', component : UserComponent , canActivate: [AuthGuard] },
+		{ path: 'user_mgmnt', component : UserMngComponent, canActivate: [AuthGuard]  },
+		{ path: 'modulo', component : ModuloComponent, canActivate: [AuthGuard] },
+		{ path: 'modulo_mgmnt', component : ModuloMngComponent , canActivate: [AuthGuard] },
+		{ path: 'accion', component : AccionComponent, canActivate: [AuthGuard] },
+		{ path: 'accion_mgmnt', component : AccionMngComponent, canActivate: [AuthGuard] },
+		{ path: 'authority', component : AuthorityComponent, canActivate: [AuthGuard] },
+		{ path: 'authority_mgmnt', component : AuthorityMngComponent, canActivate: [AuthGuard] },
+		{ path: 'userAuthority', component : UserAuthorityComponent, canActivate: [AuthGuard] },
+		{ path: 'modulo_accion', component : ModuloAccionComponent, canActivate: [AuthGuard] }
 
 	  ]
 	}  
