@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { ActivatedRoute, Router }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -22,7 +22,7 @@ export class AfiliadoMngComponent implements OnInit {
   	public busquedaAfiliado='';
 	filterInputAfiliado = new FormControl();
 
-    constructor(private router: Router, private afiliadoService: AfiliadoService) {
+    constructor(private router: Router, private afiliadoService: AfiliadoService, private route: ActivatedRoute) {
 	   	   this.filterInputAfiliado.valueChanges.subscribe(busquedaAfiliado => {
 	         this.busquedaAfiliado = busquedaAfiliado;
 	       });
@@ -56,12 +56,13 @@ export class AfiliadoMngComponent implements OnInit {
 	
 
   add(){
-    this.router.navigate(['/afiliado']);
+    //this.router.navigate(['/afiliado']);
+    this.router.navigate([ '../afiliado' ], { relativeTo: this.route })
   }
 
   setClickedRowafiliado(index, afiliado){
 	this.afiliadoService.setAfiliado(afiliado);
-    this.router.navigate(['/afiliado']);
+  this.router.navigate([ '../afiliado' ], { relativeTo: this.route })
   }
 
 }

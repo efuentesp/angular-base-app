@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
 import { BeneficiarioService }                                  from '../beneficiario/beneficiario.component.service';
 import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
-
+import { Location } from '@angular/common';
 
 
 
@@ -31,7 +31,7 @@ export class BeneficiarioComponent implements OnInit {
 
 
     constructor(private router: Router, 
-				private beneficiarioService: BeneficiarioService
+				private beneficiarioService: BeneficiarioService, private location: Location, private route: ActivatedRoute
 
 ) {
 		
@@ -59,10 +59,13 @@ export class BeneficiarioComponent implements OnInit {
 
 
     save(beneficiario){
+      console.log('Beneficiario: ', this.beneficiario.parentescoId );
+      console.log('Beneficiario: ', this.beneficiario.nombre );
+      
       this.beneficiarioService.saveBeneficiario(this.beneficiario).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Beneficiario save successfully.', 'success');
-		  this.router.navigate(['/beneficiario_mgmnt']);
+          this.router.navigate([ '../beneficiario_mgmnt' ], { relativeTo: this.route })
         }else{
           swal('Error...', 'Beneficiario save unsuccessfully.', 'error');
         }
@@ -73,7 +76,9 @@ export class BeneficiarioComponent implements OnInit {
 
 
 	return(beneficiario){
-      this.router.navigate(['/beneficiario_mgmnt']);
+      this.location.back();
+      this.router.navigate([ '../beneficiario_mgmnt' ], { relativeTo: this.route })
+      //this.router.navigate(['/beneficiario_mgmnt']);
     }
 
 	

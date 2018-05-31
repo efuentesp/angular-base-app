@@ -1,5 +1,5 @@
 import { Injectable }                              from '@angular/core';
-import { environment }                             from "../../environments/environment";
+import { environment }                             from "../../../environments/environment";
 import { Http, Response }                          from "@angular/http";
 import { Headers, RequestOptions }                 from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -75,6 +75,8 @@ export class BeneficiarioService {
     }
 
     saveBeneficiario(beneficiario){
+
+        console.log ('BeneficiarioService: ', beneficiario);
 
 		if (!beneficiario.beneficiarioId){
             return this.http.post(this.env.api + "/beneficiario", beneficiario).map(res => res);

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { ActivatedRoute, Router }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -22,7 +22,8 @@ export class BeneficiarioMngComponent implements OnInit {
   	public busquedaBeneficiario='';
 	filterInputBeneficiario = new FormControl();
 
-    constructor(private router: Router, private beneficiarioService: BeneficiarioService) {
+    constructor(private router: Router, private beneficiarioService: BeneficiarioService, 
+        private route: ActivatedRoute) {
 	   	   this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
 	         this.busquedaBeneficiario = busquedaBeneficiario;
 	       });
@@ -56,12 +57,14 @@ export class BeneficiarioMngComponent implements OnInit {
 	
 
   add(){
-    this.router.navigate(['/beneficiario']);
+    //this.router.navigate(['/beneficiario']);
+    this.router.navigate([ '../beneficiario' ], { relativeTo: this.route })
+    
   }
 
   setClickedRowbeneficiario(index, beneficiario){
 	this.beneficiarioService.setBeneficiario(beneficiario);
-    this.router.navigate(['/beneficiario']);
+  this.router.navigate([ '../beneficiario' ], { relativeTo: this.route })
   }
 
 }

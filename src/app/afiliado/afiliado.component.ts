@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -8,7 +8,7 @@ import { Afiliado }                                         from '../afiliado/af
 
 import { BeneficiarioService }                                  from '../beneficiario/beneficiario.component.service';
 import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
-
+import { Location } from '@angular/common';
 
 
 
@@ -35,9 +35,9 @@ export class AfiliadoComponent implements OnInit {
 		public busquedaBeneficiario='';
 		filterInputBeneficiario = new FormControl();
 
-    constructor(private router: Router, 
+    constructor(private router: Router, private route: ActivatedRoute,
 				private afiliadoService: AfiliadoService
-		,private beneficiarioService: BeneficiarioService
+		,private beneficiarioService: BeneficiarioService, private location: Location
 
 ) {
 		
@@ -81,7 +81,8 @@ export class AfiliadoComponent implements OnInit {
       this.afiliadoService.saveAfiliado(this.afiliado).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Afiliado save successfully.', 'success');
-		  this.router.navigate(['/afiliado_mgmnt']);
+      //this.router.navigate(['/afiliado_mgmnt']);
+      this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
         }else{
           swal('Error...', 'Afiliado save unsuccessfully.', 'error');
         }
@@ -92,7 +93,10 @@ export class AfiliadoComponent implements OnInit {
 
 
 	return(afiliado){
-      this.router.navigate(['/afiliado_mgmnt']);
+      this.location.back();
+      //this.router.navigate(['/afiliado_mgmnt']);
+      this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
+
     }
 
 	  		setClickedRowbeneficiario(index, beneficiario){
