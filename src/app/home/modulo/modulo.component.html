@@ -1,0 +1,53 @@
+
+
+
+
+
+			<div class="x_panel">
+				<div class="x_title">
+				<h2>Modulo <small>Agregar Modulo</small></h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+
+					
+					<form #moduloForm="ngForm" id="moduloForm" data-parsley-validate>
+						
+						<input class="form-control" #moduloId="ngModel" moduloId="moduloId" name="moduloId" type="hidden" [(ngModel)]="modulo.moduloId">
+
+						<label for="modulo">Modulo * :</label>
+						<input class="form-control" #modulo="ngModel" id="modulo" name="modulo" type="text" [(ngModel)]="modulo.modulo" required>
+		
+						<br/>
+						<label>Estatus * :</label>
+						<p>
+						Activo:        <input type="radio" class="flat" value="1"     name="estatus" [(ngModel)]="modulo.estatus" />		
+						Inactivo:      <input type="radio" class="flat" value="0"     name="estatus" [(ngModel)]="modulo.estatus" />		
+						</p>
+
+						<br/>
+						<label for="fechacreacion">Fechacreacion * :</label>
+						<input class="form-control" #correo="ngModel" id="fechacreacion" name="fechacreacion" type="fechacreacion" [(ngModel)]="modulo.fechacreacion" required>
+						
+						<label for="fechamodificacion">Fechamodificacion * :</label>
+						<input class="form-control" #fechamodificacion="ngModel" id="fechamodificacion" name="fechamodificacion" type="text" [(ngModel)]="modulo.fechamodificacion" required>
+						
+						<br/>
+						<div class="col-sm-12">
+							<div class="input-group">
+							<button class="btn btn-primary" (click)="save(moduloForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+							<button class="btn btn-default" (click)="return(moduloForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+
+
+

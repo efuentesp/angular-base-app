@@ -1,165 +1,221 @@
-<div class="right_col" role="main">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                    <h2>Home</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-    
-                        <p>You're logged in with JWT!!</p>
-                        <div>
-                            Users from secure api end point:
-                            <ul>
-                                <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-                            </ul>
-                        </div>
-                        <p><a [routerLink]="['/login']">Logout</a></p>
-    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+<body class="nav-md">
+	<div class="container body">
+			<div class="main_container">
+				<div class="col-md-3 left_col">
+					<div class="left_col scroll-view">
+						<div class="navbar nav_title" style="border: 0;">
+							<a href="index.html" class="site_title"><img src="../../assets/img/logo.png" width="30px"> <span>PSG</span></a>
+						</div>
+						<div class="clearfix"></div>
+						<div class="profile clearfix">
+							<div class="profile_pic">
+								<img src="assets/img/img.jpg" alt="..." class="img-circle profile_img">
+							</div>
+							<div class="profile_info">
+								<span>Welcome,</span>
+								<h2>{{valueName}} </h2>
+							</div>
+						</div>
+						<br />
 
-    
+						<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+								<div class="menu_section">
+									<h3>General</h3>
+						
+						<div *ngFor="let user of user.authorities"> 
+								
+								<div *ngIf="user.authority == 'admin'">
+										<ul class="nav side-menu">
+												<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu">
+															<li>
+																<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="beneficiario">
+																	<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
+																	<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario">Agregar Beneficiario</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="afiliado">
+																	<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active"  title="Administrar Afiliado">Administrar Afiliado</a></li>
+																	<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Tipopension"><i class="fa fa-edit"></i>Tipopension<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="tipopension">
+																	<li><a [routerLink]="['tipopension_mgmnt']" routerLinkActive="active" title="Administrar Tipopension">Administrar Tipopension</a></li>
+																	<li><a [routerLink]="['tipopension']" routerLinkActive="active" title="Agregar Tipopension">Agregar Tipopension</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Solicitudpension"><i class="fa fa-edit"></i>Solicitudpension<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="solicitudpension">
+																	<li><a [routerLink]="['solicitudpension_mgmnt']" routerLinkActive="active" title="Administrar Solicitudpension">Administrar Solicitudpension</a></li>
+																	<li><a [routerLink]="['solicitudpension']" routerLinkActive="active" title="Agregar Solicitudpension">Agregar Solicitudpension</a></li>
+																</ul>
+															</li>
+													</ul>
+												</li>
+												
+												<li><a><i class="fa fa-user"></i>Management Users <span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu">
+														<li><a [routerLink]="['user_mgmnt']" routerLinkActive="active" title="Administrar User">Administrar User</a></li>
+														<li><a [routerLink]="['user']" routerLinkActive="active" title="Agregar User">Agregar User</a></li>
+														
+														<!--<li><a [routerLink]="['userAuthority']" routerLinkActive="active" title="User Authority">User Authority</a></li>-->
+													</ul>
+												</li>
+												<li><a><i class="fa fa-sitemap"></i>Management Modules <span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu">
+														<li><a [routerLink]="['accion_mgmnt']" routerLinkActive="active" title="Administrar Accion">Administrar Accion</a></li>
+														<li><a [routerLink]="['accion']" routerLinkActive="active" title="Agregar Accion">Agregar Accion</a></li>
+														<li><a [routerLink]="['modulo_mgmnt']" routerLinkActive="active" title="Administrar Modulo">Administrar Modulo</a></li>
+														<li><a [routerLink]="['modulo']" routerLinkActive="active" title="Agregar Modulo">Agregar Modulo</a></li>
+														<li><a [routerLink]="['modulo_accion']" routerLinkActive="active" title="Modulo Accion">Modulo Accion</a></li>
+														<li><a [routerLink]="['authority_mgmnt']" routerLinkActive="active" title="Administrar Authority">Administrar Authority</a></li>
+														<li><a [routerLink]="['authority']" routerLinkActive="active" title="Agregar Authority">Agregar Authority</a></li>
+													</ul>
+												</li>
+											</ul>
+								</div>
+								<div *ngIf="user.authority == 'user'">
+										<ul class="nav side-menu">
+												<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu">
+															<li>
+																<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="beneficiario">
+																	<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
+																	<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario">Agregar Beneficiario</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="afiliado">
+																	<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active"  title="Administrar Afiliado">Administrar Afiliado</a></li>
+																	<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Tipopension"><i class="fa fa-edit"></i>Tipopension<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="tipopension">
+																	<li><a [routerLink]="['tipopension_mgmnt']" routerLinkActive="active" title="Administrar Tipopension">Administrar Tipopension</a></li>
+																	<li><a [routerLink]="['tipopension']" routerLinkActive="active" title="Agregar Tipopension">Agregar Tipopension</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Solicitudpension"><i class="fa fa-edit"></i>Solicitudpension<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="solicitudpension">
+																	<li><a [routerLink]="['solicitudpension_mgmnt']" routerLinkActive="active" title="Administrar Solicitudpension">Administrar Solicitudpension</a></li>
+																	<li><a [routerLink]="['solicitudpension']" routerLinkActive="active" title="Agregar Solicitudpension">Agregar Solicitudpension</a></li>
+																</ul>
+															</li>
+													</ul>
+												</li>
+											</ul>
+								</div>
+								<div *ngIf="user.authority == 'default'">
+										{{user.authority}}
+								</div>
+						</div>
+						
 
-<!--
-<div class="nav-md">
-    <div class="container body">
+						
+								
+								
+								
+								
+							</div>
+						</div>
 
-        <div class="main_container">
-            
-            <div class="col-md-3 left_col">
-                <div class="left_col scroll-view">
-                    <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>PSG</span></a>
-                    </div>
-                    <div class="clearfix">
-                    </div>
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="assets/images/img.jpg" alt="..." class="img-circle profile_img">
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>John Doe</h2>
-                        </div>
-                    </div>
-                    <br />
-        
-                   
-                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
-                            <h3>General</h3>
-                            <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                <li><a href="index.html">Dashboard</a></li>
-                                <li><a href="index2.html">Dashboard2</a></li>
-                                <li><a href="index3.html">Dashboard3</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" id="beneficiario">
-                                    <li><a href="/#/beneficiario_mgmnt" routerLink="beneficiario_mgmnt" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
-                                    <li><a href="/#/beneficiario"  routerLink="beneficiario" title="Agregar Beneficiario">Agregar Beneficiario</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" id="afiliado">
-                                    <li><a href="/#/afiliado_mgmnt" routerLink="afiliado_mgmnt" title="Administrar Afiliado">Administrar Afiliado</a></li>
-                                    <li><a href="/#/afiliado"  routerLink="afiliado" title="Agregar Afiliado">Agregar Afiliado</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a title="Tipopension"><i class="fa fa-edit"></i>Tipopension<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" id="tipopension">
-                                    <li><a href="/#/tipopension_mgmnt" routerLink="tipopension_mgmnt" title="Administrar Tipopension">Administrar Tipopension</a></li>
-                                    <li><a href="/#/tipopension"  routerLink="tipopension" title="Agregar Tipopension">Agregar Tipopension</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a title="Solicitudpension"><i class="fa fa-edit"></i>Solicitudpension<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu" id="solicitudpension">
-                                    <li><a href="/#/solicitudpension_mgmnt" routerLink="solicitudpension_mgmnt" title="Administrar Solicitudpension">Administrar Solicitudpension</a></li>
-                                    <li><a href="/#/solicitudpension"  routerLink="solicitudpension" title="Agregar Solicitudpension">Agregar Solicitudpension</a></li>
-                                </ul>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                   
-                    <div class="sidebar-footer hidden-small">
-                    <a data-toggle="tooltip" data-placement="top" title="Settings">
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Lock">
-                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                    </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                    </a>
-                    </div>
-                 
-        
-                </div>
-            </div>
-           
-            <div class="top_nav">
-                <div class="nav_menu">
-                    <nav>
-                    <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                    </div>
-        
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="">
-                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <img src="assets/images/img.jpg" alt="">John Doe
-                            <span class=" fa fa-angle-down"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-usermenu pull-right">
-                            <li><a href="javascript:;"> Profile</a></li>
-                            <li>
-                            <a href="javascript:;">
-                                <span class="badge bg-red pull-right">50%</span>
-                                <span>Settings</span>
-                            </a>
-                            </li>
-                            <li><a href="javascript:;">Help</a></li>
-                            <li><p><a href="/login"  routerLink="login">Logout</a></p></li>
-                        </ul>
-                        </li>
-                    </ul>
-                    </nav>
-                </div>
-            </div>
-            
+					
+						<div class="sidebar-footer hidden-small">
+							<a data-toggle="tooltip" data-placement="top" title="Settings">
+								<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+							</a>
+							<a data-toggle="tooltip" data-placement="top" title="FullScreen">
+								<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+							</a>
+							<a data-toggle="tooltip" data-placement="top" title="Lock">
+								<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+							</a>
+							
+							<a data-toggle="tooltip" data-placement="top" title="Logout" href="/login">
+								<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+							</a>
+						</div>
+						
+
+					</div>
+				</div>
+			
+			 
+				<div class="top_nav">
+					<div class="nav_menu">
+						<nav>
+							<div class="nav toggle">
+								<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+							</div>
+	
+							<ul class="nav navbar-nav navbar-right">
+								<li class="">
+									<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+										<img src="assets/img/img.jpg" alt="">{{valueName}} 
+										<span class=" fa fa-angle-down"></span>
+									</a>
+									<ul class="dropdown-menu dropdown-usermenu pull-right">
+										<li><a href="javascript:;"> Profile</a></li>
+										<li>
+											<a href="javascript:;">
+												<span class="badge bg-red pull-right">50%</span>
+												<span>Settings</span>
+											</a>
+										</li>
+										<li><a href="javascript:;">Help</a></li>
+										<li><a [routerLink]="['../login']" routerLinkActive="active" title="Logout">Logout</a> </li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				
+				<div class="container body">
+						<div class="right_col" role="main">
+								<div class="row">
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<div class="dashboard_graph">
+													<div [ngClass] = "'child-container'">
+															<!--<div *ngIf="image">
+															<img src="../../assets/img/appdev.png" class="img-home">
+															</div>-->
+															<router-outlet></router-outlet>	
+														</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+								
+									</div>
+								
+								
+								 
+									</div>
+								</div>
+
+			</div>
+		</div>
+
+		<footer>
+				<div class="pull-right">
+					©2018 All Rights Reserved. 
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			
+
+</body>
 
 
-
-        </div>
-    </div>
-    <footer>
-        <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-        </div>
-        <div class="clearfix"></div>
-    </footer>
-
-  </div>
--->
-                        
 

@@ -18,7 +18,8 @@ export class AuthService {
   login(user: User){
     if (user.userName !== '' && user.password != '' ){
       this.loggedIn.next(true);
-      this.router.navigate(['/']);
+     
+      this.router.navigate(['/home']);
     }
   }
 

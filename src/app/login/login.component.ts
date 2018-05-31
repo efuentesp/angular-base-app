@@ -26,25 +26,28 @@ export class LoginComponent implements OnInit {
         private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
-        // reset login status
         this.authenticationService.logout();
     }
 
-    
     login() {
         this.loading = true;
         this.authenticationService.login(this.user)
             .subscribe(result => {
-
-                console.log('Resultado: ', result);
-                if (result === true) {
-                    this.router.navigate(['/']);
-                } else {
-                  this.error = 'Username or password is incorrect';
-                  this.loading = false;
-                  swal('Error...', this.error , 'error');
-                    
-                }
-            });
+            if (result){
+                this.router.navigate(['/home']);
+                window.location.reload();
+                //this.location.pathname = '/home';
+                
+            }else{
+                this.error = 'Username or password is incorrect';
+                this.loading = false;
+                //swal('Error...', this.error , 'error');
+            }
+        }, error => {
+            this.error = 'Username or password is incorrect';
+            this.loading = false;
+            //swal('Error...', this.error , 'error');
+        });
+            
     }
 }

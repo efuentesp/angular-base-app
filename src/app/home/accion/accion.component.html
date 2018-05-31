@@ -1,0 +1,51 @@
+
+
+
+
+
+			<div class="x_panel">
+				<div class="x_title">
+				<h2>Accion <small>Agregar Accion</small></h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+
+					<form #accionForm="ngForm" id="accionForm" data-parsley-validate>
+						
+						<input class="form-control" #accionId="ngModel" accionId="accionId" name="accionId" type="hidden" [(ngModel)]="accion.accionId">
+
+						<label for="accion">Accion * :</label>
+						<input class="form-control" #accion="ngModel" id="accion" name="accion" type="text" [(ngModel)]="accion.accion" required>
+		
+						<br/>
+						<label>Estatus * :</label>
+						<p>
+						Activo:        <input type="radio" class="flat" value="1"     name="estatus" [(ngModel)]="accion.estatus" />		
+						Inactivo:      <input type="radio" class="flat" value="0"     name="estatus" [(ngModel)]="accion.estatus" />		
+						</p>
+
+						<br/>
+						<label for="fechacreacion">Fechacreacion * :</label>
+						<input class="form-control" #correo="ngModel" id="fechacreacion" name="fechacreacion" type="fechacreacion" [(ngModel)]="accion.fechacreacion" required>
+						
+						<label for="fechamodificacion">Fechamodificacion * :</label>
+						<input class="form-control" #fechamodificacion="ngModel" id="fechamodificacion" name="fechamodificacion" type="text" [(ngModel)]="accion.fechamodificacion" required>
+						
+						<br/>
+						<div class="col-sm-12">
+							<div class="input-group">
+							<button class="btn btn-primary" (click)="save(accionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+							<button class="btn btn-default" (click)="return(accionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
+
+

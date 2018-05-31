@@ -1,35 +1,12 @@
-/*import { Component } from '@angular/core';
-
+import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  `,
-  styles: []
+	  <router-outlet></router-outlet>	
+  `
 })
-export class AppComponent{
+export class AppComponent { 
+  title = 'Angular';
 }
 
-*/
-
-
-import { Component, OnInit, Input }   from '@angular/core';
-
-@Component ({
-    /*
-    selector: 'app-root'
-    ,templateUrl: './app.component.html'
-    */
-   selector: 'app-root',
-   template: `
-     <router-outlet></router-outlet>
-     <app-footer></app-footer>
-    `,
-})
-
-export class AppComponent
-{
-    title = 'Angular';
-}
 

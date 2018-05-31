@@ -1,28 +1,74 @@
-import { Component, OnInit } from '@angular/core';
-
-import { User } from '../user/user.component.model';
-import { UserService } from '../user/user.component.service';
+import { Component } from '@angular/core';
+import {User} from  '../user/user.component.model';
+import { Authority } from '../user/authorities.component.model';
 
 @Component({
-    selector: 'app-root',
-    moduleId: module.id,
-    templateUrl: 'home.component.html'
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
+export class HomeComponent { 
 
+  public user: User;
+  public valueName: string;
+  public array: Authority;
+  public image: boolean;
+  public admin: boolean;
+  public default: boolean;
+  public usertype: boolean;
+  public system: boolean;
+  public authorities: string[] = []; 
+  public authority : Authority [] = [];
 
-export class HomeComponent implements OnInit {
-    users: User[] = [];
+  ngOnInit() {
 
-    constructor(private userService: UserService) {}
+    this.image = true;
 
-    ngOnInit() {
+    console.log('Usuario Home:', localStorage.getItem('currentUser'));
 
-        // get users from secure api end point
-        this.userService.getUsers()
-            .subscribe(users => {
-                this.users = users;
-            });
-      
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log ('User: ', this.user);
+    console.log ('UserAuth: ', this.user.authorities);
+    console.log ('UserAuth: ', this.user.token);
+    console.log ('UserAuth: ', this.user.userName);
+    console.log ('UserAuth: ', this.user.idUser);
+    
+    //console.log ('Username: ', this.user.);
+
+    this.array = this.user.authorities
+    this.valueName = this.user.userName;
+
+    console.log(this.array.authority);
+    /*
+    for (let entry of this.user.authorities) {
+      console.log('Hola:',entry.authority); // 1, "string", false
+      if  (entry.authority == 'administrador'){
+        this.admin = true;
+      }
+
+      if  (entry.authority == 'system'){
+        this.system = true;
+      }
+
+      if  (entry.authority == 'default'){
+        this.default = true;
+      }
+
+      if  (entry.authority == 'user'){
+        this.usertype = true;
+      }
+
     }
-
+*/  
+    
+    //this.hasAnyAuthority(this.user.authorities.authority);
 }
+
+  //isAdmin(): boolean {
+  //  return true;
+  //}
+
+  isName():string{
+    return this.valueName;
+  }
+}
+    

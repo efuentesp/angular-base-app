@@ -4,9 +4,9 @@ import {UserService} from '../user/user.component.service';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-root'
+  //templateUrl: './user.component.html',
+  //styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
   //displayedColumns = ['id', 'username', 'salary', 'age'];
