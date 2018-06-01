@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -22,7 +22,7 @@ export class UserMngComponent implements OnInit {
   	public busquedaUser='';
 	filterInputUser = new FormControl();
 
-    constructor(private router: Router, private userService: UserService) {
+    constructor(private router: Router, private userService: UserService,  private route: ActivatedRoute) {
 	   	   this.filterInputUser.valueChanges.subscribe(busquedaUser => {
 	         this.busquedaUser = busquedaUser;
 	       });
@@ -37,6 +37,7 @@ export class UserMngComponent implements OnInit {
     loadUsers() {
       this.userService.getAllUser().subscribe(data => {
         if (data) {
+          console.log('Usuarios: ', data)
           this.userList = data;
         }
       }, error => {
@@ -56,12 +57,12 @@ export class UserMngComponent implements OnInit {
 	
 
   add(){
-    this.router.navigate(['/user']);
+    this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
 
-  setClickedRowuser(index, user){
-	this.userService.setUser(user);
-    this.router.navigate(['/user']);
+  setClickedRowUser(index, user){
+	  this.userService.setUser(user);
+    this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
 
 }

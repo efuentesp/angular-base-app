@@ -59,26 +59,17 @@ export class AccionService {
     }
 
     clear() {
-            /*
-			this.afiliado.fecha_afiliacion = '';    
-			this.afiliado.foto = '';    
-			this.afiliado.correo = '';    
-			this.afiliado.apellido_materno = '';    
-			this.afiliado.acta_nacimiento = '';    
-			this.afiliado.monto_pension = '';    
-			this.afiliado.apellido_paterno = '';    
-			this.afiliado.observaciones = '';    
-			this.afiliado.nombre = '';    
-			this.afiliado.semanas_cotizadas = '';    
-			this.afiliado.nss = '';    
-			this.afiliado.generoId = null;
-			this.afiliado.beneficiarioId = null;
-            this.afiliado.afiliadoId = null;
-            */
+
+        this.accion.accion = '';
+        this.accion.fechaCreacion = '';
+        this.accion.fechaModificacion = '';
+        this.accion.estatus = 1;
+        this.accion.accionId = null;
+
     }
 
     saveAccion(accion){
-
+        console.log('AccionService: ', accion);
 		if (!accion.accionId){
             return this.http.post(this.env.api + "/accion", accion).map(res => res);
         }else{

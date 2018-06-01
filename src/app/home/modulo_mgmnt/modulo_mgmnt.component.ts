@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -22,7 +22,7 @@ export class ModuloMngComponent implements OnInit {
   	public busquedaModulo='';
 	filterInputModulo = new FormControl();
 
-    constructor(private router: Router, private moduloService: ModuloService) {
+    constructor(private router: Router, private moduloService: ModuloService, private route: ActivatedRoute) {
 	   	   this.filterInputModulo.valueChanges.subscribe(busquedaModulo => {
 	         this.busquedaModulo = busquedaModulo;
 	       });
@@ -46,7 +46,7 @@ export class ModuloMngComponent implements OnInit {
     save(modulo){
 
       // Eliminar
-      this.modulo.estatus = 1;
+      //this.modulo.estatus = 1;
 
       this.moduloService.saveModulo(this.modulo).subscribe(res => {
         if (res.status == 201){
@@ -60,12 +60,12 @@ export class ModuloMngComponent implements OnInit {
 	
 
   add(){
-    this.router.navigate(['/modulo']);
+    this.router.navigate([ '../modulo_mgmnt' ], { relativeTo: this.route })
   }
 
   setClickedRowModulo(index, modulo){
-	this.moduloService.setModulo(modulo);
-    this.router.navigate(['/modulo']);
+	  this.moduloService.setModulo(modulo);
+    this.router.navigate([ '../modulo_mgmnt' ], { relativeTo: this.route })
   }
 
 }

@@ -49,10 +49,10 @@ export class AuthorityComponent implements OnInit {
 	}
 
     ngOnInit() {
-        this.authority = this.accionService.getAuthority();
+        /*this.authority = this.accionService.getAuthority();
         this.loadAuthoritys();
 
-		this.loadBeneficiarios();
+		this.loadBeneficiarios();*/
 
     }
 

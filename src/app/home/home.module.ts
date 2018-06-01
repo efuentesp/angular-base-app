@@ -97,6 +97,6 @@ import { ModuloAccionComponent } from './modulo_accion/modulo_accion.component';
 			   ModuloService,
 			   AccionService,
 			   AuthorityService,
-			   UserService 
+			   UserService
 ]})
 export class HomeModule { }

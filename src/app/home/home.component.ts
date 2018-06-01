@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import {User} from  '../user/user.component.model';
 import { Authority } from '../user/authorities.component.model';
+import { BeneficiarioMngComponent } from './beneficiario_mgmnt/beneficiario_mgmnt.component';
+import { BeneficiarioService } from './beneficiario/beneficiario.component.service';
+import { Beneficiario } from './beneficiario/beneficiario.component.model';
+import { ActivatedRoute, Router }                                          from '@angular/router';
 
 @Component({
   templateUrl: './home.component.html',
@@ -18,6 +22,17 @@ export class HomeComponent {
   public system: boolean;
   public authorities: string[] = []; 
   public authority : Authority [] = [];
+  public beneficiario: Beneficiario;
+
+
+  constructor(
+    private beneficiarioService: BeneficiarioService,
+    private router: Router,
+    private route: ActivatedRoute
+
+) {
+}
+
 
   ngOnInit() {
 
@@ -70,5 +85,18 @@ export class HomeComponent {
   isName():string{
     return this.valueName;
   }
+
+  resetBeneficiario(){
+
+    console.log('Inicio');
+    this.beneficiarioService.setEdit(false);
+    
+    this.beneficiario.apellido_materno = "";
+    this.beneficiario.apellido_paterno = "";
+    this.beneficiarioService.setBeneficiario(this.beneficiario);
+
+    console.log('Fin');
+  }
+
 }
     

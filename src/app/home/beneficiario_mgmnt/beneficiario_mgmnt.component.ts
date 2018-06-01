@@ -14,25 +14,26 @@ import { SearchBeneficiarioPipe }                               from "../pipe/be
 
 export class BeneficiarioMngComponent implements OnInit {
 
-    title = 'Nuevo Beneficiario';
+    title = 'Beneficiario';
     beneficiarioList: Beneficiario;
     beneficiario: Beneficiario;
     form: any;
+    public flag: boolean = false;
 
   	public busquedaBeneficiario='';
-	filterInputBeneficiario = new FormControl();
+    filterInputBeneficiario = new FormControl();
 
-    constructor(private router: Router, private beneficiarioService: BeneficiarioService, 
-        private route: ActivatedRoute) {
-	   	   this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
-	         this.busquedaBeneficiario = busquedaBeneficiario;
-	       });
-	}
+      constructor(private beneficiarioService: BeneficiarioService, 
+                  private route: ActivatedRoute,
+                  private router: Router) {
+          this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
+            this.busquedaBeneficiario = busquedaBeneficiario;
+          });
+    }
 
     ngOnInit() {
-
         this.loadBeneficiarios();
-
+        this.beneficiarioService.setEdit(false);
     }
 
     loadBeneficiarios() {
@@ -44,26 +45,17 @@ export class BeneficiarioMngComponent implements OnInit {
         swal('Error...', 'An error occurred while calling the beneficiarios.', 'error');
       });
     }
-    save(beneficiario){
-      this.beneficiarioService.saveBeneficiario(this.beneficiario).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'Beneficiario save successfully.', 'success');
-        }else{
-          swal('Error...', 'Beneficiario save unsuccessfully.', 'error');
-        }
-
-      } );
-    }
 	
-
   add(){
-    //this.router.navigate(['/beneficiario']);
-    this.router.navigate([ '../home/beneficiario' ], { relativeTo: this.route })
+    this.beneficiarioService.setEdit(false);
+    this.beneficiarioService.clear();
+    this.router.navigate([ '../beneficiario' ], { relativeTo: this.route })  
   }
 
-  setClickedRowbeneficiario(index, beneficiario){
-	this.beneficiarioService.setBeneficiario(beneficiario);
-    this.router.navigate(['/beneficiario']);
+  setClickedRowBeneficiario(index, beneficiario){
+    this.beneficiarioService.setBeneficiario(beneficiario);
+    this.beneficiarioService.setEdit(true);
+    this.router.navigate([ '../beneficiario' ], { relativeTo: this.route })
   }
 
 }

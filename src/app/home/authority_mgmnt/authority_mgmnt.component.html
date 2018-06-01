@@ -9,11 +9,11 @@
 				<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
-					<span class="header">Busqueda</span>
-					<span class="section">Criterios de busqueda</span>
+					<!-- <span class="header">Busqueda</span>
+					<span class="section">Criterios de busqueda</span> -->
 						
 						<form #authorityMngForm="ngForm" class="editForm" novalidate>
-								<div class='row'>
+								<!-- <div class='row'>
 									<div class="col-lg-6">
 											<div class="input-group">
 												<input type="text" class="form-control" placeholder="Search for...">
@@ -38,7 +38,7 @@
 										<div class="input-group">
 										</div>
 									</div>
-								</div>
+								</div> -->
 
 								<div class='row'>
 									<button class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
@@ -91,7 +91,7 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr *ngFor="let authority of authorityList | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowauthority(i, authority)" >
+															<tr *ngFor="let authority of authorityList | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowAuthority(i, authority)" >
 																	<td>{{authority.rol}}</td>
 																	<td>{{authority.estatus}}</td>
 																	<td>{{authority.fechacreacion}}</td>

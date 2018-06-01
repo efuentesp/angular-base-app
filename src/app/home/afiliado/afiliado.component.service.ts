@@ -14,12 +14,25 @@ export class AfiliadoService {
     private isAfiliadoFormValid: boolean = false;
     private env: any = environment;
     private afiliado = new Afiliado();
+    private flag :boolean = false;
 
-    constructor(private http: Http) {
-    }
+    constructor(private http: Http) {}
 
     getAllAfiliado(){
       return this.http.get(this.env.api + "/afiliado").map(res => res.json()).catch(AfiliadoService.handleError);
+    }
+
+    saveAfiliado(afiliado){
+        console.log('Afiliado:', afiliado);
+		if (!afiliado.afiliadoId){
+            return this.http.post(this.env.api + "/afiliado", afiliado).map(res => res);
+        }else{
+            return this.http.put(this.env.api + "/afiliado/"+ afiliado.afiliadoId, afiliado).map(res => res);
+        }
+    }
+
+    deleteAfiliado(afiliado){
+        return this.http.delete(this.env.api + "/afiliado/"+afiliado.afiliadoId, afiliado).map(res => res);
     }
 
     resetAfiliado(): Afiliado {
@@ -42,16 +55,15 @@ export class AfiliadoService {
 					nss: this.afiliado.nss, 
 					
 					generoId: this.afiliado.generoId,
-					beneficiarioId: this.afiliado.beneficiarioId,
-					afiliadoId: this.afiliado.afiliadoId	
-
+                    beneficiarioId: this.afiliado.beneficiarioId,
+                    afiliadoId: this.afiliado.afiliadoId
         };
         return afiliado;
     }
 
     setAfiliado(afiliado: Afiliado) {
        
-	this.isAfiliadoFormValid = true;
+	        this.isAfiliadoFormValid = true;
 			this.afiliado.fecha_afiliacion = afiliado.fecha_afiliacion;    
 			this.afiliado.foto = afiliado.foto;    
 			this.afiliado.correo = afiliado.correo;    
@@ -66,15 +78,10 @@ export class AfiliadoService {
 			this.afiliado.generoId = afiliado.generoId;
 			this.afiliado.beneficiarioId = afiliado.beneficiarioId;
 			this.afiliado.afiliadoId        = afiliado.afiliadoId;
-        	this.validateAfiliado();
     }
 
     isFormValid() {
         return this.isAfiliadoFormValid;
-    }
-
-    validateAfiliado() {
-
     }
 
     clear() {
@@ -95,14 +102,12 @@ export class AfiliadoService {
 			this.afiliado.afiliadoId = null;
     }
 
-    saveAfiliado(afiliado){
+    setEdit(flag){
+        this.flag = flag;
+    }
 
-		if (!afiliado.afiliadoId){
-            return this.http.post(this.env.api + "/afiliado", afiliado).map(res => res);
-        }else{
-            return this.http.put(this.env.api + "/afiliado/"+afiliado.afiliadoId, afiliado).map(res => res);
-        }
-     
+    getEdit(){
+        return this.flag;
     }
 
 	private static handleError(error: Response | any) {
@@ -119,6 +124,6 @@ export class AfiliadoService {
         errMsg = error.message ? error.message : error.toString();
     }
 
-    return Observable.throw(errMsg);
+        return Observable.throw(errMsg);
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -22,16 +22,14 @@ export class AuthorityMngComponent implements OnInit {
   	public busquedaAccion='';
 	filterInputAccion = new FormControl();
 
-    constructor(private router: Router, private authorityService: AuthorityService) {
+    constructor(private router: Router, private authorityService: AuthorityService, private route: ActivatedRoute) {
 	   	   this.filterInputAccion.valueChanges.subscribe(busquedaAccion => {
 	         this.busquedaAccion = busquedaAccion;
 	       });
 	}
 
     ngOnInit() {
-
         this.loadAuthoritys();
-
     }
 
     loadAuthoritys() {
@@ -56,12 +54,12 @@ export class AuthorityMngComponent implements OnInit {
 	
 
   add(){
-    this.router.navigate(['/authority']);
+    this.router.navigate([ '../authority' ], { relativeTo: this.route })
   }
 
   setClickedRowauthority(index, authority){
-	this.authorityService.setAuthority(authority);
-    this.router.navigate(['/authority']);
+	  this.authorityService.setAuthority(authority);
+    this.router.navigate([ '../authority' ], { relativeTo: this.route })
   }
 
 }

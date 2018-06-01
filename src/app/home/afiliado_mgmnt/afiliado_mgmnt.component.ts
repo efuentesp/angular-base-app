@@ -7,6 +7,7 @@ import { AfiliadoService }                                  from '../afiliado/af
 import { Afiliado }                                         from '../afiliado/afiliado.component.model';
 
 import { SearchAfiliadoPipe }                               from "../pipe/afiliado.filter.pipe";
+import { BeneficiarioService } from '../beneficiario/beneficiario.component.service';
 @Component ({
     selector: 'app-view',
     templateUrl: './afiliado_mgmnt.component.html'
@@ -14,24 +15,26 @@ import { SearchAfiliadoPipe }                               from "../pipe/afilia
 
 export class AfiliadoMngComponent implements OnInit {
 
-    title = 'Nuevo Afiliado';
+    title = 'Afiliado';
     afiliadoList: Afiliado;
     afiliado: Afiliado;
     form: any;
 
   	public busquedaAfiliado='';
-	filterInputAfiliado = new FormControl();
+	  filterInputAfiliado = new FormControl();
 
-    constructor(private router: Router, private afiliadoService: AfiliadoService, private route: ActivatedRoute) {
-	   	   this.filterInputAfiliado.valueChanges.subscribe(busquedaAfiliado => {
-	         this.busquedaAfiliado = busquedaAfiliado;
+    constructor(private afiliadoService: AfiliadoService, 
+                private route: ActivatedRoute,
+                private router: Router,
+                private beneficiarioService: BeneficiarioService) {
+	   	      this.filterInputAfiliado.valueChanges.subscribe(busquedaAfiliado => {
+	          this.busquedaAfiliado = busquedaAfiliado;
 	       });
 	}
 
     ngOnInit() {
-
         this.loadAfiliados();
-
+        this.afiliadoService.setEdit(false);
     }
 
     loadAfiliados() {
@@ -43,26 +46,18 @@ export class AfiliadoMngComponent implements OnInit {
         swal('Error...', 'An error occurred while calling the afiliados.', 'error');
       });
     }
-    save(afiliado){
-      this.afiliadoService.saveAfiliado(this.afiliado).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'Afiliado save successfully.', 'success');
-        }else{
-          swal('Error...', 'Afiliado save unsuccessfully.', 'error');
-        }
-
-      } );
-    }
-	
-
+  
   add(){
-    //this.router.navigate(['/afiliado']);
-    this.router.navigate([ '../afiliado' ], { relativeTo: this.route })
+    this.afiliadoService.setEdit(false);
+    this.afiliadoService.clear();
+    this.router.navigate([ '../afiliado' ], { relativeTo: this.route })  
   }
 
-  setClickedRowafiliado(index, afiliado){
-	this.afiliadoService.setAfiliado(afiliado);
-    this.router.navigate(['/afiliado']);
+  setClickedRowAfiliado(index, afiliado){
+    this.afiliadoService.setAfiliado(afiliado);
+    this.beneficiarioService.getBeneficiarioById(afiliado.getBeneficiarioById);
+    this.afiliadoService.setEdit(true);
+    this.router.navigate([ '../afiliado' ], { relativeTo: this.route })
   }
 
 }

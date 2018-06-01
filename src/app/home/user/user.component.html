@@ -40,22 +40,12 @@
 							<div *ngFor="let modulo of modulosList" style="float:left; width:25%;" >
 								<b>{{modulo.modulo}}</b> 
 								<div *ngFor="let accion of accionsList" >
-									<input type="checkbox" class="flat" value="{{accion.accion}}"  name="accion" [(ngModel)]="user.accion" /> 
+									<input type="checkbox" value="{{accion.accion}}"  name="accion" [(ngModel)]="user.accion" /> 
 									{{accion.accion}} <!--<input type="checkbox"  class="flat" [formControlName]="accion.value" [class.invalid]="!detailsForm.controls.accions.valid">-->
 								</div>
 							</div>
 						</div>
 
-						<!--<br/>
-						<label>Acciones * :</label>
-						<div formGroupName="modulos">
-						<div *ngFor="let accion of accionsList"  style="float:left">
-								{{accion.accion}} <input type="checkbox"  class="flat" [formControlName]="accion.value" [class.invalid]="!detailsForm.controls.accions.valid">
-						</div>
-						</div>-->
-				
-						<br/>
-						<br/>
 						<div class="col-sm-12">
 							<div class="input-group">
 							<button class="btn btn-primary" (click)="save(userForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>

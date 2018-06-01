@@ -9,11 +9,11 @@
 				<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
-					<span class="header">Busqueda</span>
-					<span class="section">Criterios de busqueda</span>
+					<!--<span class="header">Busqueda</span>
+					<span class="section">Criterios de busqueda</span>-->
 						
 						<form #afiliadoMngForm="ngForm" class="editForm" novalidate>
-								<div class='row'>
+								<!--<div class='row'>
 									<div class="col-lg-6">
 											<div class="input-group">
 												<input type="text" class="form-control" placeholder="Search for...">
@@ -39,7 +39,7 @@
 										</div>
 									</div>
 								</div>
-
+							-->
 								<div class='row'>
 									<button class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
 								</div>
@@ -92,15 +92,15 @@
 																	<th>Acta_nacimiento</th>
 																	<th>Monto_pension</th>
 																	<th>Apellido_paterno</th>
-																	<th>Observaciones</th>
 																	<th>Nombre</th>
+																	<!--<th>Observaciones</th>
 																	<th>Genero</th>
 																	<th>Semanas_cotizadas</th>
-																	<th>Nss</th>
+																	<th>Nss</th>-->
 															</tr>
 														</thead>
 														<tbody>
-															<tr *ngFor="let afiliado of afiliadoList | filterAfiliado: busquedaAfiliado | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowafiliado(i, afiliado)" >
+															<tr *ngFor="let afiliado of afiliadoList | filterAfiliado: busquedaAfiliado | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowAfiliado(i, afiliado)" >
 																	<td>{{afiliado.beneficiarioId}}</td>
 																	<td>{{afiliado.fecha_afiliacion}}</td>
 																	<td>{{afiliado.foto}}</td>
@@ -109,11 +109,11 @@
 																	<td>{{afiliado.acta_nacimiento}}</td>
 																	<td>{{afiliado.monto_pension}}</td>
 																	<td>{{afiliado.apellido_paterno}}</td>
-																	<td>{{afiliado.observaciones}}</td>
 																	<td>{{afiliado.nombre}}</td>
+																	<!--<td>{{afiliado.observaciones}}</td>
 																	<td>{{afiliado.generoId}}</td>
 																	<td>{{afiliado.semanas_cotizadas}}</td>
-																	<td>{{afiliado.nss}}</td>
+																	<td>{{afiliado.nss}}</td>-->
 															</tr>
 														</tbody>
 												</table>

@@ -14,34 +14,49 @@
 				</div>
 				<div class="x_content">
 
-					<form #accionForm="ngForm" id="accionForm" data-parsley-validate>
+					<form #accionForm="ngForm" id="accionForm" class="form-horizontal form-label-left" data-parsley-validate>
 						
 						<input class="form-control" #accionId="ngModel" accionId="accionId" name="accionId" type="hidden" [(ngModel)]="accion.accionId">
 
-						<label for="accion">Accion * :</label>
-						<input class="form-control" #accion="ngModel" id="accion" name="accion" type="text" [(ngModel)]="accion.accion" required>
-		
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="accion">Accion: <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							<input class="form-control col-md-7 col-xs-12" #accion="ngModel" [(ngModel)]="accion.accion" id="accion" name="accion" type="text" required="required" >
+							</div>
+						</div>
+						
+						<div class="form-group">
 						<br/>
-						<label>Estatus * :</label>
-						<p>
-						Activo:        <input type="radio" class="flat" value="1"     name="estatus" [(ngModel)]="accion.estatus" />		
-						Inactivo:      <input type="radio" class="flat" value="0"     name="estatus" [(ngModel)]="accion.estatus" />		
-						</p>
+						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="accion">Estatus: <span class="required">*</span></label>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+						Activo:        <input type="radio"  value="1"     name="estatus" [(ngModel)]="accion.estatus" />		
+						Inactivo:      <input type="radio"  value="0"     name="estatus" [(ngModel)]="accion.estatus" />		
+						</div>
+						</div>
 
-						<br/>
-						<label for="fechacreacion">Fechacreacion * :</label>
-						<input class="form-control" #correo="ngModel" id="fechacreacion" name="fechacreacion" type="fechacreacion" [(ngModel)]="accion.fechacreacion" required>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="fechacreacion">Fechacreacion: <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							<input class="form-control col-md-7 col-xs-12" #fechacreacion="ngModel" id="fechacreacion" name="fechacreacion" type="fechacreacion" [(ngModel)]="accion.fechacreacion" required="required">
+							</div>
+						</div>
 						
-						<label for="fechamodificacion">Fechamodificacion * :</label>
-						<input class="form-control" #fechamodificacion="ngModel" id="fechamodificacion" name="fechamodificacion" type="text" [(ngModel)]="accion.fechamodificacion" required>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="fechamodificacion">Fechamodificacion: <span class="required">*</span></label>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input class="form-control col-md-7 col-xs-12" #fechamodificacion="ngModel" id="fechamodificacion" name="fechamodificacion" type="text" [(ngModel)]="accion.fechamodificacion" required="required">
+							</div>
+						</div>
 						
-						<br/>
+						<div class="ln_solid"></div>
+
 						<div class="col-sm-12">
 							<div class="input-group">
 							<button class="btn btn-primary" (click)="save(accionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 							<button class="btn btn-default" (click)="return(accionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 							</div>
 						</div>
+
 					</form>
 				</div>
 			</div>

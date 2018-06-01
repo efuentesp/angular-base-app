@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -24,35 +24,20 @@ export class AccionComponent implements OnInit {
     accion: Accion;
     form: any;
 
-	beneficiarioList: Beneficiario;
-
-
-
-
-
-
-
 		public busquedaBeneficiario='';
 		filterInputBeneficiario = new FormControl();
 
     constructor(private router: Router, 
-				private accionService: AccionService
-		,private beneficiarioService: BeneficiarioService, private location: Location
+				private accionService: AccionService, private location: Location, private route: ActivatedRoute
 
 ) {
-		
-
-		  	 this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
-	         this.busquedaBeneficiario = busquedaBeneficiario;
-	       });
 
 	}
 
     ngOnInit() {
+        
         this.accion = this.accionService.getAccion();
         this.loadAccions();
-
-		this.loadBeneficiarios();
 
     }
 
@@ -66,40 +51,23 @@ export class AccionComponent implements OnInit {
       });
     }
 
-		loadBeneficiarios(){
-      		this.beneficiarioService.getAllBeneficiario().subscribe(data => {
-        	if (data) {
-          	this.beneficiarioList = data;
-        	}
-      		}, error => {
-        	swal('Error...', 'An error occurred while calling the beneficiarios.', 'error');
-      	});
-    }
-
-
     save(accion){
+      console.log('Accion: ', this.accion);
       this.accionService.saveAccion(this.accion).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Accion save successfully.', 'success');
-		  //this.router.navigate(['/accion_mgmnt']);
+          this.router.navigate([ '../accion_mgmnt' ], { relativeTo: this.route })
         }else{
           swal('Error...', 'Accion save unsuccessfully.', 'error');
         }
       } );
     }
-	
-	
-
 
 	return(accion){
-      this.location.back();
-      //this.router.navigate(['/afiliado_mgmnt']);
-
+      //this.location.back();
+      this.router.navigate([ '../accion_mgmnt' ], { relativeTo: this.route })
     }
 
-	  		//setClickedRowbeneficiario(index, beneficiario){
-			//this.accion.beneficiarioId = beneficiario.beneficiarioId;
-		//}
 	
 }
 

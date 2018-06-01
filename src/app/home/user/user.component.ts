@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -40,15 +40,11 @@ export class UserComponent implements OnInit {
     private authorityService: AuthorityService, 
     private location: Location,
     private moduloService: ModuloService,
-    private accionService: AccionService
+    private accionService: AccionService,
+    private route:ActivatedRoute
 
 ) {
 		
-
-		  	 //this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
-	       //  this.busquedaBeneficiario = busquedaBeneficiario;
-	       //});
-
 	}
 
     ngOnInit() {
@@ -63,6 +59,8 @@ export class UserComponent implements OnInit {
     loadUsers(){
       this.userService.getAllUser().subscribe(data => {
         if (data) {
+
+          console.log('Usuarios: ', data);
           this.userList = data;
         }
       }, error => {
@@ -105,10 +103,13 @@ export class UserComponent implements OnInit {
 
 
     save(user){
+      console.log('User Save', this.user);
+      // Cambiar a dinamico
+      this.user.rol = 'admistrador';
       this.userService.saveUser(this.user).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'User save successfully.', 'success');
-		  //this.router.navigate(['/accion_mgmnt']);
+		      this.router.navigate([ '../user' ], { relativeTo: this.route })
         }else{
           swal('Error...', 'User save unsuccessfully.', 'error');
         }
@@ -124,7 +125,7 @@ export class UserComponent implements OnInit {
 
     }
 
-	  		setClickedRowAuthority(index, authority){
+	  setClickedRowAuthority(index, authority){
 			    this.user.rol = authority.rol;
 		}
 	

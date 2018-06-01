@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
 import { ModuloService }                                  from '../modulo/modulo.component.service';
 import { Modulo }                                         from '../modulo/modulo.component.model';
 
-import { BeneficiarioService }                                  from '../beneficiario/beneficiario.component.service';
-import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
 import { Location } from '@angular/common';
 
 
@@ -24,35 +22,17 @@ export class ModuloComponent implements OnInit {
     modulo: Modulo;
     form: any;
 
-	beneficiarioList: Beneficiario;
-
-
-
-
-
-
-
-		public busquedaBeneficiario='';
-		filterInputBeneficiario = new FormControl();
 
     constructor(private router: Router, 
-				private moduloService: ModuloService
-		,private beneficiarioService: BeneficiarioService, private location: Location
+				private moduloService: ModuloService, private location: Location, private route: ActivatedRoute
 
 ) {
-		
-
-		  	 this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
-	         this.busquedaBeneficiario = busquedaBeneficiario;
-	       });
 
 	}
 
     ngOnInit() {
         this.modulo = this.moduloService.getModulo();
         this.loadModulos();
-
-		this.loadBeneficiarios();
 
     }
 
@@ -66,17 +46,6 @@ export class ModuloComponent implements OnInit {
       });
     }
 
-		loadBeneficiarios(){
-      		this.beneficiarioService.getAllBeneficiario().subscribe(data => {
-        	if (data) {
-          	this.beneficiarioList = data;
-        	}
-      		}, error => {
-        	swal('Error...', 'An error occurred while calling the beneficiarios.', 'error');
-      	});
-    }
-
-
     save(modulo){
       this.moduloService.saveModulo(this.modulo).subscribe(res => {
         if (res.status == 201 || res.status == 200){
@@ -87,19 +56,13 @@ export class ModuloComponent implements OnInit {
         }
       } );
     }
-	
-	
-
 
 	return(modulo){
-      this.location.back();
-      //this.router.navigate(['/afiliado_mgmnt']);
+      //this.location.back();
+      this.router.navigate([ '../modulo_mgmnt' ], { relativeTo: this.route })
 
     }
 
-	  		//setClickedRowbeneficiario(index, beneficiario){
-			//this.modulo.beneficiarioId = beneficiario.beneficiarioId;
-		//}
 	
 }
 

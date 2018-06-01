@@ -14,12 +14,28 @@ export class BeneficiarioService {
     private isBeneficiarioFormValid: boolean = false;
     private env: any = environment;
     private beneficiario = new Beneficiario();
+    private flag :boolean = false;
 
-    constructor(private http: Http) {
-    }
+    constructor(private http: Http) {}
 
     getAllBeneficiario(){
       return this.http.get(this.env.api + "/beneficiario").map(res => res.json()).catch(BeneficiarioService.handleError);
+    }
+
+    saveBeneficiario(beneficiario){
+		if (!beneficiario.beneficiarioId){
+            return this.http.post(this.env.api + "/beneficiario", beneficiario).map(res => res);
+        }else{
+            return this.http.put(this.env.api + "/beneficiario/"+beneficiario.beneficiarioId, beneficiario).map(res => res);
+        }
+    }
+
+    deleteBeneficiario(beneficiario){
+        return this.http.delete(this.env.api + "/beneficiario/"+beneficiario.beneficiarioId, beneficiario).map(res => res);
+    }
+
+    getBeneficiarioById(beneficiarioId){
+        return this.http.get(this.env.api + "/beneficiario/"+beneficiarioId).map(res => res);
     }
 
     resetBeneficiario(): Beneficiario {
@@ -44,7 +60,7 @@ export class BeneficiarioService {
 
     setBeneficiario(beneficiario: Beneficiario) {
        
-	this.isBeneficiarioFormValid = true;
+	        this.isBeneficiarioFormValid = true;
 			this.beneficiario.apellido_materno = beneficiario.apellido_materno;    
 			this.beneficiario.curp = beneficiario.curp;    
 			this.beneficiario.fecha_nacimiento = beneficiario.fecha_nacimiento;    
@@ -52,15 +68,11 @@ export class BeneficiarioService {
 			this.beneficiario.apellido_paterno = beneficiario.apellido_paterno;    
 			this.beneficiario.parentescoId = beneficiario.parentescoId;
 			this.beneficiario.beneficiarioId        = beneficiario.beneficiarioId;
-        	this.validateBeneficiario();
+        	
     }
 
     isFormValid() {
         return this.isBeneficiarioFormValid;
-    }
-
-    validateBeneficiario() {
-
     }
 
     clear() {
@@ -74,32 +86,28 @@ export class BeneficiarioService {
 			this.beneficiario.beneficiarioId = null;
     }
 
-    saveBeneficiario(beneficiario){
-
-        console.log ('BeneficiarioService: ', beneficiario);
-
-		if (!beneficiario.beneficiarioId){
-            return this.http.post(this.env.api + "/beneficiario", beneficiario).map(res => res);
-        }else{
-            return this.http.put(this.env.api + "/beneficiario/"+beneficiario.beneficiarioId, beneficiario).map(res => res);
-        }
-     
+    setEdit(flag){
+        this.flag = flag;
     }
 
-	private static handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-        if (error.status === 404) {
-            errMsg = 'Resource was not found';
+    getEdit(){
+        return this.flag;
+    }
+
+    private static handleError(error: Response | any) {
+        let errMsg: string;
+        if (error instanceof Response) {
+            if (error.status === 404) {
+                errMsg = 'Resource was not found';
+            } else {
+                const body = error.json() || '';
+                const err = body.error || JSON.stringify(body);
+                errMsg = 'Error';
+            }
         } else {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = 'Error';
+            errMsg = error.message ? error.message : error.toString();
         }
-    } else {
-        errMsg = error.message ? error.message : error.toString();
-    }
-
-    return Observable.throw(errMsg);
+    
+        return Observable.throw(errMsg);
     }
 }

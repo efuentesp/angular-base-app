@@ -158,17 +158,24 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="parentesco">Parentesco: <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-					<input  type="radio" class="flat" value="conyuge"      #parentescoId="ngModel"  name="parentescoId" [(ngModel)]="beneficiario.parentescoId" /> Conyugue <br/>		
-					<input  type="radio" class="flat" value="ascendiente"  #parentescoId="ngModel"  name="parentescoId" [(ngModel)]="beneficiario.parentescoId" /> Ascendente <br/>		
-					<input  type="radio" class="flat" value="hijo"         #parentescoId="ngModel"  name="parentescoId" [(ngModel)]="beneficiario.parentescoId" /> Hijo <br/>
+					<input  type="radio"  value="conyuge"      #parentescoId="ngModel"  name="parentescoId" [(ngModel)]="beneficiario.parentescoId" /> Conyugue <br/>		
+					<input  type="radio"  value="ascendiente"  #parentescoId="ngModel"  name="parentescoId" [(ngModel)]="beneficiario.parentescoId" /> Ascendente <br/>		
+					<input  type="radio"  value="hijo"         #parentescoId="ngModel"  name="parentescoId" [(ngModel)]="beneficiario.parentescoId" /> Hijo <br/>
 				</div>
 			</div>
 	
 			<div class="ln_solid"></div>
 			<div class="col-sm-12">
 				<div class="input-group">
+				<div *ngIf="flag">	
+				<button class="btn btn-danger" (click)="delete(beneficiarioForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+				<button class="btn btn-primary" (click)="save(beneficiarioForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+				<button class="btn btn-default" (click)="return(beneficiarioForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+				</div>
+				<div *ngIf="!flag">
 				<button class="btn btn-primary" (click)="save(beneficiarioForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 				<button class="btn btn-default" (click)="return(beneficiarioForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+				</div>
 				</div>
 			</div>
 

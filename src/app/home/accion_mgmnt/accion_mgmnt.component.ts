@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -22,16 +22,14 @@ export class AccionMngComponent implements OnInit {
   	public busquedaAccion='';
 	filterInputAccion = new FormControl();
 
-    constructor(private router: Router, private accionService: AccionService) {
+    constructor(private router: Router, private accionService: AccionService, private route: ActivatedRoute) {
 	   	   this.filterInputAccion.valueChanges.subscribe(busquedaAccion => {
 	         this.busquedaAccion = busquedaAccion;
 	       });
 	}
 
     ngOnInit() {
-
         this.loadAccions();
-
     }
 
     loadAccions() {
@@ -56,12 +54,12 @@ export class AccionMngComponent implements OnInit {
 	
 
   add(){
-    this.router.navigate(['/accion']);
+    this.router.navigate([ '../accion' ], { relativeTo: this.route })
   }
 
-  setClickedRowaccion(index, accion){
-	this.accionService.setAccion(accion);
-    this.router.navigate(['/accion']);
+  setClickedRowAccion(index, accion){
+	  this.accionService.setAccion(accion);
+    this.router.navigate([ '../accion' ], { relativeTo: this.route })
   }
 
 }

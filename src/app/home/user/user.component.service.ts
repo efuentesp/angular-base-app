@@ -69,7 +69,7 @@ export class UserService {
     }
 
     saveUser(user){
-
+        console.log('User Service', user);
 		if (!user.userId){
             return this.http.post(this.env.api + "/user", user).map(res => res);
         }else{

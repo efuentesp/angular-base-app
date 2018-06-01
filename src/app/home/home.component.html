@@ -24,7 +24,7 @@
 						
 						<div *ngFor="let user of user.authorities"> 
 								
-								<div *ngIf="user.authority == 'admin'">
+								<div *ngIf="user.authority == 'administrador'">
 										<ul class="nav side-menu">
 												<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 													<ul class="nav child_menu">
@@ -32,7 +32,7 @@
 																<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
 																<ul class="nav child_menu" id="beneficiario">
 																	<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
-																	<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario">Agregar Beneficiario</a></li>
+																	<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar Beneficiario</a></li>
 																</ul>
 															</li>
 															<li>
@@ -69,13 +69,30 @@
 												</li>
 												<li><a><i class="fa fa-sitemap"></i>Management Modules <span class="fa fa-chevron-down"></span></a>
 													<ul class="nav child_menu">
-														<li><a [routerLink]="['accion_mgmnt']" routerLinkActive="active" title="Administrar Accion">Administrar Accion</a></li>
-														<li><a [routerLink]="['accion']" routerLinkActive="active" title="Agregar Accion">Agregar Accion</a></li>
-														<li><a [routerLink]="['modulo_mgmnt']" routerLinkActive="active" title="Administrar Modulo">Administrar Modulo</a></li>
-														<li><a [routerLink]="['modulo']" routerLinkActive="active" title="Agregar Modulo">Agregar Modulo</a></li>
-														<li><a [routerLink]="['modulo_accion']" routerLinkActive="active" title="Modulo Accion">Modulo Accion</a></li>
-														<li><a [routerLink]="['authority_mgmnt']" routerLinkActive="active" title="Administrar Authority">Administrar Authority</a></li>
-														<li><a [routerLink]="['authority']" routerLinkActive="active" title="Agregar Authority">Agregar Authority</a></li>
+															<li>
+																<a title="Acciones"><i class="fa fa-edit"></i>Acciones<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="beneficiario">
+																	<li><a [routerLink]="['accion_mgmnt']" routerLinkActive="active" title="Administrar Accion">Administrar Accion</a></li>
+																	<li><a [routerLink]="['accion']" routerLinkActive="active" title="Agregar Accion">Agregar Accion</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Modulos"><i class="fa fa-edit"></i>Modulos<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="beneficiario">
+																	<li><a [routerLink]="['modulo_mgmnt']" routerLinkActive="active" title="Administrar Modulo">Administrar Modulo</a></li>
+																	<li><a [routerLink]="['modulo']" routerLinkActive="active" title="Agregar Modulo">Agregar Modulo</a></li>
+																</ul>
+															</li>
+															<li>
+																<a title="Authority"><i class="fa fa-edit"></i>Authority<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="beneficiario">
+																	<li><a [routerLink]="['authority_mgmnt']" routerLinkActive="active" title="Administrar Authority">Administrar Authority</a></li>
+																	<li><a [routerLink]="['authority']" routerLinkActive="active" title="Agregar Authority">Agregar Authority</a></li>
+																</ul>
+															</li>
+														
+														<!--<li><a [routerLink]="['modulo_accion']" routerLinkActive="active" title="Modulo Accion">Modulo Accion</a></li>-->
+														
 													</ul>
 												</li>
 											</ul>
@@ -117,7 +134,10 @@
 											</ul>
 								</div>
 								<div *ngIf="user.authority == 'default'">
-										{{user.authority}}
+										<!--{{user.authority}}-->
+								</div>
+								<div *ngIf="user.authority == 'System'">
+										<!--{{user.authority}}-->
 								</div>
 						</div>
 						
@@ -209,7 +229,7 @@
 
 		<footer>
 				<div class="pull-right">
-					©2018 All Rights Reserved. 
+					© 2018 All Rights Reserved. Softtek 
 				</div>
 				<div class="clearfix"></div>
 			</footer>

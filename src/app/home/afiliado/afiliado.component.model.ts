@@ -1,3 +1,5 @@
+import { Beneficiario } from "../beneficiario/beneficiario.component.model";
+
 export class Afiliado {
 
 	afiliadoId: number = null;
@@ -13,8 +15,7 @@ export class Afiliado {
 	semanas_cotizadas: string = '';
 	nss: string = '';
 
-	generoId: number = null;	
+	generoId: number = null;
 	beneficiarioId: number = null;
-
-
+	
 }
