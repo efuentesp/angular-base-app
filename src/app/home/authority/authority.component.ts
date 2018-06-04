@@ -1,16 +1,11 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
 import { AuthorityService }                                  from '../authority/authority.component.service';
 import { Authority }                                         from '../authority/authority.component.model';
-
-import { BeneficiarioService }                                  from '../beneficiario/beneficiario.component.service';
-import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
 import { Location } from '@angular/common';
-
-
 
 @Component ({
     selector: 'app-view',
@@ -20,86 +15,65 @@ import { Location } from '@angular/common';
 export class AuthorityComponent implements OnInit {
 
     title = 'Nuevo Authority';
-    authorityList: Authority;
     authority: Authority;
+    public flag: boolean = false;
     form: any;
 
-	beneficiarioList: Beneficiario;
-
-
-
-
-
-
-
-		public busquedaBeneficiario='';
-		filterInputBeneficiario = new FormControl();
-
-    constructor(private router: Router, 
-				private accionService: AuthorityService
-		,private beneficiarioService: BeneficiarioService, private location: Location
-
-) {
-		
-
-		  	 this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
-	         this.busquedaBeneficiario = busquedaBeneficiario;
-	       });
-
-	}
+    constructor(  
+                private authorityService: AuthorityService, 
+                private location: Location, 
+                private router: Router,
+                private route: ActivatedRoute
+    ) {}
 
     ngOnInit() {
-        /*this.authority = this.accionService.getAuthority();
-        this.loadAuthoritys();
-
-		this.loadBeneficiarios();*/
-
-    }
-
-	loadAuthoritys(){
-      this.accionService.getAllAuthority().subscribe(data => {
-        if (data) {
-          this.authorityList = data;
+        this.authority = new Authority;
+        this.flag = this.authorityService.getEdit();
+        if (this.flag){
+          this.authority = this.authorityService.getAuthority();
         }
-      }, error => {
-        swal('Error...', 'An error occurred while calling the authority.', 'error');
-      });
     }
 
-		loadBeneficiarios(){
-      		this.beneficiarioService.getAllBeneficiario().subscribe(data => {
-        	if (data) {
-          	this.beneficiarioList = data;
-        	}
-      		}, error => {
-        	swal('Error...', 'An error occurred while calling the beneficiarios.', 'error');
-      	});
-    }
-
-
-    save(authority){
-      this.accionService.saveAuthority(this.authority).subscribe(res => {
+    save(authority){  
+      this.authorityService.saveAuthority(this.authority).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Authority save successfully.', 'success');
-		  //this.router.navigate(['/accion_mgmnt']);
+          this.router.navigate([ '../authority_mgmnt' ], { relativeTo: this.route })
         }else{
           swal('Error...', 'Authority save unsuccessfully.', 'error');
         }
       } );
     }
+  
+    delete(authority){
+      swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this authority!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!"
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          this.authorityService.deleteAuthority(this.authority).subscribe(res => {
+            if (res.status == 201 || res.status == 200){
+              swal('Success...', 'Authority item has been deleted successfully.', 'success');
+              this.router.navigate([ '../authority_mgmnt' ], { relativeTo: this.route })
+            }else{
+              swal('Error...', 'Authority deleted unsuccessfully.', 'error');
+            }
+          });
+        } else {
+          //swal("Cancelled", "Authority deleted unsuccessfully", "error");
+        }
+      });
+    }
 	
-	
-
-
 	return(authority){
       this.location.back();
-      //this.router.navigate(['/afiliado_mgmnt']);
+  }
 
-    }
-
-	  	//	setClickedRowbeneficiario(index, beneficiario){
-			//this.afiliado.beneficiarioId = beneficiario.beneficiarioId;
-		//}
 	
 }
 

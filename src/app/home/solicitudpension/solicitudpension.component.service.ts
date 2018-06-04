@@ -14,12 +14,28 @@ export class SolicitudpensionService {
     private isSolicitudpensionFormValid: boolean = false;
     private env: any = environment;
     private solicitudpension = new Solicitudpension();
+    private flag :boolean = false;
 
-    constructor(private http: Http) {
-    }
+    constructor(private http: Http) {}
 
     getAllSolicitudpension(){
       return this.http.get(this.env.api + "/solicitudpension").map(res => res.json()).catch(SolicitudpensionService.handleError);
+    }
+
+    saveSolicitudpension(solicitudpension){
+		if (!solicitudpension.solicitudpensionId){
+            return this.http.post(this.env.api + "/solicitudpension", solicitudpension).map(res => res);
+        }else{
+            return this.http.put(this.env.api + "/solicitudpension/"+solicitudpension.solicitudpensionId, solicitudpension).map(res => res);
+        }
+    }
+
+    deleteSolicitudpension(solicitudpension){
+        return this.http.delete(this.env.api + "/solicitudpension/"+solicitudpension.solicitudpensionId, solicitudpension).map(res => res);
+    }
+
+    getSolicitudpensionById(solicitudpensionId){
+        return this.http.get(this.env.api + "/solicitudpension/"+solicitudpensionId).map(res => res);
     }
 
     resetSolicitudpension(): Solicitudpension {
@@ -50,15 +66,11 @@ export class SolicitudpensionService {
 			this.solicitudpension.afiliadoId = solicitudpension.afiliadoId;
 			this.solicitudpension.tipopensionId = solicitudpension.tipopensionId;
 			this.solicitudpension.solicitudpensionId        = solicitudpension.solicitudpensionId;
-        	this.validateSolicitudpension();
+    
     }
 
     isFormValid() {
         return this.isSolicitudpensionFormValid;
-    }
-
-    validateSolicitudpension() {
-
     }
 
     clear() {
@@ -71,14 +83,12 @@ export class SolicitudpensionService {
 			this.solicitudpension.solicitudpensionId = null;
     }
 
-    saveSolicitudpension(solicitudpension){
+    setEdit(flag){
+        this.flag = flag;
+    }
 
-		if (!solicitudpension.solicitudpensionId){
-            return this.http.post(this.env.api + "/solicitudpension", solicitudpension).map(res => res);
-        }else{
-            return this.http.put(this.env.api + "/solicitudpension/"+solicitudpension.solicitudpensionId, solicitudpension).map(res => res);
-        }
-     
+    getEdit(){
+        return this.flag;
     }
 
 	private static handleError(error: Response | any) {

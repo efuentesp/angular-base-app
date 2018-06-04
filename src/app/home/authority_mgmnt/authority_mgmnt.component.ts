@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router, ActivatedRoute }                                          from '@angular/router';
+import { ActivatedRoute, Router }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
 import { AuthorityService }                                  from '../authority/authority.component.service';
 import { Authority }                                         from '../authority/authority.component.model';
 
-//import { SearchAfiliadoPipe }                               from "../pipe/afiliado.filter.pipe";
+//import { SearchAuthorityPipe }                               from "../pipe/authority.filter.pipe";
 @Component ({
     selector: 'app-view',
     templateUrl: './authority_mgmnt.component.html'
@@ -14,22 +14,26 @@ import { Authority }                                         from '../authority/
 
 export class AuthorityMngComponent implements OnInit {
 
-    title = 'Nuevo Authority';
+    title = 'Authority';
     authorityList: Authority;
     authority: Authority;
     form: any;
+    public flag: boolean = false;
 
-  	public busquedaAccion='';
-	filterInputAccion = new FormControl();
+  	public busquedaAuthority='';
+    filterInputAuthority = new FormControl();
 
-    constructor(private router: Router, private authorityService: AuthorityService, private route: ActivatedRoute) {
-	   	   this.filterInputAccion.valueChanges.subscribe(busquedaAccion => {
-	         this.busquedaAccion = busquedaAccion;
-	       });
-	}
+      constructor(private authorityService: AuthorityService, 
+                  private route: ActivatedRoute,
+                  private router: Router) {
+          this.filterInputAuthority.valueChanges.subscribe(busquedaAuthority => {
+            this.busquedaAuthority = busquedaAuthority;
+          });
+    }
 
     ngOnInit() {
         this.loadAuthoritys();
+        this.authorityService.setEdit(false);
     }
 
     loadAuthoritys() {
@@ -38,27 +42,19 @@ export class AuthorityMngComponent implements OnInit {
           this.authorityList = data;
         }
       }, error => {
-        swal('Error...', 'An error occurred while calling the authority.', 'error');
+        swal('Error...', 'An error occurred while calling the authoritys.', 'error');
       });
     }
-    save(authority){
-      this.authorityService.saveAuthority(this.authority).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'Accion save successfully.', 'success');
-        }else{
-          swal('Error...', 'Accion save unsuccessfully.', 'error');
-        }
-
-      } );
-    }
 	
-
   add(){
-    this.router.navigate([ '../authority' ], { relativeTo: this.route })
+    this.authorityService.setEdit(false);
+    this.authorityService.clear();
+    this.router.navigate([ '../authority' ], { relativeTo: this.route })  
   }
 
-  setClickedRowauthority(index, authority){
-	  this.authorityService.setAuthority(authority);
+  setClickedRowAuthority(index, authority){
+    this.authorityService.setAuthority(authority);
+    this.authorityService.setEdit(true);
     this.router.navigate([ '../authority' ], { relativeTo: this.route })
   }
 

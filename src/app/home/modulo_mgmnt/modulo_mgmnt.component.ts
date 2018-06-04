@@ -1,37 +1,39 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router, ActivatedRoute }                                          from '@angular/router';
+import { ActivatedRoute, Router }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
 import { ModuloService }                                  from '../modulo/modulo.component.service';
 import { Modulo }                                         from '../modulo/modulo.component.model';
 
-//import { SearchAfiliadoPipe }                               from "../pipe/afiliado.filter.pipe";
+//import { SearchModuloPipe }                               from "../pipe/modulo.filter.pipe";
 @Component ({
     selector: 'app-view',
-    templateUrl: './Modulo_mgmnt.component.html'
+    templateUrl: './modulo_mgmnt.component.html'
 })
 
 export class ModuloMngComponent implements OnInit {
 
-    title = 'Nuevo Modulo';
+    title = 'Modulo';
     moduloList: Modulo;
     modulo: Modulo;
     form: any;
+    public flag: boolean = false;
 
   	public busquedaModulo='';
-	filterInputModulo = new FormControl();
+    filterInputModulo = new FormControl();
 
-    constructor(private router: Router, private moduloService: ModuloService, private route: ActivatedRoute) {
-	   	   this.filterInputModulo.valueChanges.subscribe(busquedaModulo => {
-	         this.busquedaModulo = busquedaModulo;
-	       });
-	}
+      constructor(private moduloService: ModuloService, 
+                  private route: ActivatedRoute,
+                  private router: Router) {
+          this.filterInputModulo.valueChanges.subscribe(busquedaModulo => {
+            this.busquedaModulo = busquedaModulo;
+          });
+    }
 
     ngOnInit() {
-
         this.loadModulos();
-
+        this.moduloService.setEdit(false);
     }
 
     loadModulos() {
@@ -40,32 +42,21 @@ export class ModuloMngComponent implements OnInit {
           this.moduloList = data;
         }
       }, error => {
-        swal('Error...', 'An error occurred while calling the modulo.', 'error');
+        swal('Error...', 'An error occurred while calling the modulos.', 'error');
       });
     }
-    save(modulo){
-
-      // Eliminar
-      //this.modulo.estatus = 1;
-
-      this.moduloService.saveModulo(this.modulo).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'Modulo save successfully.', 'success');
-        }else{
-          swal('Error...', 'Modulo save unsuccessfully.', 'error');
-        }
-
-      } );
-    }
 	
-
   add(){
-    this.router.navigate([ '../modulo_mgmnt' ], { relativeTo: this.route })
+    this.moduloService.setEdit(false);
+    this.moduloService.clear();
+    this.router.navigate([ '../modulo' ], { relativeTo: this.route })  
   }
 
   setClickedRowModulo(index, modulo){
-	  this.moduloService.setModulo(modulo);
-    this.router.navigate([ '../modulo_mgmnt' ], { relativeTo: this.route })
+    console.log('Modulo:', modulo);
+    this.moduloService.setModulo(modulo);
+    this.moduloService.setEdit(true);
+    this.router.navigate([ '../modulo' ], { relativeTo: this.route })
   }
 
 }

@@ -1,16 +1,11 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router, ActivatedRoute }                                          from '@angular/router';
+import { Router, ActivatedRoute }                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
 import { AccionService }                                  from '../accion/accion.component.service';
 import { Accion }                                         from '../accion/accion.component.model';
-
-import { BeneficiarioService }                                  from '../beneficiario/beneficiario.component.service';
-import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
 import { Location } from '@angular/common';
-
-
 
 @Component ({
     selector: 'app-view',
@@ -20,39 +15,30 @@ import { Location } from '@angular/common';
 export class AccionComponent implements OnInit {
 
     title = 'Nuevo Accion';
-    accionList: Accion;
     accion: Accion;
+    public flag: boolean = false;
     form: any;
 
-		public busquedaBeneficiario='';
-		filterInputBeneficiario = new FormControl();
-
-    constructor(private router: Router, 
-				private accionService: AccionService, private location: Location, private route: ActivatedRoute
-
-) {
-
-	}
+    constructor(  
+                private accionService: AccionService, 
+                private location: Location, 
+                private router: Router,
+                private route: ActivatedRoute
+    ) {}
 
     ngOnInit() {
-        
-        this.accion = this.accionService.getAccion();
-        this.loadAccions();
+        this.accion = new Accion;
+        this.flag = this.accionService.getEdit();
+        console.log('Flag:', this.flag)
+        if (this.flag){
+          
+          this.accion = this.accionService.getAccion();
 
-    }
-
-	loadAccions(){
-      this.accionService.getAllAccion().subscribe(data => {
-        if (data) {
-          this.accionList = data;
+          console.log('Accion Get:', this.accion);
         }
-      }, error => {
-        swal('Error...', 'An error occurred while calling the accions.', 'error');
-      });
     }
 
-    save(accion){
-      console.log('Accion: ', this.accion);
+    save(accion){  
       this.accionService.saveAccion(this.accion).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Accion save successfully.', 'success');
@@ -62,11 +48,35 @@ export class AccionComponent implements OnInit {
         }
       } );
     }
-
-	return(accion){
-      //this.location.back();
-      this.router.navigate([ '../accion_mgmnt' ], { relativeTo: this.route })
+  
+    delete(accion){
+      swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this accion!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!"
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          this.accionService.deleteAccion(this.accion).subscribe(res => {
+            if (res.status == 201 || res.status == 200){
+              swal('Success...', 'Accion item has been deleted successfully.', 'success');
+              this.router.navigate([ '../accion_mgmnt' ], { relativeTo: this.route })
+            }else{
+              swal('Error...', 'Accion deleted unsuccessfully.', 'error');
+            }
+          });
+        } else {
+          //swal("Cancelled", "Accion deleted unsuccessfully", "error");
+        }
+      });
     }
+	
+	return(accion){
+      this.location.back();
+  }
 
 	
 }

@@ -14,12 +14,28 @@ export class AccionService {
     private isAccionFormValid: boolean = false;
     private env: any = environment;
     private accion = new Accion();
+    private flag :boolean = false;
 
-    constructor(private http: Http) {
-    }
+    constructor(private http: Http) {}
 
     getAllAccion(){
       return this.http.get(this.env.api + "/accion").map(res => res.json()).catch(AccionService.handleError);
+    }
+
+    saveAccion(accion){
+		if (!accion.accionId){
+            return this.http.post(this.env.api + "/accion", accion).map(res => res);
+        }else{
+            return this.http.put(this.env.api + "/accion/"+accion.accionId, accion).map(res => res);
+        }
+    }
+
+    deleteAccion(accion){
+        return this.http.delete(this.env.api + "/accion/"+accion.accionId, accion).map(res => res);
+    }
+
+    getAccionById(accionId){
+        return this.http.get(this.env.api + "/accion/"+accionId).map(res => res);
     }
 
     resetAccion(): Accion {
@@ -29,69 +45,62 @@ export class AccionService {
 
     getAccion(): Accion {
         var accion: Accion = {
-                
-					fechaCreacion: this.accion.fechaCreacion, 
-					fechaModificacion: this.accion.fechaModificacion, 
+					accion: this.accion.accion, 
+					idAccion: this.accion.idAccion, 
 					estatus: this.accion.estatus, 
-                    accion: this.accion.accion,
-                    accionId: this.accion.accionId
+					fechaCreacion: this.accion.fechaCreacion, 
+					fechaModificacion: this.accion.fechaModificacion
         };
         return accion;
     }
 
     setAccion(accion: Accion) {
        
-	this.isAccionFormValid = true;
-            
-            this.accion.accion = accion.accion;
-            this.accion.fechaCreacion = accion.fechaCreacion;
-            this.accion.fechaModificacion = accion.fechaModificacion;
-            this.accion.estatus = accion.estatus;
-            this.accion.accionId = accion.accionId;
+	        //this.isAccionFormValid = true;
+			this.accion.accion = accion.accion;    
+			this.accion.idAccion = accion.idAccion;    
+			this.accion.estatus = accion.estatus;    
+			this.accion.fechaModificacion = accion.fechaModificacion;    
+			this.accion.fechaCreacion = accion.fechaCreacion;    
+		
+        	
     }
 
     isFormValid() {
         return this.isAccionFormValid;
     }
 
-    validateAccion() {
-
-    }
-
     clear() {
 
-        this.accion.accion = '';
-        this.accion.fechaCreacion = '';
-        this.accion.fechaModificacion = '';
-        this.accion.estatus = 1;
-        this.accion.accionId = null;
-
+        this.accion.accion = '';    
+        this.accion.idAccion = null;    
+        this.accion.estatus = null;    
+        this.accion.fechaModificacion = '';    
+        this.accion.fechaCreacion = ''; 
     }
 
-    saveAccion(accion){
-        console.log('AccionService: ', accion);
-		if (!accion.accionId){
-            return this.http.post(this.env.api + "/accion", accion).map(res => res);
-        }else{
-            return this.http.put(this.env.api + "/accion/"+accion.accionId, accion).map(res => res);
-        }
-     
+    setEdit(flag){
+        this.flag = flag;
     }
 
-	private static handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-        if (error.status === 404) {
-            errMsg = 'Resource was not found';
+    getEdit(){
+        return this.flag;
+    }
+
+    private static handleError(error: Response | any) {
+        let errMsg: string;
+        if (error instanceof Response) {
+            if (error.status === 404) {
+                errMsg = 'Resource was not found';
+            } else {
+                const body = error.json() || '';
+                const err = body.error || JSON.stringify(body);
+                errMsg = 'Error';
+            }
         } else {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = 'Error';
+            errMsg = error.message ? error.message : error.toString();
         }
-    } else {
-        errMsg = error.message ? error.message : error.toString();
-    }
-
-    return Observable.throw(errMsg);
+    
+        return Observable.throw(errMsg);
     }
 }

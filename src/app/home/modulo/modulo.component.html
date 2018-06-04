@@ -15,13 +15,13 @@
 				<div class="x_content">
 
 					
-					<form #moduloForm="ngForm" id="moduloForm" data-parsley-validate>
-						
-						<input class="form-control" #moduloId="ngModel" moduloId="moduloId" name="moduloId" type="hidden" [(ngModel)]="modulo.moduloId">
+					<form #moduloForm="ngForm" id="moduloForm" class="form-horizontal form-label-left" data-parsley-validate>
+			
+						<input class="form-control" #idModulo="ngModel" idModulo="idModulo" name="idModulo" type="text" [(ngModel)]="modulo.idModulo">
 
 						<label for="modulo">Modulo * :</label>
 						<input class="form-control" #modulo="ngModel" id="modulo" name="modulo" type="text" [(ngModel)]="modulo.modulo" required>
-		
+<!--		
 						<br/>
 						<label>Estatus * :</label>
 						<p>
@@ -31,19 +31,27 @@
 
 						<br/>
 						<label for="fechacreacion">Fechacreacion * :</label>
-						<input class="form-control" #correo="ngModel" id="fechacreacion" name="fechacreacion" type="fechacreacion" [(ngModel)]="modulo.fechacreacion" required>
+						<input class="form-control" #correo="ngModel" id="fechaCreacion" name="fechaCreacion" type="fechaCreacion" [(ngModel)]="modulo.fechaCreacion" required>
 						
 						<label for="fechamodificacion">Fechamodificacion * :</label>
-						<input class="form-control" #fechamodificacion="ngModel" id="fechamodificacion" name="fechamodificacion" type="text" [(ngModel)]="modulo.fechamodificacion" required>
+						<input class="form-control" #fechamodificacion="ngModel" id="fechaModificacion" name="fechaModificacion" type="text" [(ngModel)]="modulo.fechaModificacion" required>
 						
 						<br/>
+						<div class="ln_solid"></div>
 						<div class="col-sm-12">
 							<div class="input-group">
+							<div *ngIf="flag">	
+							<button class="btn btn-danger" (click)="delete(moduloForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+							<button class="btn btn-primary" (click)="save(moduloForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+							<button class="btn btn-default" (click)="return(moduloForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+							</div>
+							<div *ngIf="!flag">
 							<button class="btn btn-primary" (click)="save(moduloForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 							<button class="btn btn-default" (click)="return(moduloForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 							</div>
+							</div>
 						</div>
-
+					-->
 					</form>
 				</div>
 			</div>

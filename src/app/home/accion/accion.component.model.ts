@@ -1,6 +1,6 @@
 export class Accion {
 
-	accionId: number = null;
+	idAccion: number = null;
 	accion:  string = '';
 	estatus:  number = null;
 	fechaCreacion: string = '';

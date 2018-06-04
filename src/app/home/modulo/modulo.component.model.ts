@@ -1,6 +1,6 @@
 export class Modulo {
 
-	moduloId: number = null;
+	idModulo: number = null;
 	modulo:  string = '';
 	estatus:  number = null;
 	fechaCreacion: string = '';
