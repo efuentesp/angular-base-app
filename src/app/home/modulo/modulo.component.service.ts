@@ -24,19 +24,19 @@ export class ModuloService {
 
     saveModulo(modulo){
         console.log('Modulo', modulo);
-		if (!modulo.moduloId){
+		if (!modulo.idModulo){
             return this.http.post(this.env.api + "/modulo", modulo).map(res => res);
         }else{
-            return this.http.put(this.env.api + "/modulo/"+modulo.moduloId, modulo).map(res => res);
+            return this.http.put(this.env.api + "/modulo/"+modulo.idModulo, modulo).map(res => res);
         }
     }
 
     deleteModulo(modulo){
-        return this.http.delete(this.env.api + "/modulo/"+modulo.moduloId, modulo).map(res => res);
+        return this.http.delete(this.env.api + "/modulo/"+modulo.idModulo, modulo).map(res => res);
     }
 
-    getModuloById(moduloId){
-        return this.http.get(this.env.api + "/modulo/"+moduloId).map(res => res);
+    getModuloById(idModulo){
+        return this.http.get(this.env.api + "/modulo/"+idModulo).map(res => res);
     }
 
     resetModulo(): Modulo {

@@ -1,6 +1,6 @@
 export class Authority {
 
-	idrol: number = null;
+	idRol: number = null;
 	rol:  string = '';
 	estatus:  number = null;
 	fechaCreacion: string = '';

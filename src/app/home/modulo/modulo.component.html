@@ -17,24 +17,24 @@
 					
 					<form #moduloForm="ngForm" id="moduloForm" class="form-horizontal form-label-left" data-parsley-validate>
 			
-						<input class="form-control" #idModulo="ngModel" idModulo="idModulo" name="idModulo" type="text" [(ngModel)]="modulo.idModulo">
+						<input class="form-control" #idModulo="ngModel" idModulo="idModulo" name="idModulo" type="hidden" [(ngModel)]="modulo.idModulo">
 
 						<label for="modulo">Modulo * :</label>
-						<input class="form-control" #modulo="ngModel" id="modulo" name="modulo" type="text" [(ngModel)]="modulo.modulo" required>
-<!--		
+						<input class="form-control" id="modulo" name="modulo" type="text" [(ngModel)]="modulo.modulo" required>
+		
 						<br/>
 						<label>Estatus * :</label>
 						<p>
-						Activo:        <input type="radio" class="flat" value="1"     name="estatus" [(ngModel)]="modulo.estatus" />		
-						Inactivo:      <input type="radio" class="flat" value="0"     name="estatus" [(ngModel)]="modulo.estatus" />		
+						Activo:        <input type="radio"  value="true"     name="estatus" [(ngModel)]="modulo.estatus" />		
+						Inactivo:      <input type="radio"  value="false"     name="estatus" [(ngModel)]="modulo.estatus" />		
 						</p>
 
 						<br/>
 						<label for="fechacreacion">Fechacreacion * :</label>
-						<input class="form-control" #correo="ngModel" id="fechaCreacion" name="fechaCreacion" type="fechaCreacion" [(ngModel)]="modulo.fechaCreacion" required>
+						<input class="form-control"  id="fechaCreacion" name="fechaCreacion" type="fechaCreacion" [(ngModel)]="modulo.fechaCreacion" required>
 						
 						<label for="fechamodificacion">Fechamodificacion * :</label>
-						<input class="form-control" #fechamodificacion="ngModel" id="fechaModificacion" name="fechaModificacion" type="text" [(ngModel)]="modulo.fechaModificacion" required>
+						<input class="form-control"  id="fechaModificacion" name="fechaModificacion" type="text" [(ngModel)]="modulo.fechaModificacion" required>
 						
 						<br/>
 						<div class="ln_solid"></div>
@@ -51,7 +51,7 @@
 							</div>
 							</div>
 						</div>
-					-->
+					
 					</form>
 				</div>
 			</div>

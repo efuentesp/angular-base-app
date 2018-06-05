@@ -18,9 +18,10 @@ export class UserMngComponent implements OnInit {
     userList: User;
     user: User;
     form: any;
+    public flag: boolean = false;
 
   	public busquedaUser='';
-	filterInputUser = new FormControl();
+	  filterInputUser = new FormControl();
 
     constructor(private router: Router, private userService: UserService,  private route: ActivatedRoute) {
 	   	   this.filterInputUser.valueChanges.subscribe(busquedaUser => {
@@ -29,9 +30,8 @@ export class UserMngComponent implements OnInit {
 	}
 
     ngOnInit() {
-
         this.loadUsers();
-
+        this.userService.setEdit(false);
     }
 
     loadUsers() {
@@ -44,24 +44,16 @@ export class UserMngComponent implements OnInit {
         swal('Error...', 'An error occurred while calling the users.', 'error');
       });
     }
-    save(user){
-      this.userService.saveUser(this.user).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'User save successfully.', 'success');
-        }else{
-          swal('Error...', 'User save unsuccessfully.', 'error');
-        }
-
-      } );
-    }
-	
 
   add(){
-    this.router.navigate([ '../user' ], { relativeTo: this.route })
+    this.userService.setEdit(false);
+    this.userService.clear();
+    this.router.navigate([ '../user' ], { relativeTo: this.route })  
   }
 
   setClickedRowUser(index, user){
-	  this.userService.setUser(user);
+    this.userService.setUser(user);
+    this.userService.setEdit(true);
     this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
 

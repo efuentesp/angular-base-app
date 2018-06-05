@@ -14,6 +14,7 @@ export class UserService {
     private isUserFormValid: boolean = false;
     private env: any = environment;
     private user = new User();
+    private flag :boolean = false;
 
     constructor(private http: Http) {
     }
@@ -22,6 +23,29 @@ export class UserService {
       return this.http.get(this.env.api + "/user").map(res => res.json()).catch(UserService.handleError);
     }
 
+    saveUser(user){
+       
+
+        user.imagen = user.userName + '.jpg';
+        user.rol    = 'admin';
+
+        console.log('User Service', user);
+
+		if (!user.idUser){
+            return this.http.post(this.env.api + "/user", user).map(res => res);
+        }else{
+            return this.http.put(this.env.api + "/user/"+user.idUser, user).map(res => res);
+        }
+    }
+
+    deleteUser(user){
+        return this.http.delete(this.env.api + "/user/"+user.idUser, user).map(res => res);
+    }
+
+    getUserById(idUser){
+        return this.http.get(this.env.api + "/user/"+idUser).map(res => res);
+    }
+    
     resetUser(): User {
         this.clear();
         return this.user;
@@ -30,11 +54,11 @@ export class UserService {
     getUser(): User {
         var user: User = {
                     
-                    iduser: this.user.iduser,
-                    username: this.user.username,
+            idUser: this.user.idUser,
+            userName: this.user.userName,
                     password: this.user.password,
                     rol: this.user.rol,
-                    image: this.user.image
+                    imagen: this.user.imagen
 
         };
         return user;
@@ -44,11 +68,11 @@ export class UserService {
        
     this.isUserFormValid = true;
     
-    this.user.iduser = user.iduser;
-    this.user.username = user.username;
+    this.user.idUser = user.idUser;
+    this.user.userName = user.userName;
     this.user.password = user.password;
     this.user.rol = user.rol;
-    this.user.image = user.image;
+    this.user.imagen = user.imagen;
           
     }
 
@@ -61,37 +85,34 @@ export class UserService {
     }
 
     clear() {
-        this.user.iduser = null;
-        this.user.username = '';
+        this.user.idUser = null;
+        this.user.userName = '';
         this.user.password = '';
         this.user.rol = '';
-        this.user.image = '';
+        this.user.imagen = '';
+    }
+    
+    setEdit(flag){
+        this.flag = flag;
     }
 
-    saveUser(user){
-        console.log('User Service', user);
-		if (!user.userId){
-            return this.http.post(this.env.api + "/user", user).map(res => res);
-        }else{
-            return this.http.put(this.env.api + "/user/"+user.accionId, user).map(res => res);
-        }
-     
+    getEdit(){
+        return this.flag;
     }
 
 	private static handleError(error: Response | any) {
-    let errMsg: string;
-    if (error instanceof Response) {
-        if (error.status === 404) {
-            errMsg = 'Resource was not found';
+        let errMsg: string;
+        if (error instanceof Response) {
+            if (error.status === 404) {
+                errMsg = 'Resource was not found';
+            } else {
+                const body = error.json() || '';
+                const err = body.error || JSON.stringify(body);
+                errMsg = 'Error';
+            }
         } else {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = 'Error';
+            errMsg = error.message ? error.message : error.toString();
         }
-    } else {
-        errMsg = error.message ? error.message : error.toString();
-    }
-
     return Observable.throw(errMsg);
     }
 }

@@ -23,19 +23,19 @@ export class AuthorityService {
     }
 
     saveAuthority(authority){
-		if (!authority.authorityId){
+		if (!authority.idRol){
             return this.http.post(this.env.api + "/authority", authority).map(res => res);
         }else{
-            return this.http.put(this.env.api + "/authority/"+authority.authorityId, authority).map(res => res);
+            return this.http.put(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
         }
     }
 
     deleteAuthority(authority){
-        return this.http.delete(this.env.api + "/authority/"+authority.authorityId, authority).map(res => res);
+        return this.http.delete(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
     }
 
-    getAuthorityById(authorityId){
-        return this.http.get(this.env.api + "/authority/"+authorityId).map(res => res);
+    getAuthorityById(idRol){
+        return this.http.get(this.env.api + "/authority/"+idRol).map(res => res);
     }
 
     resetAuthority(): Authority {
@@ -48,7 +48,7 @@ export class AuthorityService {
 					estatus: this.authority.estatus, 
 					fechaCreacion: this.authority.fechaCreacion, 
 					fechaModificacion: this.authority.fechaModificacion, 
-					idrol: this.authority.idrol, 
+					idRol: this.authority.idRol, 
 					rol: this.authority.rol
         };
         return authority;
@@ -60,7 +60,7 @@ export class AuthorityService {
 			this.authority.estatus = authority.estatus;    
 			this.authority.fechaCreacion = authority.fechaCreacion;    
 			this.authority.fechaModificacion = authority.fechaModificacion;    
-			this.authority.idrol = authority.idrol;    
+			this.authority.idRol = authority.idRol;    
 			this.authority.rol = authority.rol;  
     }
 
@@ -73,7 +73,7 @@ export class AuthorityService {
 			this.authority.estatus = null;    
 			this.authority.fechaModificacion = '';    
 			this.authority.fechaCreacion = '';   
-			this.authority.idrol = null;    
+			this.authority.idRol = null;    
 			this.authority.rol = null;
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -14,55 +14,48 @@ import { SearchSolicitudpensionPipe }                               from "../pip
 
 export class SolicitudpensionMngComponent implements OnInit {
 
-    title = 'Nuevo Solicitudpension';
-    solicitudpensionList: Solicitudpension;
-    solicitudpension: Solicitudpension;
-    form: any;
+  title = 'Solicitudpension';
+  solicitudpensionList: Solicitudpension;
+  solicitudpension: Solicitudpension;
+  form: any;
+  public flag: boolean = false;
 
-  	public busquedaSolicitudpension='';
-	filterInputSolicitudpension = new FormControl();
+  public busquedaBeneficiario='';
+  filterInputBeneficiario = new FormControl();
 
-    constructor(private router: Router, private solicitudpensionService: SolicitudpensionService) {
-	   	   this.filterInputSolicitudpension.valueChanges.subscribe(busquedaSolicitudpension => {
-	         this.busquedaSolicitudpension = busquedaSolicitudpension;
-	       });
-	}
+    constructor(private solicitudpensionService: SolicitudpensionService, 
+                private route: ActivatedRoute,
+                private router: Router) {
+          this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
+          this.busquedaBeneficiario = busquedaBeneficiario;
+        });
+  }
 
-    ngOnInit() {
+  ngOnInit() {
+      this.loadSolicitudpensions();
+      this.solicitudpensionService.setEdit(false);
+  }
 
-        this.loadSolicitudpensions();
-
-    }
-
-    loadSolicitudpensions() {
-      this.solicitudpensionService.getAllSolicitudpension().subscribe(data => {
-        if (data) {
-          this.solicitudpensionList = data;
-        }
-      }, error => {
-        swal('Error...', 'An error occurred while calling the solicitudpensions.', 'error');
-      });
-    }
-    save(solicitudpension){
-      this.solicitudpensionService.saveSolicitudpension(this.solicitudpension).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'Solicitudpension save successfully.', 'success');
-        }else{
-          swal('Error...', 'Solicitudpension save unsuccessfully.', 'error');
-        }
-
-      } );
-    }
-	
+  loadSolicitudpensions() {
+    this.solicitudpensionService.getAllSolicitudpension().subscribe(data => {
+      if (data) {
+        this.solicitudpensionList = data;
+      }
+    }, error => {
+      swal('Error...', 'An error occurred while calling the solicitudpensions.', 'error');
+    });
+  }
 
   add(){
-    this.router.navigate(['/solicitudpension']);
+    this.solicitudpensionService.setEdit(false);
+    this.solicitudpensionService.clear();
+    this.router.navigate([ '../solicitudpension' ], { relativeTo: this.route })  
   }
 
-  setClickedRowsolicitudpension(index, solicitudpension){
-	this.solicitudpensionService.setSolicitudpension(solicitudpension);
-    this.router.navigate(['/solicitudpension']);
+  setClickedRowSolicitudpension(index, solicitudpension){
+    this.solicitudpensionService.setSolicitudpension(solicitudpension);
+    this.solicitudpensionService.setEdit(true);
+    this.router.navigate([ '../solicitudpension' ], { relativeTo: this.route })
   }
-
 }
 

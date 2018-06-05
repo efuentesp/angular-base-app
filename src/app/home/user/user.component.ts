@@ -27,13 +27,20 @@ export class UserComponent implements OnInit {
     userList: User;
     user: User;
     form: any;
+    public flag: boolean = false;
+
+    userArray: User[];
+    selectedIndex = 4;
+    timeVar = " hours";
+    checkboxValue:boolean;
  
 	authorityList: Authority [] = [];
   modulosList: Modulo;
   accionsList: Accion;
 
 		public busquedaBeneficiario='';
-		filterInputBeneficiario = new FormControl();
+    filterInputBeneficiario = new FormControl();
+    public isChecked: boolean;
 
     constructor(private router: Router, 
     private userService: UserService,
@@ -48,12 +55,60 @@ export class UserComponent implements OnInit {
 	}
 
     ngOnInit() {
-        this.user = this.userService.getUser();
+        
         this.loadUsers();
         this.loadAuthoritys();
         this.loadModules();
         this.loadAccions();
+        this.user = new User;
+        this.flag = this.userService.getEdit();
+        if (this.flag){
+          this.user = this.userService.getUser();
+        }
 
+    }
+
+    save(user){  
+
+      
+
+      this.isChecked = Number(this.authorityList['status']) === 0 ? false : true;
+      console.log('List:', this.isChecked);
+
+
+      this.userService.saveUser(this.user).subscribe(res => {
+        if (res.status == 201 || res.status == 200){
+          swal('Success...', 'User save successfully.', 'success');
+          this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
+        }else{
+          swal('Error...', 'User save unsuccessfully.', 'error');
+        }
+      } );
+    }
+
+    delete(user){
+      swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this user!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!"
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          this.userService.deleteUser(this.user).subscribe(res => {
+            if (res.status == 201 || res.status == 200){
+              swal('Success...', 'User item has been deleted successfully.', 'success');
+              this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
+            }else{
+              swal('Error...', 'User deleted unsuccessfully.', 'error');
+            }
+          });
+        } else {
+          //swal("Cancelled", "User deleted unsuccessfully", "error");
+        }
+      });
     }
 
     loadUsers(){
@@ -101,33 +156,15 @@ export class UserComponent implements OnInit {
   });
 }
 
-
-    save(user){
-      console.log('User Save', this.user);
-      // Cambiar a dinamico
-      this.user.rol = 'admistrador';
-      this.userService.saveUser(this.user).subscribe(res => {
-        if (res.status == 201 || res.status == 200){
-          swal('Success...', 'User save successfully.', 'success');
-		      this.router.navigate([ '../user' ], { relativeTo: this.route })
-        }else{
-          swal('Error...', 'User save unsuccessfully.', 'error');
-        }
-      } );
-    }
-	
-	
-
-
-	return(user){
-      this.location.back();
-      //this.router.navigate(['/afiliado_mgmnt']);
-
-    }
-
 	  setClickedRowAuthority(index, authority){
 			    this.user.rol = authority.rol;
-		}
+    }
+	
+	return(beneficiario){
+      this.location.back();
+  }
+
+
 	
 }
 

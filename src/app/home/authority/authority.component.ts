@@ -35,6 +35,7 @@ export class AuthorityComponent implements OnInit {
     }
 
     save(authority){  
+      console.log('Authority:', this.authority);
       this.authorityService.saveAuthority(this.authority).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Authority save successfully.', 'success');

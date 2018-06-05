@@ -1,9 +1,9 @@
 export class User {
 
-	iduser: number = null;
-	username:  string = '';
+	idUser: number = null;
+	userName:  string = '';
 	password:  string = '';
 	rol: string = '';
-	image: string = '';
+	imagen: string = '';
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
-import { Router }                                          from '@angular/router';
+import { Router, ActivatedRoute }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
@@ -21,20 +21,23 @@ export class TipopensionMngComponent implements OnInit {
     tipopensionList: Tipopension;
     tipopension: Tipopension;
     form: any;
+    public flag: boolean = false;
 
   	public busquedaTipopension='';
-	filterInputTipopension = new FormControl();
+	  filterInputTipopension = new FormControl();
 
-    constructor(private router: Router, private tipopensionService: TipopensionService, private location: Location) {
-	   	   this.filterInputTipopension.valueChanges.subscribe(busquedaTipopension => {
+    constructor(private router: Router, 
+                private route: ActivatedRoute, 
+                private tipopensionService: TipopensionService, 
+                private location: Location) {
+	   	     this.filterInputTipopension.valueChanges.subscribe(busquedaTipopension => {
 	         this.busquedaTipopension = busquedaTipopension;
 	       });
 	}
 
     ngOnInit() {
-
         this.loadTipopensions();
-
+        this.tipopensionService.setEdit(false);
     }
 
     loadTipopensions() {
@@ -46,27 +49,18 @@ export class TipopensionMngComponent implements OnInit {
         swal('Error...', 'An error occurred while calling the tipopensions.', 'error');
       });
     }
-    save(tipopension){
-      this.tipopensionService.saveTipopension(this.tipopension).subscribe(res => {
-        if (res.status == 201){
-          swal('Success...', 'Tipopension save successfully.', 'success');
-        }else{
-          swal('Error...', 'Tipopension save unsuccessfully.', 'error');
-        }
 
-      } );
+    add(){
+      this.tipopensionService.setEdit(false);
+      this.tipopensionService.clear();
+      this.router.navigate([ '../tipopension' ], { relativeTo: this.route })  
     }
-	
-
-  add(){
-    //this.router.navigate(['/tipopension']);
-    this.location.back();
-  }
-
-  setClickedRowtipopension(index, tipopension){
-	this.tipopensionService.setTipopension(tipopension);
-    this.router.navigate(['/tipopension']);
-  }
+  
+    setClickedRowTipopension(index, tipopension){
+      this.tipopensionService.setTipopension(tipopension);
+      this.tipopensionService.setEdit(true);
+      this.router.navigate([ '../tipopension' ], { relativeTo: this.route })
+    }
 
 }
 

@@ -23,19 +23,23 @@ export class AccionService {
     }
 
     saveAccion(accion){
-		if (!accion.accionId){
+		if (!accion.idAccion){
+            console.log('Accion:', accion);
             return this.http.post(this.env.api + "/accion", accion).map(res => res);
         }else{
-            return this.http.put(this.env.api + "/accion/"+accion.accionId, accion).map(res => res);
+            console.log('Accion:', accion);
+            return this.http.put(this.env.api + "/accion/"+accion.idAccion, accion).map(res => res);
         }
     }
 
     deleteAccion(accion){
-        return this.http.delete(this.env.api + "/accion/"+accion.accionId, accion).map(res => res);
+        console.log('delete:', accion.idAccion );
+        return this.http.delete(this.env.api + "/accion/"+accion.idAccion, accion).map(res => res);
     }
 
-    getAccionById(accionId){
-        return this.http.get(this.env.api + "/accion/"+accionId).map(res => res);
+    getAccionById(idAccion){
+        console.log('delete:', idAccion );
+        return this.http.get(this.env.api + "/accion/"+idAccion).map(res => res);
     }
 
     resetAccion(): Accion {

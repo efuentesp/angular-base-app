@@ -94,8 +94,8 @@
 															<tr *ngFor="let authority of authorityList | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowAuthority(i, authority)" >
 																	<td>{{authority.rol}}</td>
 																	<td>{{authority.estatus}}</td>
-																	<td>{{authority.fechacreacion}}</td>
-																	<td>{{authority.fechamodificacion}}</td>
+																	<td>{{authority.fechaCreacion}}</td>
+																	<td>{{authority.fechaModificacion}}</td>
 															</tr>
 														</tbody>
 												</table>

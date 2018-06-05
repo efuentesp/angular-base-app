@@ -20,12 +20,22 @@
 					<input class="form-control" #clave="ngModel" id="clave" name="clave" type="text" [(ngModel)]="tipopension.clave" required>
 
 					<br/>
+
+					<div class="ln_solid"></div>
 					<div class="col-sm-12">
 						<div class="input-group">
+						<div *ngIf="flag">	
+						<button class="btn btn-danger" (click)="delete(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+						<button class="btn btn-primary" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+						<button class="btn btn-default" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+						</div>
+						<div *ngIf="!flag">
 						<button class="btn btn-primary" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 						<button class="btn btn-default" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 						</div>
+						</div>
 					</div>
+					
 				</form>
 				
 				</div>

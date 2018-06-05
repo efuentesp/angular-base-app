@@ -39,6 +39,7 @@ export class AuthorityMngComponent implements OnInit {
     loadAuthoritys() {
       this.authorityService.getAllAuthority().subscribe(data => {
         if (data) {
+          console.log('data:', data);
           this.authorityList = data;
         }
       }, error => {

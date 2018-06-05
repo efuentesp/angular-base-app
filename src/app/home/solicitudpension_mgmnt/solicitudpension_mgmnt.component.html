@@ -108,7 +108,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr *ngFor="let solicitudpension of solicitudpensionList | filterSolicitudpension: busquedaSolicitudpension | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowsolicitudpension(i, solicitudpension)" >
+										<tr *ngFor="let solicitudpension of solicitudpensionList | filterSolicitudpension: busquedaSolicitudpension | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowSolicitudpension(i, solicitudpension)" >
 												<td>{{solicitudpension.numero}}</td>
 												<td>{{solicitudpension.afiliadoId}}</td>
 												<td>{{solicitudpension.tipopensionId}}</td>

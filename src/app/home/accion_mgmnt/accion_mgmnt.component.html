@@ -84,6 +84,7 @@
 												<table id="datatable" class="table table-striped table-bordered">
 													<thead>
 															<tr>
+																	<th>Id</th>
 																	<th>Accion</th>
 																	<th>Estatus</th>
 																	<th>Fechacreacion</th>
@@ -92,6 +93,7 @@
 														</thead>
 														<tbody>
 															<tr *ngFor="let accion of accionList | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowAccion(i, accion)" >
+																	<td>{{accion.idAccion}}</td>
 																	<td>{{accion.accion}}</td>
 																	<td>{{accion.estatus}}</td>
 																	<td>{{accion.fechaCreacion}}</td>

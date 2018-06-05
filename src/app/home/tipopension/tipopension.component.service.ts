@@ -14,12 +14,30 @@ export class TipopensionService {
     private isTipopensionFormValid: boolean = false;
     private env: any = environment;
     private tipopension = new Tipopension();
+    private flag :boolean = false;
 
     constructor(private http: Http) {
     }
 
     getAllTipopension(){
       return this.http.get(this.env.api + "/tipopension").map(res => res.json()).catch(TipopensionService.handleError);
+    }
+
+    
+    saveTipopension(tipopension){
+		if (!tipopension.tipopensionId){
+            return this.http.post(this.env.api + "/tipopension", tipopension).map(res => res);
+        }else{
+            return this.http.put(this.env.api + "/tipopension/"+tipopension.tipopensionId, tipopension).map(res => res);
+        }
+    }
+
+    deleteTipopension(tipopension){
+        return this.http.delete(this.env.api + "/tipopension/"+tipopension.tipopensionId, tipopension).map(res => res);
+    }
+
+    geteTipopensionById(tipopensionId){
+        return this.http.get(this.env.api + "/tipopension/"+tipopensionId).map(res => res);
     }
 
     resetTipopension(): Tipopension {
@@ -44,15 +62,10 @@ export class TipopensionService {
 			this.tipopension.nombre = tipopension.nombre;    
 			this.tipopension.clave = tipopension.clave;    
 			this.tipopension.tipopensionId        = tipopension.tipopensionId;
-        	this.validateTipopension();
     }
 
     isFormValid() {
         return this.isTipopensionFormValid;
-    }
-
-    validateTipopension() {
-
     }
 
     clear() {
@@ -62,14 +75,12 @@ export class TipopensionService {
 			this.tipopension.tipopensionId = null;
     }
 
-    saveTipopension(tipopension){
+    setEdit(flag){
+        this.flag = flag;
+    }
 
-		if (!tipopension.tipopensionId){
-            return this.http.post(this.env.api + "/tipopension", tipopension).map(res => res);
-        }else{
-            return this.http.put(this.env.api + "/tipopension/"+tipopension.tipopensionId, tipopension).map(res => res);
-        }
-     
+    getEdit(){
+        return this.flag;
     }
 
 	private static handleError(error: Response | any) {

@@ -14,22 +14,26 @@
 					
 					<form #userForm="ngForm" id="userForm" data-parsley-validate>
 						
-						<input class="form-control" #iduser="ngModel" iduser="iduser" name="iduser" type="hidden" [(ngModel)]="user.iduser">
+						<input class="form-control" #iduser="ngModel" iduser="iduser" name="iduser" type="hidden" [(ngModel)]="user.idUser">
 
 						<label for="username">Username * :</label>
-						<input class="form-control" #username="ngModel" id="username" name="username" type="text" [(ngModel)]="user.username" required>
+						<input class="form-control" #username="ngModel" id="username" name="username" type="text" [(ngModel)]="user.userName" required>
 						
+						<div *ngIf="!flag">
 						<label for="rol">Password * :</label>
 						<input class="form-control" #password="ngModel" password="rol" name="password" type="text"  [(ngModel)]="user.password" required>
-						
+						</div>
+
 						<br/>
 						<div style="float:left; width: 7%;" >
 								<label>Rol * :</label>
 						</div>
 
 						<div style="float:left" class="col-md-2">
+							
 							<div *ngFor="let authority of authorityList">
-								<input type="checkbox" class="flat" value="{{authority.rol}}"     name="authority" [(ngModel)]="user.rol" /> {{authority.rol}}  
+									<!-- <input type="checkbox" [formControl]="authority"/> {{authority.rol}} -->
+								<input type="checkbox" value="{{authority.idRol}}"  name="{{authority.rol}}"/> {{authority.rol}} 
 							</div>
 						</div>
 
@@ -46,13 +50,20 @@
 							</div>
 						</div>
 
+						<div class="ln_solid"></div>
 						<div class="col-sm-12">
 							<div class="input-group">
+							<div *ngIf="flag">	
+							<button class="btn btn-danger" (click)="delete(userForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+							<button class="btn btn-primary" (click)="save(userForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+							<button class="btn btn-default" (click)="return(userForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+							</div>
+							<div *ngIf="!flag">
 							<button class="btn btn-primary" (click)="save(userForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 							<button class="btn btn-default" (click)="return(userForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 							</div>
+							</div>
 						</div>
-						
 
 					</form>
 					

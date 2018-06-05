@@ -1,17 +1,56 @@
-<div class="x_panel">
-        <div class="x_title">
-        <h2>Modulo Accion<small>Administrar Modulo Accion</small></h2>
-        <ul class="nav navbar-right panel_toolbox">
-            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-            </li>
-        </ul>
-        <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            
-            
-                
-                
-               
-        </div>
-    </div>
+
+
+			<div class="x_panel">
+                    <div class="x_title">
+                    <h2>User <small>Agregar User</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+    
+                        
+                        <form #moduloAccionForm="ngForm" id="moduloAccionForm" data-parsley-validate>
+    
+                            <div style="float:left; width: 7%;" >
+                                    <label>Modulo * :</label>
+                            </div>
+                            <div style="float:left"  class="col-md-9"> 
+                                <div *ngFor="let modulo of modulosList" style="float:left; width:25%;" >
+                                    <b>{{modulo.modulo}}</b> 
+                                    <div *ngFor="let accion of accionsList" >
+                                        <input type="checkbox" value="{{accion.accion}}"  name="accion" /> 
+                                        {{accion.accion}} 
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+    
+                            <div class="ln_solid"></div>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                <div *ngIf="flag">	
+                                <button class="btn btn-danger" (click)="delete(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+                                <button class="btn btn-primary" (click)="save(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+                                <button class="btn btn-default" (click)="return(moduloAccionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+                                </div>
+                                <div *ngIf="!flag">
+                                <button class="btn btn-primary" (click)="save(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+                                <button class="btn btn-default" (click)="return(moduloAccionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+                                </div>
+                                </div>
+                            </div>
+    
+                        </form>
+                        
+                        
+    
+                    </div>
+                </div>	
+    
+    
+    
+    
+    

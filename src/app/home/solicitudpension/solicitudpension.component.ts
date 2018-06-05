@@ -23,12 +23,13 @@ export class SolicitudpensionComponent implements OnInit {
 
     title = 'Nuevo Solicitudpension';
     solicitudpensionList: Solicitudpension;
-    solicitudpension: Solicitudpension;
+		solicitudpension: Solicitudpension;
+		public flag: boolean = false;
     form: any;
 
 		afiliadoList: Afiliado;
 		tipopensionList: Tipopension;
-		public flag = false;
+
 		public busquedaAfiliado='';
 		filterInputAfiliado = new FormControl();
 		public busquedaTipopension='';
@@ -54,13 +55,12 @@ export class SolicitudpensionComponent implements OnInit {
 				this.loadAfiliados();
 				this.loadTipopensions();
 				this.flag = this.solicitudpensionService.getEdit();
+				this.solicitudpension = new Solicitudpension;
         if (this.flag){
           this.solicitudpension = this.solicitudpensionService.getSolicitudpension();
         }
 		}
 		
-
-
 		loadAfiliados(){
       		this.afiliadoService.getAllAfiliado().subscribe(data => {
         	if (data) {
@@ -80,7 +80,6 @@ export class SolicitudpensionComponent implements OnInit {
         	swal('Error...', 'An error occurred while calling the tipopensions.', 'error');
       	});
     }
-
 
     save(solicitudpension){
       this.solicitudpensionService.saveSolicitudpension(this.solicitudpension).subscribe(res => {

@@ -89,7 +89,7 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr *ngFor="let tipopension of tipopensionList | filterTipopension: busquedaTipopension | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowtipopension(i, tipopension)" >
+														<tr *ngFor="let tipopension of tipopensionList | filterTipopension: busquedaTipopension | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowTipopension(i, tipopension)" >
 																<td>{{tipopension.nombre}}</td>
 																<td>{{tipopension.clave}}</td>
 														</tr>

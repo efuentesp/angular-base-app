@@ -25,26 +25,32 @@
 						<br/>
 						<label>Estatus * :</label>
 						<p>
-						Activo:        <input type="radio" class="flat" value="1"     name="estatus" [(ngModel)]="authority.estatus" />		
-						Inactivo:      <input type="radio" class="flat" value="0"     name="estatus" [(ngModel)]="authority.estatus" />		
+						Activo:        <input type="radio"  value="true"     name="estatus" [(ngModel)]="authority.estatus" />		
+						Inactivo:      <input type="radio"  value="false"     name="estatus" [(ngModel)]="authority.estatus" />		
 						</p>
 
 						<br/>
-						<label for="fechacreacion">Fechacreacion * :</label>
-						<input class="form-control" #correo="ngModel" id="fechacreacion" name="fechacreacion" type="fechacreacion" [(ngModel)]="authority.fechacreacion" required>
+						<label for="fechaCreacion">FechaCreacion * :</label>
+						<input class="form-control" #correo="ngModel" id="fechacreacion" name="fechaCreacion" type="fechaCreacion" [(ngModel)]="authority.fechaCreacion" required>
 						
-						<label for="fechamodificacion">Fechamodificacion * :</label>
-						<input class="form-control" #fechamodificacion="ngModel" id="fechamodificacion" name="fechamodificacion" type="text" [(ngModel)]="authority.fechamodificacion" required>
+						<label for="fechaModificacion">FechaModificacion * :</label>
+						<input class="form-control" #fechaModificacion="ngModel" id="fechaModificacion" name="fechaModificacion" type="text" [(ngModel)]="authority.fechaModificacion" required>
 						
 						<br/>
-						
+						<div class="ln_solid"></div>
 						<div class="col-sm-12">
 							<div class="input-group">
+							<div *ngIf="flag">	
+							<button class="btn btn-danger" (click)="delete(authorityForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+							<button class="btn btn-primary" (click)="save(authorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+							<button class="btn btn-default" (click)="return(authorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+							</div>
+							<div *ngIf="!flag">
 							<button class="btn btn-primary" (click)="save(authorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 							<button class="btn btn-default" (click)="return(authorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 							</div>
+							</div>
 						</div>
-
 					</form>
 					
 					

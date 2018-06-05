@@ -20,15 +20,15 @@
 							<input class="form-control col-md-7 col-xs-12"  [(ngModel)]="accion.accion" id="accion" name="accion" type="text" required="required" >
 							</div>
 						</div>
-											
+
 						<div class="form-group">
-						<br/>
-						<label class="control-label col-md-3 col-sm-3 col-xs-12" for="accion">Estatus: <span class="required">*</span></label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-						Activo:        <input type="radio"  value="1"     name="estatus" [(ngModel)]="accion.estatus" />		
-						Inactivo:      <input type="radio"  value="0"     name="estatus" [(ngModel)]="accion.estatus" />		
-						</div>
-						</div>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="estatus">Estatus: <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input  type="radio"  value="true"    name="estatus" [(ngModel)]="accion.estatus" /> Activo <br/>		
+									<input  type="radio"  value="false"   name="estatus" [(ngModel)]="accion.estatus" /> Inaxtivo <br/>		
+								</div>
+							</div>
 
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="fechacreacion">Fechacreacion: <span class="required">*</span></label>
