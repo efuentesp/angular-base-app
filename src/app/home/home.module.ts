@@ -47,6 +47,7 @@ import { UserMngComponent } from './user_mgmnt/user_mgmnt.component';
 import { UserService } from './user/user.component.service';
 import { UserAuthorityComponent } from './user_authority/user-authority.component';
 import { ModuloAccionComponent } from './modulo_accion/modulo_accion.component';
+import { SearchUserPipe } from './pipe/user.filter.pipe';
 
 @NgModule({
   imports: [     
@@ -76,6 +77,7 @@ import { ModuloAccionComponent } from './modulo_accion/modulo_accion.component';
 		SearchAfiliadoPipe,
 		SearchBeneficiarioPipe,
 		SearchSolicitudpensionPipe,
+		SearchUserPipe,
 		UserComponent,
 		UserMngComponent,
 		AuthorityComponent,

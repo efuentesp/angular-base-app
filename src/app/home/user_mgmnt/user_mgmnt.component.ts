@@ -6,7 +6,8 @@ import swal from 'sweetalert2';
 import { UserService }                                  from '../user/user.component.service';
 import { User }                                         from '../user/user.component.model';
 
-//import { SearchAfiliadoPipe }                               from "../pipe/afiliado.filter.pipe";
+import { SearchUserPipe }                               from "../pipe/user.filter.pipe";
+
 @Component ({
     selector: 'app-view',
     templateUrl: './user_mgmnt.component.html'
