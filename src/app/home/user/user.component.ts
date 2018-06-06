@@ -18,7 +18,9 @@ import { Accion } from '../accion/accion.component.model';
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './user.component.html'
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.css']
+
 })
 
 export class UserComponent implements OnInit {
@@ -33,14 +35,16 @@ export class UserComponent implements OnInit {
     selectedIndex = 4;
     timeVar = " hours";
     checkboxValue:boolean;
+    public selectElement: string;
  
-	authorityList: Authority [] = [];
-  modulosList: Modulo;
-  accionsList: Accion;
+  	authorityList: Authority [] = [];
+    modulosList: Modulo;
+    accionsList: Accion;
 
 		public busquedaBeneficiario='';
     filterInputBeneficiario = new FormControl();
     public isChecked: boolean;
+    public selectedValue: string = '';
 
     constructor(private router: Router, 
     private userService: UserService,
@@ -63,19 +67,16 @@ export class UserComponent implements OnInit {
         this.user = new User;
         this.flag = this.userService.getEdit();
         if (this.flag){
+          console.log ('Usuario Edit:', this.user);
           this.user = this.userService.getUser();
+          this.selectedValue= this.user.rol;
+          console.log ('Usuario Edit:', this.selectedValue);
         }
-
     }
 
     save(user){  
 
-      
-
-      this.isChecked = Number(this.authorityList['status']) === 0 ? false : true;
-      console.log('List:', this.isChecked);
-
-
+      this.user.rol = this.selectedValue;
       this.userService.saveUser(this.user).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'User save successfully.', 'success');
@@ -84,6 +85,11 @@ export class UserComponent implements OnInit {
           swal('Error...', 'User save unsuccessfully.', 'error');
         }
       } );
+    }
+
+    setRole(item){
+      this.selectedValue = item;
+      console.log('Valor del item', item);
     }
 
     delete(user){
@@ -146,25 +152,22 @@ export class UserComponent implements OnInit {
   }
 
   loadAccions(){
-    this.accionService.getAllAccion().subscribe(data => {
-    if (data) {
-      console.log('Accions:', data);
-      this.accionsList = data;
+        this.accionService.getAllAccion().subscribe(data => {
+        if (data) {
+          console.log('Accions:', data);
+          this.accionsList = data;
+        }
+        }, error => {
+        swal('Error...', 'An error occurred while calling the accions.', 'error');
+      });
     }
-    }, error => {
-    swal('Error...', 'An error occurred while calling the accions.', 'error');
-  });
-}
 
 	  setClickedRowAuthority(index, authority){
 			    this.user.rol = authority.rol;
     }
 	
-	return(beneficiario){
-      this.location.back();
-  }
-
-
-	
+    return(beneficiario){
+        this.location.back();
+    }
 }
 

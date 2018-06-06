@@ -1,0 +1,30 @@
+.modulos{
+    float: left;
+    width: 100%;
+    border-bottom: 2px solid #E6E9ED;
+}
+
+.roles{
+    float: left;
+}
+
+.title{
+    width: 100%;
+}
+
+.title_1{
+    width: 50%;
+}
+
+.title_2{
+    -webkit-transform: rotate(-90deg);
+ 
+    -moz-transform: rotate(-90deg);
+   
+}
+
+.line{
+    border-bottom: 2px solid #E6E9ED;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+}

@@ -16,11 +16,14 @@ import { UserService }                                  from '../user/user.compo
 import { User }                                         from '../user/user.component.model';
 import { AuthorityService }                                  from '../authority/authority.component.service';
 import { Authority }                                         from '../authority/authority.component.model';
+import { ModuloAccionAuthority } from './modulo_accion.component.model';
+import { ModuloAccionAuthorityService } from './modulo_accion.component.service';
 
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './modulo_accion.component.html'
+    templateUrl: './modulo_accion.component.html',
+    styleUrls: ['./modulo_accion.component.css']
 })
 
 export class ModuloAccionComponent implements OnInit {
@@ -28,6 +31,7 @@ export class ModuloAccionComponent implements OnInit {
   userList: User;
   user: User;
   form: any;
+  moduloAccionAuthority = new ModuloAccionAuthority;
   public flag: boolean = false;
 
   userArray: User[];
@@ -35,9 +39,11 @@ export class ModuloAccionComponent implements OnInit {
   timeVar = " hours";
   checkboxValue:boolean;
 
-authorityList: Authority [] = [];
-modulosList: Modulo;
-accionsList: Accion;
+  authorityList: Authority [] = [];
+  modulosList: Modulo;
+  accionsList: Accion;
+
+  filter = false;
 
   public busquedaBeneficiario='';
   filterInputBeneficiario = new FormControl();
@@ -49,8 +55,8 @@ accionsList: Accion;
   private location: Location,
   private moduloService: ModuloService,
   private accionService: AccionService,
-  private route:ActivatedRoute
-
+  private route:ActivatedRoute,
+  private moduloAccionAuthorityService: ModuloAccionAuthorityService
 ) {
   
 }
@@ -70,13 +76,6 @@ accionsList: Accion;
   }
 
   save(user){  
-
-    
-
-    this.isChecked = Number(this.authorityList['status']) === 0 ? false : true;
-    console.log('List:', this.isChecked);
-
-
     this.userService.saveUser(this.user).subscribe(res => {
       if (res.status == 201 || res.status == 200){
         swal('Success...', 'User save successfully.', 'success');
@@ -164,4 +163,34 @@ loadAccions(){
   return(beneficiario){
     this.location.back();
   }
+
+  saveRole(idModulo, idAuthority, idAccion, isChecked){
+
+    if(isChecked.target.checked){
+      this.moduloAccionAuthority.idAccion = idAccion;
+      this.moduloAccionAuthority.idModulo = idModulo;
+      this.moduloAccionAuthority.idRol    = idAuthority;
+      this.moduloAccionAuthority.estatus  = 1;
+      this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+        if (res.status == 201 || res.status == 200){
+          //swal('Success...', 'User save successfully.', 'success');
+        }else{
+          //swal('Error...', 'User save unsuccessfully.', 'error');
+        }
+      } );
+    }else{
+      this.moduloAccionAuthority.idAccion = idAccion;
+      this.moduloAccionAuthority.idModulo = idModulo;
+      this.moduloAccionAuthority.idRol    = idAuthority;
+      this.moduloAccionAuthority.estatus  = 0;
+      this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+        if (res.status == 201 || res.status == 200){
+          //swal('Success...', 'User save successfully.', 'success');
+        }else{
+          //swal('Error...', 'User save unsuccessfully.', 'error');
+        }
+      } );
+    }
+  }
+
 }

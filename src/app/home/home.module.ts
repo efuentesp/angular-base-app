@@ -48,6 +48,7 @@ import { UserService } from './user/user.component.service';
 import { UserAuthorityComponent } from './user_authority/user-authority.component';
 import { ModuloAccionComponent } from './modulo_accion/modulo_accion.component';
 import { SearchUserPipe } from './pipe/user.filter.pipe';
+import { ModuloAccionAuthorityService } from './modulo_accion/modulo_accion.component.service';
 
 @NgModule({
   imports: [     
@@ -99,6 +100,7 @@ import { SearchUserPipe } from './pipe/user.filter.pipe';
 			   ModuloService,
 			   AccionService,
 			   AuthorityService,
-			   UserService
+			   UserService,
+			   ModuloAccionAuthorityService
 ]})
 export class HomeModule { }
