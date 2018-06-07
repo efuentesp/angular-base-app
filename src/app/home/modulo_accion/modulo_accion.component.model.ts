@@ -1,11 +1,10 @@
-export class ModuloAccionAuthority {
+export class ModuloAccion {
 
-    idModuloAccionAuthority: number = null;
-    idRol: number = null;
+    id: number = null;
+    estatus: boolean = null;
     idAccion: number = null;
-    idModulo: number = null;
-    estatus: number = null;
     fechaCreacion: string = '';
+    idModulo: number = null;
     fechaModificacion: string = '';
 
 }

@@ -26,6 +26,7 @@ import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.compone
 import { UserAuthorityComponent } from './user_authority/user-authority.component';
 import { BeneficiarioMngComponent } from './beneficiario_mgmnt/beneficiario_mgmnt.component';
 import { ModuloAccionComponent} from './modulo_accion/modulo_accion.component';
+import { ModuloAccionAuthorityComponent } from './modulo_accion_authority/modulo_accion_authority.component';
 
 const homeRoutes: Routes = [
 	{ 
@@ -68,8 +69,8 @@ const homeRoutes: Routes = [
 		{ path: 'authority', component : AuthorityComponent, canActivate: [AuthGuard] },
 		{ path: 'authority_mgmnt', component : AuthorityMngComponent, canActivate: [AuthGuard] },
 		{ path: 'userAuthority', component : UserAuthorityComponent, canActivate: [AuthGuard] },
+		{ path: 'modulo_accion_authority', component : ModuloAccionAuthorityComponent, canActivate: [AuthGuard] },
 		{ path: 'modulo_accion', component : ModuloAccionComponent, canActivate: [AuthGuard] }
-
 	  ]
 	}  
 ];

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import { Authority }                           from '../authority/authority.component.model';
 
 @Injectable()
-export class ModuloAccionService {
+export class ModuloAccionAuthorityService {
 
     private isAuthorityFormValid: boolean = false;
     private env: any = environment;
@@ -18,18 +18,12 @@ export class ModuloAccionService {
 
     constructor(private http: Http) {}
 
-    getAllModuloAccion(idModulo, idAccion){
-        console.log('getAllModuloAccion');
-      return this.http.get(this.env.api + "/moduloaccion/"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
-    }
-
-    getAllModuloAccionById(idModulo, idAccion){
-        console.log('getAllModuloAccionById');
-        return this.http.get(this.env.api + "/  /"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
+    getAllModuloAccionAuthority(){
+      return this.http.get(this.env.api + "/moduloAccionAuthority").map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);
     }
 
     save(authority){
-        console.log('Resultado: --> ',authority);
+        console.log('Resultado: --> ',authority.idModuloAccionAuthority);
 		if (!authority.idModuloAccionAuthority){
             return this.http.post(this.env.api + "/moduloAccionAuthority", authority).map(res => res);
         }else{
