@@ -24,17 +24,23 @@
 						
 						<div *ngFor="let user of user.authorities"> 
 								
-								<div *ngIf="user.authority == 'administrador'">
+								<div *ngIf="user.authority == 'admin'">
 										<ul class="nav side-menu">
 												<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 													<ul class="nav child_menu">
-															<li>
-																<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
-																<ul class="nav child_menu" id="beneficiario">
-																	<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
-																	<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar Beneficiario</a></li>
-																</ul>
-															</li>
+															
+															<div *ngFor="let modulo of user.modulos"> 
+																	<div *ngIf="modulo.modulo == 'beneficiario'">
+																		<li>
+																			<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
+																			<ul class="nav child_menu" id="beneficiario">
+																				<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
+																				<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar Beneficiario</a></li>
+																			</ul>
+																		</li>
+																	</div>
+															</div>
+															
 															<li>
 																<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
 																<ul class="nav child_menu" id="afiliado">

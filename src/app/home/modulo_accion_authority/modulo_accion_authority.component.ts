@@ -176,84 +176,163 @@ loadAccions(){
 
   saveRole(idModulo, idAuthority, idAccion, isChecked){
 
-    console.log('saveRole'); 
+    console.log('saveRole-- Inicio'); 
 
     this.moduloAccionService.getAllModuloAccion(idModulo,idAccion).subscribe(data =>{
         if (data) {
-          console.log('Accions-1:', data);
-          this.moduloaccionsList = data;
-          this.moduloaccionsList.forEach(element => {
-            console.log('Accions-2:', element.id);
-          });
-        }else{
-          this.moduloAccionService.getAllModuloAccionById(idModulo,idAccion).subscribe(data =>{
-            if (data) {
+          console.log('caso 1');
+          // Caso 1. Si esta en la tabla de modulo accion 
+          // Obtiene el id
+          console.log('caso 1- Id', data.id);
+          this.moduloAccionAuthority.idModuloAccion = data.id;
+          this.moduloAccionAuthority.idAuthority    = idAuthority;
+          this.moduloAccionAuthority.fechaCreacion =  "1528318795000";
+          this.moduloAccionAuthority.fechaModificacion = null;
 
+          if(isChecked.target.checked){
+            console.log('Guarda Elemento-true');
+            this.moduloAccionAuthority.estatus  = true;  
+            // Es true la selección va a guardar en moduloAccionAuthority
+            this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+                
+              if (res){
+                  console.log('Resultado:', res);
+              }
+
+            });
+
+          }else{
+            console.log('Quita Elemento-true');
+            this.moduloAccionAuthority.estatus  = false;  
+            // Es false la seleccion
+            this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+                
+              if (res){
+                  console.log('Resultado:', res);
+              }
+
+            });
+          }
+
+        }else{
+
+          // No regresa datos, es nuevo
+          // Por lo que va a buscar el id 
+          this.moduloAccionService.getAllModuloAccionById(idModulo,idAccion).subscribe(data =>{
+            
+            if (data) {
+              console.log('caso 2');
               this.moduloaccionsList = data;
-              console.log('Accions-1:', data);
-              console.log('Debe de guardar');
+              console.log('caso 2 -', data.id);
+              this.moduloAccionAuthority.idModuloAccion = data.id;
+              this.moduloAccionAuthority.idAuthority    = idAuthority;
+              this.moduloAccionAuthority.fechaCreacion =  "1528318795000";
+              this.moduloAccionAuthority.fechaModificacion = null;
+
+              if(isChecked.target.checked){
+               // Es seleccionado
+               console.log('Guarda Elemento-true');
+               this.moduloAccionAuthority.estatus  = true;
+                
+                this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+                  if (res){
+                    console.log('Resultado:', res);
+                  }
+                  
+                } );
+
+              }else{
+                //No es seleccionado
+                console.log('Quita Elemento-false');
+                this.moduloAccionAuthority.estatus  = false;
+
+                this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+                  if (res){
+                    console.log('Resultado:', res);
+                  }
+                } );
+              }
 
             }else{
-
+              console.log('No obtiene el Id de Modulo Accion By Id');
             }
           
           });
         }
         }, error => {
-          console.log('Error');
-          // Esta duplicada
+          console.log('caso 3 - Error');
+
+          // Esta duplicada y va a buscar el Id
           this.moduloAccionService.getAllModuloAccionById(idModulo,idAccion).subscribe(data =>{
             if(data){
+              console.log('caso 3 -', data.id);
+              this.moduloAccionAuthority.idModuloAccion = data.id;
+              this.moduloAccionAuthority.idAuthority    = idAuthority;
+              this.moduloAccionAuthority.fechaCreacion =  "1528318795000";
+              this.moduloAccionAuthority.fechaModificacion = null;
 
               if(isChecked.target.checked){
                
-                this.moduloAccionAuthority.idModuloAccion = data.id;
-                this.moduloAccionAuthority.idAuthority    = idAuthority;
                 this.moduloAccionAuthority.estatus  = true;
-                this.moduloAccionAuthority.fechaCreacion =  "1528318795000";
-                this.moduloAccionAuthority.fechaModificacion = null;
-          
-                console.log('Valor de authority true: ', this.moduloAccionAuthority);
-
+                console.log('Guarda Elemento-true');
+                console.log('Elemento:', this.moduloAccionAuthority);
                 this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
-                  //if (res.status == 201 || res.status == 200){
-                    //swal('Success...', 'User save successfully.', 'success');
-                  //}else{
-                    //swal('Error...', 'User save unsuccessfully.', 'error');
-                  //}
-                  console.log('Guarda elemento');
+                  if (res){
+                    console.log('Resultado:', res);
+                  }
+                },error => {
+                  // El elemento ya se encuentra en base en la tabla modulo accion authority
+                  console.log('caso 4');
+                  // Busca el Id
+                  console.log('Valores modulo accion:', data.id);
+                  console.log('Valores idauthority:', idAuthority);
+                  
+                  this.moduloAccionAuthorityService.getAllModuloAccionAuthorityById(data.id,idAuthority).subscribe(result =>{
+                  
+                    if (result){
+                      console.log('caso 4 - By Id', result.id);
+                      this.moduloAccionAuthority.idmoduloaccionauthority = result.id;
+
+                      // Obtiene id y va a actualizar el camo
+                      this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+                        console.log('Actualiza a true');
+                      });
+                    }
+                  });
                 } );
               }else{
-                //this.moduloAccionAuthority.idAccion = idAccion;
-                this.moduloAccionAuthority.idModuloAccion = data.id;
-                this.moduloAccionAuthority.idAuthority    = idAuthority;
+               
                 this.moduloAccionAuthority.estatus  = false;
-                this.moduloAccionAuthority.fechaCreacion =  "1528318795000";
-                this.moduloAccionAuthority.fechaModificacion = null;
-          
-                console.log('Valor de authority false: ', this.moduloAccionAuthority);
-
+                console.log('Quita Elemento-false');
+                console.log('Elemento:', this.moduloAccionAuthority);
                 this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
-                  //if (res.status == 201 || res.status == 200){
-                    //swal('Success...', 'User save successfully.', 'success');
-                  //}else{
-                    //swal('Error...', 'User save unsuccessfully.', 'error');
-                  //}
-                  console.log('Quita elemento');
+                  if (res){
+                    console.log('Resultado:', res);
+                  }
+                },error => {
+                  // El elemento ya se encuentra en base en la tabla modulo accion authority
+                  console.log('caso 5');
+                  // Busca el Id
+                  this.moduloAccionAuthorityService.getAllModuloAccionAuthorityById(data.id,idAuthority).subscribe(result =>{
+                    if (result){
+                      console.log('caso 5 -', result.id);
+                      this.moduloAccionAuthority.idmoduloaccionauthority = result.id;
+                      // Obtiene id y va a actualizar el camo
+                      this.moduloAccionAuthorityService.save(this.moduloAccionAuthority).subscribe(res => {
+                        console.log('Actualiza a false');
+                      });
+
+                    }
+                  });
                 } );
               }
-
-
-
-
-             console.log('Data', data.id);
              
             }else{
-
+              console.log('No obtiene el Id de Modulo Accion Authority');
             }
           
-          });
-
+          }
+        );
 
         }
     );

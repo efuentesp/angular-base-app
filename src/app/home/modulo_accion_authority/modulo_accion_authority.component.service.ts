@@ -19,24 +19,32 @@ export class ModuloAccionAuthorityService {
     constructor(private http: Http) {}
 
     getAllModuloAccionAuthority(){
-      return this.http.get(this.env.api + "/moduloAccionAuthority").map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);
+      return this.http.get(this.env.api + "/moduloaccionauthority").map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);
+    }
+
+
+    getAllModuloAccionAuthorityById(idModuloAccion,idAuthority){
+        console.log('ById');
+        return this.http.get(this.env.api + "/moduloaccionauthorityid/"+idModuloAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
     }
 
     save(authority){
         console.log('Resultado: --> ',authority.idModuloAccionAuthority);
 		if (!authority.idModuloAccionAuthority){
-            return this.http.post(this.env.api + "/moduloAccionAuthority", authority).map(res => res);
+            console.log('post');
+            return this.http.post(this.env.api + "/moduloaccionauthority", authority).map(res => res);
         }else{
-            return this.http.put(this.env.api + "/moduloAccionAuthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
+            console.log('put');
+            return this.http.put(this.env.api + "/moduloaccionauthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
         }
     }
 
     deleteModuloAccionAuthority(authority){
-        return this.http.delete(this.env.api + "/moduloAccionAuthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
+        return this.http.delete(this.env.api + "/moduloaccionauthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
     }
 
     getModuloAccionAuthorityById(idModuloAccionAuthority){
-        return this.http.get(this.env.api + "/moduloAccionAuthority/"+idModuloAccionAuthority).map(res => res);
+        return this.http.get(this.env.api + "/moduloaccionauthority/"+idModuloAccionAuthority).map(res => res);
     }
 
     resetModuloAccionAuthority(): Authority {

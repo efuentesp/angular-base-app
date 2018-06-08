@@ -53,6 +53,8 @@ export class HomeComponent {
     this.valueName = this.user.userName;
 
     console.log(this.array.authority);
+
+ 
     /*
     for (let entry of this.user.authorities) {
       console.log('Hola:',entry.authority); // 1, "string", false

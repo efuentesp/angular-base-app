@@ -25,7 +25,7 @@ export class ModuloAccionService {
 
     getAllModuloAccionById(idModulo, idAccion){
         console.log('getAllModuloAccionById');
-        return this.http.get(this.env.api + "/  /"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
+        return this.http.get(this.env.api + "/moduloaccionid/"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
     }
 
     save(authority){
