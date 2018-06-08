@@ -5,6 +5,7 @@ import { BeneficiarioMngComponent } from './beneficiario_mgmnt/beneficiario_mgmn
 import { BeneficiarioService } from './beneficiario/beneficiario.component.service';
 import { Beneficiario } from './beneficiario/beneficiario.component.model';
 import { ActivatedRoute, Router }                                          from '@angular/router';
+import { UserService } from './user/user.component.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -28,7 +29,8 @@ export class HomeComponent {
   constructor(
     private beneficiarioService: BeneficiarioService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private userService: UserService
 
 ) {
 }
@@ -47,37 +49,14 @@ export class HomeComponent {
     console.log ('UserAuth: ', this.user.userName);
     console.log ('UserAuth: ', this.user.idUser);
     
-    //console.log ('Username: ', this.user.);
+    console.log ('Username: ', this.user.userName);
 
     this.array = this.user.authorities
     this.valueName = this.user.userName;
 
-    console.log(this.array.authority);
-
- 
-    /*
-    for (let entry of this.user.authorities) {
-      console.log('Hola:',entry.authority); // 1, "string", false
-      if  (entry.authority == 'administrador'){
-        this.admin = true;
-      }
-
-      if  (entry.authority == 'system'){
-        this.system = true;
-      }
-
-      if  (entry.authority == 'default'){
-        this.default = true;
-      }
-
-      if  (entry.authority == 'user'){
-        this.usertype = true;
-      }
-
-    }
-*/  
-    
-    //this.hasAnyAuthority(this.user.authorities.authority);
+    this.userService.getModulosAccionAuthorityByUserName(this.valueName).subscribe(data=>{
+      console.log(data.json());
+    });
 }
 
   //isAdmin(): boolean {

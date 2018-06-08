@@ -29,22 +29,26 @@ export class ModuloAccionAuthorityService {
     }
 
     save(authority){
-        console.log('Resultado: --> ',authority.idModuloAccionAuthority);
-		if (!authority.idModuloAccionAuthority){
+        console.log('ModuloAccionAuthorityService: --> ',authority);
+		if (!authority.idmoduloaccionauthority){
             console.log('post');
             return this.http.post(this.env.api + "/moduloaccionauthority", authority).map(res => res);
         }else{
             console.log('put');
-            return this.http.put(this.env.api + "/moduloaccionauthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
+            return this.http.put(this.env.api + "/moduloaccionauthority/"+authority.idmoduloaccionauthority, authority).map(res => res);
         }
     }
 
-    deleteModuloAccionAuthority(authority){
-        return this.http.delete(this.env.api + "/moduloaccionauthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
+    saveMaa(idModulo, idAccion, idAuthority, res){
+        return this.http.get(this.env.api + "/moduloaccionauthority/"+idModulo+"/"+idAccion+"/"+idAuthority+"/"+res).map(res => res);
     }
 
-    getModuloAccionAuthorityById(idModuloAccionAuthority){
-        return this.http.get(this.env.api + "/moduloaccionauthority/"+idModuloAccionAuthority).map(res => res);
+    deleteModuloAccionAuthority(authority){
+        return this.http.delete(this.env.api + "/moduloaccionauthority/"+authority.idmoduloaccionauthority, authority).map(res => res);
+    }
+
+    getModuloAccionAuthorityById(idmoduloaccionauthority){
+        return this.http.get(this.env.api + "/moduloaccionauthority/"+idmoduloaccionauthority).map(res => res);
     }
 
     resetModuloAccionAuthority(): Authority {
