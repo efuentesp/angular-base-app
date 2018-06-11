@@ -71,6 +71,7 @@ export class ModuloAccionAuthorityComponent implements OnInit {
 
   ngOnInit() {
       
+      this.loadModuloAccionAuthority();
       this.loadUsers();
       this.loadAuthoritys();
       this.loadModules();
@@ -82,7 +83,7 @@ export class ModuloAccionAuthorityComponent implements OnInit {
         this.user = this.userService.getUser();
       }
 
-      this.loadModuloAccionAuthority();
+      
   }
 
   save(user){  
@@ -174,17 +175,59 @@ loadAccions(){
 }
 
 loadModuloAccionAuthority(){
-  console.log('Carga valores', this.accionsList.length);
-  //this.isActive = false;
-  
-  for (let i = 0; i < this.accionsList.length; i++) {
-    console.log('Resultado', this.accionsList[i].accion);
-  }
 
-  }
+    this.accionService.getAllAccion().subscribe(data => {
+      if (data) {
+        console.log('loadModuloAccionAuthority:', data);
+        this.accionsList = data;
+        
+        this.moduloService.getAllModulo().subscribe(data => {
+          if (data) {
+            console.log('Modulos: ', data);
+            this.modulosList = data;
 
-  setCellValue() {
- 
+            this.authorityService.getAllAuthority().subscribe(data => {
+              if (data) {
+      
+                //console.log('authority: ', data);
+                this.authorityList = data;
+
+                for (let i = 0; i < this.accionsList.length; i++) {
+                  for (let j = 0; j < this.modulosList.length; j++) {
+                    for (let k = 0; k < this.authorityList.length; k++) {
+
+                      
+
+                      console.log('Resultado', this.accionsList[i].accion);
+                      console.log('Resultado', this.modulosList[j].modulo);
+                      console.log('Resultado', this.authorityList[k].idRol);
+                    } 
+                  } 
+                }
+/*
+                console.log('loadModuloAccionAuthority: ', this.accionsList.length);
+                console.log('loadModuloAccionAuthority: ', this.modulosList.length);
+                console.log('loadModuloAccionAuthority: ', this.authorityList.length);*/
+
+              }
+              }, error => {
+              swal('Error...', 'An error occurred while calling the authorities.', 'error');
+            });
+
+          }
+          }, error => {
+          swal('Error...', 'An error occurred while calling the modules.', 'error');
+        });
+
+      
+      }
+    
+      return this.accionsList;
+      
+      }, error => {
+      swal('Error...', 'An error occurred while calling the accions.', 'error');
+    });
+
 
   }
 

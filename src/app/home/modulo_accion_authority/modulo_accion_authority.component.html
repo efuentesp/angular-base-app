@@ -50,7 +50,7 @@
                                         <td>{{accion.accion}}</td>
                                         <td *ngFor="let authority of authorityList; let j = index">
                                                 <!-- {{accion.accion}} -  {{authority.rol}} - {{modulo.modulo}} -->
-                                            <input type="checkbox"  (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event);"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />
+                                            <input type="checkbox" [(ngModel)]="modulo.isSelected && accion.iSselected && authority.isSelected" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event);"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />
                                             <!-- [(ngModel)]="item[authority.idRol][modulo.idModulo][accion.idAccion]" -->
                                             <!-- <input type="text" value="e{{i}}{{j}}{{k}}" name="e{{i}}{{j}}{{k}}"> -->
                                             <!-- <input type="checkbox" [(ngModel)]="authority.isSelected" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="e{{i}}{{j}}{{k}}" value="e{{i}}{{j}}{{k}}" />          

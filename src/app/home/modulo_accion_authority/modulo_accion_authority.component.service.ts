@@ -28,6 +28,11 @@ export class ModuloAccionAuthorityService {
         return this.http.get(this.env.api + "/moduloaccionauthorityid/"+idModuloAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
     }
 
+    getIsSelected(idModulo, idAccion, idAuthority){
+        console.log('selected');
+        return this.http.get(this.env.api + "//moduloaccionauthority/"+idModulo+"/"+idAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
+    }
+
     save(authority){
         console.log('ModuloAccionAuthorityService: --> ',authority);
 		if (!authority.idmoduloaccionauthority){
