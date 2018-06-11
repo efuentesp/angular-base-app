@@ -56,7 +56,8 @@ export class ModuloAccionService {
 					fechaCreacion: this.authority.fechaCreacion, 
 					fechaModificacion: this.authority.fechaModificacion, 
 					idRol: this.authority.idRol, 
-					rol: this.authority.rol
+                    rol: this.authority.rol,
+                    isSelected: this.authority.isSelected
         };
         return authority;
     }

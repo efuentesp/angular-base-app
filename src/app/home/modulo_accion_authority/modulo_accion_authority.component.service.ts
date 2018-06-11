@@ -29,8 +29,8 @@ export class ModuloAccionAuthorityService {
     }
 
     getIsSelected(idModulo, idAccion, idAuthority){
-        console.log('selected');
-        return this.http.get(this.env.api + "//moduloaccionauthority/"+idModulo+"/"+idAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
+        //console.log('selected: ', idModulo+' '+idAccion+' '+idAuthority );
+        return this.http.get(this.env.api + "/moduloaccionauthorityid/"+idModulo+"/"+idAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
     }
 
     save(authority){
@@ -67,7 +67,8 @@ export class ModuloAccionAuthorityService {
 					fechaCreacion: this.authority.fechaCreacion, 
 					fechaModificacion: this.authority.fechaModificacion, 
 					idRol: this.authority.idRol, 
-					rol: this.authority.rol
+                    rol: this.authority.rol,
+                    isSelected: this.authority.isSelected
         };
         return authority;
     }
@@ -79,7 +80,8 @@ export class ModuloAccionAuthorityService {
 			this.authority.fechaCreacion = authority.fechaCreacion;    
 			this.authority.fechaModificacion = authority.fechaModificacion;    
 			this.authority.idRol = authority.idRol;    
-			this.authority.rol = authority.rol;  
+            this.authority.rol = authority.rol; 
+            this.authority.isSelected = authority.isSelected; 
     }
 
     isFormValid() {
@@ -92,7 +94,8 @@ export class ModuloAccionAuthorityService {
 			this.authority.fechaModificacion = '';    
 			this.authority.fechaCreacion = '';   
 			this.authority.idRol = null;    
-			this.authority.rol = null;
+            this.authority.rol = null;
+            this.authority.isSelected = false;
     }
 
     setEdit(flag){

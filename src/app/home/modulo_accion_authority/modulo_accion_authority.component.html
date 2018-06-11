@@ -13,7 +13,7 @@
                     <div class="x_content">
     
                         
-                        <form #moduloAccionForm="ngForm" id="moduloAccionForm" data-parsley-validate>
+                        <form #moduloAccionAuthorityForm="ngForm" id="moduloAccionAuthorityForm" data-parsley-validate>
     
                             <!-- <div style="float:left; width: 7%;" >
                                     <label>Modulo * :</label>
@@ -43,14 +43,19 @@
                                 <div *ngFor="let modulo of modulosList; let i = index" class="modulos">
                                 <table ng-table="tableParams" show-filter="true" border="1">
                                     <th>{{modulo.modulo}}</th>
-                                    <th *ngFor="let authority of authorityList; let j = index">
+                                    <th *ngFor="let authority of authorityList; let b = index">
                                         {{authority.rol}}
                                     </th>
                                     <tr *ngFor="let accion of accionsList; let k = index">   
                                         <td>{{accion.accion}}</td>
                                         <td *ngFor="let authority of authorityList; let j = index">
-                                                <!-- {{accion.accion}} -  {{authority.rol}} - {{modulo.modulo}} -->
-                                            <input type="checkbox" [(ngModel)]="modulo.isSelected && accion.iSselected && authority.isSelected" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event);"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />
+
+                                            
+                                            <input type="checkbox" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event);"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />
+                                            {{i}}{{j}}{{k}}
+                                            {{modulo.idModulo}}
+                                            {{accion.idAccion}}
+                                            {{authority.idRol}}
                                             <!-- [(ngModel)]="item[authority.idRol][modulo.idModulo][accion.idAccion]" -->
                                             <!-- <input type="text" value="e{{i}}{{j}}{{k}}" name="e{{i}}{{j}}{{k}}"> -->
                                             <!-- <input type="checkbox" [(ngModel)]="authority.isSelected" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="e{{i}}{{j}}{{k}}" value="e{{i}}{{j}}{{k}}" />          
@@ -66,13 +71,13 @@
                                 <br/>
                                 <div class="input-group">
                                 <div *ngIf="flag">	
-                                <button class="btn btn-danger" (click)="delete(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
-                                <button class="btn btn-primary" (click)="save(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
-                                <button class="btn btn-default" (click)="return(moduloAccionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+                                <!-- <button class="btn btn-danger" (click)="delete(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button> -->
+                                <!-- <button class="btn btn-primary" (click)="save(moduloAccionAuthorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button> -->
+                                <button class="btn btn-default" (click)="return(moduloAccionAuthorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
                                 </div>
                                 <div *ngIf="!flag">
-                                <button class="btn btn-primary" (click)="save(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
-                                <button class="btn btn-default" (click)="return(moduloAccionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+                                <!-- <button class="btn btn-primary" (click)="save(moduloAccionAuthorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button> -->
+                                <button class="btn btn-default" (click)="return(moduloAccionAuthorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
                                 </div>
                                 </div>
                             </div>

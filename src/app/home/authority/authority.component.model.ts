@@ -5,5 +5,5 @@ export class Authority {
 	estatus:  number = null;
 	fechaCreacion: string = '';
 	fechaModificacion: string = '';
-
+	isSelected : boolean = false;
 }

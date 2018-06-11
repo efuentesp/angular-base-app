@@ -49,7 +49,8 @@ export class AuthorityService {
 					fechaCreacion: this.authority.fechaCreacion, 
 					fechaModificacion: this.authority.fechaModificacion, 
 					idRol: this.authority.idRol, 
-					rol: this.authority.rol
+                    rol: this.authority.rol,
+                    isSelected:this.authority.isSelected
         };
         return authority;
     }
@@ -61,7 +62,8 @@ export class AuthorityService {
 			this.authority.fechaCreacion = authority.fechaCreacion;    
 			this.authority.fechaModificacion = authority.fechaModificacion;    
 			this.authority.idRol = authority.idRol;    
-			this.authority.rol = authority.rol;  
+            this.authority.rol = authority.rol;  
+            this.authority.isSelected = authority.isSelected;
     }
 
     isFormValid() {
@@ -74,7 +76,8 @@ export class AuthorityService {
 			this.authority.fechaModificacion = '';    
 			this.authority.fechaCreacion = '';   
 			this.authority.idRol = null;    
-			this.authority.rol = null;
+            this.authority.rol = null;
+            this.authority.isSelected = false;
     }
 
     setEdit(flag){

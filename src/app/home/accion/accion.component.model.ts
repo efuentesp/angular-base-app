@@ -5,5 +5,5 @@ export class Accion {
 	estatus:  number = null;
 	fechaCreacion: string = '';
 	fechaModificacion: string = '';
-
+	isSelected: boolean = false;
 }

@@ -48,6 +48,7 @@ export class ModuloAccionAuthorityComponent implements OnInit {
   accionsList: Accion [] = [];
   moduloaccionsList: ModuloAccion [] = [];
   moduloAccion: ModuloAccion;
+  moduloAccionAuthorityList : ModuloAccionAuthority [] = [];
 
   isActive:boolean = true;
   filter = false;
@@ -176,60 +177,68 @@ loadAccions(){
 
 loadModuloAccionAuthority(){
 
-    this.accionService.getAllAccion().subscribe(data => {
-      if (data) {
-        console.log('loadModuloAccionAuthority:', data);
-        this.accionsList = data;
-        
-        this.moduloService.getAllModulo().subscribe(data => {
+        this.accionService.getAllAccion().subscribe(data => {
           if (data) {
-            console.log('Modulos: ', data);
-            this.modulosList = data;
-
-            this.authorityService.getAllAuthority().subscribe(data => {
+            this.accionsList = data;
+            
+            this.moduloService.getAllModulo().subscribe(data => {
               if (data) {
-      
-                //console.log('authority: ', data);
-                this.authorityList = data;
-
-                for (let i = 0; i < this.accionsList.length; i++) {
-                  for (let j = 0; j < this.modulosList.length; j++) {
-                    for (let k = 0; k < this.authorityList.length; k++) {
-
-                      
-
-                      console.log('Resultado', this.accionsList[i].accion);
-                      console.log('Resultado', this.modulosList[j].modulo);
-                      console.log('Resultado', this.authorityList[k].idRol);
-                    } 
-                  } 
-                }
+                this.modulosList = data;
+    
+                this.authorityService.getAllAuthority().subscribe(data => {
+                  if (data) {
+                    this.authorityList = data;
+    
+                    for (let i = 0; i < this.modulosList.length; i++) {
+                      for (let j = 0; j < this.accionsList.length; j++) {
+                        for (let k = 0; k < this.authorityList.length; k++) {                      
+                          
+                          console.log('***', this.modulosList[i].isSelected+" "+i); 
+                          console.log('***', this.accionsList[j].isSelected+" "+j); 
+                          console.log('***', this.authorityList[k].isSelected+" "+k); 
+                          
+                          this.moduloAccionAuthorityService.getIsSelected(this.modulosList[i].idModulo, this.accionsList[j].idAccion, this.authorityList[k].idRol).subscribe(data => {
+                            console.log('Estatus: ', data.estatus+" :"+this.modulosList[i].idModulo+" "+this.accionsList[j].idAccion+ " " + this.authorityList[k].idRol+"  Contador: ");
+                            
+                           
+                            
 /*
-                console.log('loadModuloAccionAuthority: ', this.accionsList.length);
-                console.log('loadModuloAccionAuthority: ', this.modulosList.length);
-                console.log('loadModuloAccionAuthority: ', this.authorityList.length);*/
+                            if (data.estatus){
+                              this.modulosList[0].isSelected = true; 
+                              this.accionsList[0].isSelected = true; 
+                              this.authorityList[0].isSelected = true; 
+                            }
 
+                            if (data.estatus){
+                              this.modulosList[2].isSelected = true; 
+                              this.accionsList[2].isSelected = true; 
+                              this.authorityList[2].isSelected = true; 
+                            }*/
+
+                            
+                          });
+                        } 
+                      } 
+                    }
+                  }
+                  }, error => {
+                  swal('Error...', 'An error occurred while calling the authorities.', 'error');
+                });
+    
               }
               }, error => {
-              swal('Error...', 'An error occurred while calling the authorities.', 'error');
+              swal('Error...', 'An error occurred while calling the modules.', 'error');
             });
-
           }
+        
+          console.log('Numero de elementos:', this.moduloAccionAuthorityList.length);
+          //return this.accionsList;
+          
           }, error => {
-          swal('Error...', 'An error occurred while calling the modules.', 'error');
+          swal('Error...', 'An error occurred while calling the accions.', 'error');
         });
 
-      
-      }
-    
-      return this.accionsList;
-      
-      }, error => {
-      swal('Error...', 'An error occurred while calling the accions.', 'error');
-    });
-
-
-  }
+}
 
   setClickedRowAuthority(index, authority){
       this.user.rol = authority.rol;
