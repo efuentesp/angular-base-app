@@ -23,6 +23,10 @@ export class ModuloAccionService {
       return this.http.get(this.env.api + "/moduloaccion/"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
     }
 
+    getModuloAccion(idModuloAccion){       
+      return this.http.get(this.env.api + "/moduloaccionbyid/"+idModuloAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
+    }
+
     getAllModuloAccionById(idModulo, idAccion){
         console.log('getAllModuloAccionById');
         return this.http.get(this.env.api + "/moduloaccionid/"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
