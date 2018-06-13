@@ -180,6 +180,7 @@ loadAccions(){
 
 loadModuloAccionAuthorityList(){
 
+
   this.moduloAccionAuthorityService.getAllModuloAccionAuthority().subscribe(data => {
     
     this.moduloAccionAuthorityList = data;
@@ -190,6 +191,9 @@ loadModuloAccionAuthorityList(){
 
         this.moduloAccionService.getModuloAccion(element.idModuloAccion).subscribe(result => {
           
+
+
+
           console.log('Modulo Accion', element.estatus);
           console.log('Modulo Accion', element.idModuloAccion);
           console.log ('El resultado es: ', result.idAccion);
@@ -229,12 +233,17 @@ loadModuloAccionAuthority(){
     
                     for (let i = 0; i < this.modulosList.length; i++) {
                       for (let j = 0; j < this.accionsList.length; j++) {
-                        for (let k = 0; k < this.authorityList.length; k++) {                      
-                          this.authorityList[k].isSelected = false;
+                        for (let k = 0; k < this.authorityList.length; k++) { 
+                          
+
+
+                          
+
+                          //this.authorityList[k].isSelected = false;
                           this.moduloAccionAuthorityService.getIsSelected(this.modulosList[i].idModulo, this.accionsList[j].idAccion, this.authorityList[k].idRol).subscribe(data => {
                             
                             console.log('Estatus: ', data.estatus+" :"+this.modulosList[i].modulo+" "+this.accionsList[j].accion+ " " + this.authorityList[k].rol+"  Contador: ");
-                            console.log('isSelected: ', this.authorityList[k].isSelected);
+                            //console.log('isSelected: ', this.authorityList[k].isSelected);
                             
                             //this.authorityList[1].isSelected = false;    // este esta en false
                             
@@ -254,7 +263,7 @@ loadModuloAccionAuthority(){
                             //if (data.estatus){
                             
 
-                            this.authorityList[k].isSelected = data.estatus;
+                            //this.authorityList[k].isSelected = data.estatus;
                             //}
 
  //                           this.authorityList[k].isSelected = false;
