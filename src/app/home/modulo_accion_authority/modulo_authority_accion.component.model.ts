@@ -7,6 +7,5 @@ export class ModuloAccionAuthorityAux {
     estatus: boolean = null;
     fechaCreacion: string = '';
     fechaModificacion: string = '';
-    isSelected: boolean = false;
 
 }

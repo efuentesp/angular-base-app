@@ -36,7 +36,7 @@ export class ModuloService {
     }
 
     getModuloById(idModulo){
-        return this.http.get(this.env.api + "/modulo/"+idModulo).map(res => res);
+        return this.http.get(this.env.api + "/modulo/"+idModulo).map(res => res.json());
     }
 
     resetModulo(): Modulo {

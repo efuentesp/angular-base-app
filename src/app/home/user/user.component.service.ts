@@ -24,7 +24,7 @@ export class UserService {
     }
 
     getModulosAccionAuthorityByUserName(username){
-        return this.http.get(this.env.api + "/user/username/"+username).map(res => res);
+        return this.http.get(this.env.api + "/moduloByUsername/username/"+username).map(res => res);
     }
 
     saveUser(user){

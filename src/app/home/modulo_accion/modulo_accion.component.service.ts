@@ -46,7 +46,7 @@ export class ModuloAccionService {
     }
 
     getModuloAccionAuthorityById(idModuloAccionAuthority){
-        return this.http.get(this.env.api + "/moduloAccionAuthority/"+idModuloAccionAuthority).map(res => res);
+        return this.http.get(this.env.api + "/moduloAccionAuthority/"+idModuloAccionAuthority).map(res => res.json());
     }
 
     resetModuloAccionAuthority(): Authority {

@@ -53,7 +53,11 @@ export class ModuloAccionAuthorityService {
     }
 
     getModuloAccionAuthorityById(idmoduloaccionauthority){
-        return this.http.get(this.env.api + "/moduloaccionauthority/"+idmoduloaccionauthority).map(res => res);
+        return this.http.get(this.env.api + "/moduloaccionauthority/"+idmoduloaccionauthority).map(res => res.json());
+    }
+
+    searchModuloAccionAuthorityById(idmoduloaccionauthority){
+        return this.http.get(this.env.api + "/moduloaccionauthority/search/"+idmoduloaccionauthority).map(res => res.json());
     }
 
     resetModuloAccionAuthority(): Authority {

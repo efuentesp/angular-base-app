@@ -62,6 +62,8 @@
                                     </div>
                                 </div>  -->
 
+                                
+                                
                                 <div> Tabla 1 </div>
                                 <div *ngFor="let modulo of modulosList; let i = index" class="modulos">
                                     <table ng-table="tableParams" show-filter="true" border="1">
@@ -72,22 +74,31 @@
                                         <tr *ngFor="let accion of accionsList; let k = index">   
                                             <td>{{accion.accion}}</td>
                                             <td *ngFor="let authority of authorityList; let j = index">
-    
-                                            <input type="checkbox" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event);"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />
                                                 
-                                            <div *ngFor="let maa of moduloAccionAuthorityAuxList; let c = index" >
-                                               <div *ngIf="modulo.idModulo == maa.idModulo && accion.idAccion == maa.idAccion && authority.idRol == maa.idAuthority;">
-                                           
+                                                <div *ngFor="let maa of moduloAccionAuthorityAuxList" >
+                                                <div *ngIf="modulo.idModulo == maa.idModulo && accion.idAccion == maa.idAccion && authority.idRol == maa.idAuthority;">
+                                                    <div *ngIf="authority.rol =='administrador'">
+                                                    <input type="checkbox" disabled [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
+                                                    </div> 
+                                                    <div *ngIf="authority.rol != 'administrador'">
+                                                    <input type="checkbox" [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
+                                                    </div>     
+                                                </div>
+                                                </div>
+                                                <!-- <input type="checkbox" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />        -->
+                                            <!-- <div *ngFor="let maa of moduloAccionAuthorityAuxList" >
+                                                
+                                                    
                                                     <input type="checkbox" [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
                                                     {{maa.estatus}} 
                                                     
-                                                </div> 
-                                                <!-- <ng-template #elseBlock>
-                                                        <input type="checkbox"  (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
-                                                </ng-template>  -->
+                                                </div>
+                                                
+                                            </div>   -->
 
-                                            </div> 
-                                                <!--{{j}}-->
+                                            <!-- <input type="checkbox" [checked]="valor(modulo.idModulo,accion.idAccion,authority.idRol)" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event);"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />  -->
+                                            
+                                            <!--{{j}}-->
                                                 <!-- {{modulo.isSelected}} -->
                                                 <!--{{accion.isSelected}}-->
                                                 <!--{{authority.rol}}-->
@@ -100,7 +111,7 @@
                                         </tr>
                                     </table>
                                 </div> 
-
+                            
                                 
                                
 

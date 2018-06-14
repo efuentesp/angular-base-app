@@ -54,6 +54,7 @@ export class ModuloAccionAuthorityComponent implements OnInit {
 
   isActive:boolean = true;
   filter = false;
+  count: Number = 0;
 
   public busquedaBeneficiario='';
   filterInputBeneficiario = new FormControl();
@@ -73,7 +74,6 @@ export class ModuloAccionAuthorityComponent implements OnInit {
 }
 
   ngOnInit() {
-      this.loadModuloAccionAuthorityList();
       this.loadModuloAccionAuthority();
       this.loadUsers();
       this.loadAuthoritys();
@@ -177,46 +177,6 @@ loadAccions(){
 });
 }
 
-
-loadModuloAccionAuthorityList(){
-
-
-  this.moduloAccionAuthorityService.getAllModuloAccionAuthority().subscribe(data => {
-    
-    this.moduloAccionAuthorityList = data;
-
-    this.moduloAccionAuthorityList.forEach(element => {
-
-        console.log('Numero de Id: ', element.idModuloAccion);
-
-        this.moduloAccionService.getModuloAccion(element.idModuloAccion).subscribe(result => {
-          
-
-
-
-          console.log('Modulo Accion', element.estatus);
-          console.log('Modulo Accion', element.idModuloAccion);
-          console.log ('El resultado es: ', result.idAccion);
-          console.log ('El resultado es: ', result.idModulo);
-
-          let moduloAccionAuthorityAux = new ModuloAccionAuthorityAux;
-          moduloAccionAuthorityAux.estatus = element.estatus;
-          moduloAccionAuthorityAux.idAuthority = element.idAuthority;
-          moduloAccionAuthorityAux.idAccion = result.idAccion;
-          moduloAccionAuthorityAux.idModulo = result.idModulo;
-
-          this.moduloAccionAuthorityAuxList.push(moduloAccionAuthorityAux);
-
-        });
-    });
-  });
-
-}
-
-
-
-
-
 loadModuloAccionAuthority(){
 
   this.moduloService.getAllModulo().subscribe(data => {
@@ -231,52 +191,24 @@ loadModuloAccionAuthority(){
                   if (data) {
                     this.authorityList = data;
     
+                    let count = 0;
+
                     for (let i = 0; i < this.modulosList.length; i++) {
                       for (let j = 0; j < this.accionsList.length; j++) {
                         for (let k = 0; k < this.authorityList.length; k++) { 
                           
-
-
-                          
-
-                          //this.authorityList[k].isSelected = false;
+                        count++;      
+                          console.log('Contador:',count);
                           this.moduloAccionAuthorityService.getIsSelected(this.modulosList[i].idModulo, this.accionsList[j].idAccion, this.authorityList[k].idRol).subscribe(data => {
                             
-                            console.log('Estatus: ', data.estatus+" :"+this.modulosList[i].modulo+" "+this.accionsList[j].accion+ " " + this.authorityList[k].rol+"  Contador: ");
-                            //console.log('isSelected: ', this.authorityList[k].isSelected);
-                            
-                            //this.authorityList[1].isSelected = false;    // este esta en false
-                            
-//                            if (data.estatus){
-//                              this.modulosList[0].isSelected = true; 
-//                              this.accionsList[0].isSelected = true; 
-//                              this.authorityList[0].isSelected = true;    // este esta en true
-//                            }
+                            let moduloAccionAuthorityAux = new ModuloAccionAuthorityAux;
+                            moduloAccionAuthorityAux.estatus = data.estatus;
+                            moduloAccionAuthorityAux.idAuthority = this.authorityList[k].idRol;
+                            moduloAccionAuthorityAux.idAccion = this.accionsList[j].idAccion;
+                            moduloAccionAuthorityAux.idModulo = this.modulosList[i].idModulo;
 
-/*                            if (data.estatus){
-                              this.modulosList[2].isSelected = true; 
-                              this.accionsList[2].isSelected = true; 
-                              this.authorityList[2].isSelected = true;     // este esta en true
+                            this.moduloAccionAuthorityAuxList.push(moduloAccionAuthorityAux);
 
-                            }*/
-                            
-                            //if (data.estatus){
-                            
-
-                            //this.authorityList[k].isSelected = data.estatus;
-                            //}
-
- //                           this.authorityList[k].isSelected = false;
-/*
-                           
-
-                            if (data.estatus){
-                              this.modulosList[2].isSelected = true; 
-                              this.accionsList[2].isSelected = true; 
-                              this.authorityList[2].isSelected = true; 
-                            }*/
-
-                            
                           });
                         } 
                       } 
@@ -315,9 +247,6 @@ loadModuloAccionAuthority(){
     console.log('Valores Iniciales Modulo: ', idModulo); 
     console.log('Valores Iniciales Accion: ', idAccion); 
     console.log('Valores Iniciales Authority: ', idAuthority); 
-    console.log('Valores Iniciales Boolean: ');
-
-
     
     if(isChecked.target.checked){
       this.moduloAccionAuthorityService.saveMaa(idModulo, idAccion, idAuthority, true).subscribe(data =>{

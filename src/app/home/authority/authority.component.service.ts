@@ -34,8 +34,12 @@ export class AuthorityService {
         return this.http.delete(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
     }
 
+    getAuthorityByName(rol){
+        return this.http.get(this.env.api + "/authority/rol/"+rol).map(res => res.json());
+    }
+
     getAuthorityById(idRol){
-        return this.http.get(this.env.api + "/authority/"+idRol).map(res => res);
+        return this.http.get(this.env.api + "/authority/"+idRol).map(res => res.json());
     }
 
     resetAuthority(): Authority {

@@ -29,7 +29,7 @@
 												<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 													<ul class="nav child_menu">
 															
-															<div *ngFor="let modulo of user.modulos"> 
+															<!-- <div *ngFor="let modulo of moduloList"> 
 																	<div *ngIf="modulo.modulo == 'beneficiario'">
 																		<li>
 																			<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
@@ -39,8 +39,9 @@
 																			</ul>
 																		</li>
 																	</div>
-															</div>
-															
+															</div> -->
+															<!-- <div *ngFor="let modulo of moduloList; let i = index; let c = count ;"> 
+																	<div *ngIf="modulo.modulo == 'afiliado'"> -->
 															<li>
 																<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
 																<ul class="nav child_menu" id="afiliado">
@@ -48,6 +49,12 @@
 																	<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
 																</ul>
 															</li>
+																<!-- </div>
+															</div> -->
+																
+
+															<!-- <div *ngFor="let modulo of moduloList"> 
+																<div *ngIf="modulo.modulo == 'tipopension'">
 															<li>
 																<a title="Tipopension"><i class="fa fa-edit"></i>Tipopension<span class="fa fa-chevron-down"></span></a>
 																<ul class="nav child_menu" id="tipopension">
@@ -55,6 +62,11 @@
 																	<li><a [routerLink]="['tipopension']" routerLinkActive="active" title="Agregar Tipopension">Agregar Tipopension</a></li>
 																</ul>
 															</li>
+																</div>
+															</div>
+
+															<div *ngFor="let modulo of moduloList">
+																<div *ngIf="modulo.modulo == 'solicitudpension'">
 															<li>
 																<a title="Solicitudpension"><i class="fa fa-edit"></i>Solicitudpension<span class="fa fa-chevron-down"></span></a>
 																<ul class="nav child_menu" id="solicitudpension">
@@ -62,6 +74,8 @@
 																	<li><a [routerLink]="['solicitudpension']" routerLinkActive="active" title="Agregar Solicitudpension">Agregar Solicitudpension</a></li>
 																</ul>
 															</li>
+																</div>
+															</div> -->
 													</ul>
 												</li>
 												
