@@ -39,6 +39,11 @@ export class ModuloService {
         return this.http.get(this.env.api + "/modulo/"+idModulo).map(res => res.json());
     }
 
+    getModuloByRole(rol){
+        console.log('Service: ', rol);
+        return this.http.get(this.env.api + "/modulo/rol/"+rol).map(res => res.json());
+    }
+
     resetModulo(): Modulo {
         this.clear();
         return this.modulo;

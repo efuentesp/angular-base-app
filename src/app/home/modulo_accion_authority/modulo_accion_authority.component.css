@@ -17,9 +17,9 @@
 }
 
 .title_2{
-    -webkit-transform: rotate(-90deg);
- 
-    -moz-transform: rotate(-90deg);
+    transform: rotate(270deg);
+    padding-left: 20px;
+    padding-bottom: 65px;
   
 }
 
@@ -28,3 +28,4 @@
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
 }
+

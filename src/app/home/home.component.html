@@ -23,25 +23,33 @@
 									<h3>General</h3>
 						
 						<div *ngFor="let user of user.authorities"> 
-								
 								<div *ngIf="user.authority == 'administrador'">
+									
 										<ul class="nav side-menu">
-												<li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-													<ul class="nav child_menu">
-															
-															<!-- <div *ngFor="let modulo of moduloList"> 
-																	<div *ngIf="modulo.modulo == 'beneficiario'">
-																		<li>
-																			<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
-																			<ul class="nav child_menu" id="beneficiario">
-																				<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
-																				<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar Beneficiario</a></li>
-																			</ul>
-																		</li>
-																	</div>
-															</div> -->
-															<!-- <div *ngFor="let modulo of moduloList; let i = index; let c = count ;"> 
-																	<div *ngIf="modulo.modulo == 'afiliado'"> -->
+												<li >
+													<a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+													<ul  class="nav child_menu" *ngFor="let modulo of moduloList" >				
+															<li *ngIf="modulo.modulo === 'beneficiario'">
+																
+																<a  title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="beneficiario">
+																	<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
+																	<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar Beneficiario</a></li>
+																</ul>
+																
+																
+															</li>
+
+															<!-- <li *ngIf="modulo.modulo === 'afiliado'">
+																<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
+																<ul class="nav child_menu" id="afiliado">
+																	<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active"  title="Administrar Afiliado">Administrar Afiliado</a></li>
+																	<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
+																</ul>
+															</li> -->
+																	
+
+																	<!-- <div *ngIf="modulo.modulo == 'afiliado'"> 
 															<li>
 																<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
 																<ul class="nav child_menu" id="afiliado">
@@ -49,11 +57,8 @@
 																	<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
 																</ul>
 															</li>
-																<!-- </div>
-															</div> -->
-																
-
-															<!-- <div *ngFor="let modulo of moduloList"> 
+																 </div>
+															
 																<div *ngIf="modulo.modulo == 'tipopension'">
 															<li>
 																<a title="Tipopension"><i class="fa fa-edit"></i>Tipopension<span class="fa fa-chevron-down"></span></a>
@@ -63,9 +68,7 @@
 																</ul>
 															</li>
 																</div>
-															</div>
-
-															<div *ngFor="let modulo of moduloList">
+															
 																<div *ngIf="modulo.modulo == 'solicitudpension'">
 															<li>
 																<a title="Solicitudpension"><i class="fa fa-edit"></i>Solicitudpension<span class="fa fa-chevron-down"></span></a>
@@ -74,9 +77,10 @@
 																	<li><a [routerLink]="['solicitudpension']" routerLinkActive="active" title="Agregar Solicitudpension">Agregar Solicitudpension</a></li>
 																</ul>
 															</li>
-																</div>
-															</div> -->
+																</div> -->
+															
 													</ul>
+													
 												</li>
 												
 												<li><a><i class="fa fa-user"></i>Management Users <span class="fa fa-chevron-down"></span></a>
@@ -123,6 +127,7 @@
 													</ul>
 												</li>
 											</ul>
+									
 								</div>
 								<div *ngIf="user.authority == 'user'">
 										<ul class="nav side-menu">

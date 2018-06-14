@@ -62,67 +62,15 @@ export class HomeComponent {
     //console.log('Usuario Home:', localStorage.getItem('currentUser'));
 
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    /*
-    console.log ('User: ', this.user);
-    console.log ('UserAuth: ', this.user.authorities);
-    console.log ('UserAuth: ', this.user.token);
-    console.log ('UserAuth: ', this.user.userName);
-    console.log ('UserAuth: ', this.user.idUser);
-    
-    console.log ('Username: ', this.user.userName);*/
     
 
     this.rol = this.user.authorities[0].authority;
-    this.authorityService.getAuthorityByName(this.rol).subscribe(data => {
-      this.authority = data;
-      this.moduloAccionAuthorityService.searchModuloAccionAuthorityById(this.authority.idRol).subscribe(data =>{
-        // Obtiene todos los modulos accions
-        this.moduloAccionAuthorityList = data;
-        
-        
-        this.moduloAccionAuthorityList.forEach(element => {
-          // De cada modulo accion, obtendremos el modulo
-          this.moduloAccionService.getModuloAccion(element.idModuloAccion).subscribe(data => {
-           
-            this.moduloAccionList.push(data);
-            this.moduloAccion = data;
+    console.log ("Rol: ", this.rol);
+    this.moduloService.getModuloByRole(this.rol).subscribe(data => {
+      this.moduloList = data;
 
-
-
-            this.moduloService.getModuloById(this.moduloAccion.idModulo).subscribe(data =>{
-            
-            this.modulo = data;
-                   
-            this.moduloList.push(this.modulo);
-                   
-                
-
-/*
-                  this.moduloList.forEach(element => {
-                    console.log('ElementoA:', element.modulo);
-                  
-                    this.moduloAuxList.forEach(element2 => {
-                      console.log('ElementoB:', element2.modulo);
-                      if (element2.modulo != element.modulo){
-                        this.moduloAuxList.push(element2);
-                      }
-                    });
-                  });
-*/
-
-            });
-          });
-        });
-      });
     });
-
-    console.log("Modulos Action Authority: ", this.moduloAccionAuthorityList);
-    console.log("Modulos activos: ", this.moduloAccionList);
-    console.log("Modulo: ", this.moduloList);
-
-
-
-    console.log("ModuloAux: ", this.moduloAuxList);
+  
 
   }
 
