@@ -198,7 +198,7 @@ loadModuloAccionAuthority(){
                         for (let k = 0; k < this.authorityList.length; k++) { 
                           
                         count++;      
-                          console.log('Contador:',count);
+            
                           this.moduloAccionAuthorityService.getIsSelected(this.modulosList[i].idModulo, this.accionsList[j].idAccion, this.authorityList[k].idRol).subscribe(data => {
                             
                             let moduloAccionAuthorityAux = new ModuloAccionAuthorityAux;
