@@ -22,12 +22,14 @@
                                     </th> -->
 
                                     
-                                    <tr *ngFor="let modulo of modulosList; let i = index" class="modulos">
+                                    <tr *ngFor="let modulo of modulosList; let i = index" class="modulos"><h2>MANTENIMIENTO {{modulo.modulo | uppercase }}</h2>
+                                    <br/>
                                     <td>
                                        <table>
                                            <tr *ngFor="let accion of accionsList; let k = index">
                                             <td class="col-md-4">{{accion.accion | uppercase}}</td>
                                            </tr>
+                                           <br/>
                                        </table>
                                      </td>
                                      <td>  
@@ -46,7 +48,9 @@
                                                     </div>
                                                  </td>
                                              </tr>
-                                         </table>     
+                                             <br/>
+                                         </table> 
+
                                     <!-- <div *ngFor="let modulo of modulosList; let i = index" class="modulos"> -->
 
                                     <!-- <table ng-table="tableParams" show-filter="true"> -->
@@ -70,7 +74,7 @@
                                     </div> -->
                                     </td> 
                                     </tr>
-
+                                   
                                 </table>
 
                                 

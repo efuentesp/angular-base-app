@@ -38,7 +38,11 @@ export class HomeComponent {
   public moduloList: Modulo [] = [];
   public moduloAuxList: Modulo [] = [];
   public modulo: Modulo;
-  
+
+  // Modulos
+  public afiliadoLink : boolean = false;
+  public beneficiarioLink: boolean = false;
+
   //public authorityAux: Authority;
   public rol: string;
   public count : Number;
@@ -62,15 +66,12 @@ export class HomeComponent {
     //console.log('Usuario Home:', localStorage.getItem('currentUser'));
 
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-    
+    this.valueName = this.user.userName;
 
     this.rol = this.user.authorities[0].authority;
     console.log ("Rol: ", this.rol);
-    this.moduloService.getModuloByRole(this.rol).subscribe(data => {
-      this.moduloList = data;
 
-    });
-  
+    this.loadModulos();
 
   }
 
@@ -90,6 +91,36 @@ export class HomeComponent {
     console.log('Fin');
   }
 
+  loadModulos(){
+   
+    this.moduloService.getModuloByRole(this.rol).subscribe(res => {
+      
+      console.log("Resultado: ", res);
+      this.moduloList = res;
+  
+      console.log('Resultado*****');
+  
+      this.moduloList.forEach(element => {
+        
+        console.log ('Elemento:', element.modulo);
+  
+        if (element.modulo=="afiliado"){
+          console.log("Es true");
+  
+          this.afiliadoLink = true;
+        }
+
+        if (element.modulo=="beneficiario"){
+          console.log("Es true");
+  
+          this.beneficiarioLink = true;
+        }
+  
+      });
+  
+    });
+  }
+  
 
 }
     

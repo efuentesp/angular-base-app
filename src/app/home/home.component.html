@@ -23,34 +23,119 @@
 									<h3>General</h3>
 						
 						<div *ngFor="let user of user.authorities"> 
-								<div *ngIf="user.authority == 'admin'">
+								<div *ngIf="user.authority == 'administrador'">
 									<ul class="nav side-menu">
 										<li>
 											<a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-											<div *ngFor="let modulo of moduloList">
+												<ul  class="nav child_menu">		
+													<li>
+														<a title="Afiliado" ><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
+														<ul *ngIf="afiliadoLink" class="nav child_menu" id="afiliado">
+															<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active"  title="Administrar Afiliado">Administrar Afiliado</a></li>
+															<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
+														</ul>
+														
+													</li>
+														
+													<li>
+														<a title="Beneficiario"><i class="fa fa-edit"></i>Beneficiarios<span class="fa fa-chevron-down"></span></a>
+														<ul *ngIf="beneficiarioLink" class="nav child_menu" id="beneficiario">
+															<li><a [routerLink]="['beneficiario_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar Beneficiario</a></li>
+															<li><a [routerLink]="['beneficiario']" routerLinkActive="active" title="Agregar Beneficiario">Agregar Beneficiario</a></li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+
+											<li><a><i class="fa fa-user"></i>Management Users <span class="fa fa-chevron-down"></span></a>
+												<ul class="nav child_menu">
+													<li><a [routerLink]="['user_mgmnt']" routerLinkActive="active" title="Administrar User">Administrar User</a></li>
+													<li><a [routerLink]="['user']" routerLinkActive="active" title="Agregar User">Agregar User</a></li>
 													
-											<ul  class="nav child_menu">				
-													<li *ngIf="modulo.modulo === 'afiliados'">
+													<!--<li><a [routerLink]="['userAuthority']" routerLinkActive="active" title="User Authority">User Authority</a></li>-->
+												</ul>
+											</li>
+											<li><a><i class="fa fa-sitemap"></i>Management Modules <span class="fa fa-chevron-down"></span></a>
+												<ul class="nav child_menu">
+														<li>
+															<a title="Acciones"><i class="fa fa-edit"></i>Acciones<span class="fa fa-chevron-down"></span></a>
+															<ul class="nav child_menu" id="accion">
+																<li><a [routerLink]="['accion_mgmnt']" routerLinkActive="active" title="Administrar Accion">Administrar Accion</a></li>
+																<li><a [routerLink]="['accion']" routerLinkActive="active" title="Agregar Accion">Agregar Accion</a></li>
+															</ul>
+														</li>
+														<li>
+															<a title="Modulos"><i class="fa fa-edit"></i>Modulos<span class="fa fa-chevron-down"></span></a>
+															<ul class="nav child_menu" id="modulo">
+																<li><a [routerLink]="['modulo_mgmnt']" routerLinkActive="active" title="Administrar Modulo">Administrar Modulo</a></li>
+																<li><a [routerLink]="['modulo']" routerLinkActive="active" title="Agregar Modulo">Agregar Modulo</a></li>
+															</ul>
+														</li>
+														<li>
+															<a title="Authority"><i class="fa fa-edit"></i>Authority<span class="fa fa-chevron-down"></span></a>
+															<ul class="nav child_menu" id="authority">
+																<li><a [routerLink]="['authority_mgmnt']" routerLinkActive="active" title="Administrar Authority">Administrar Authority</a></li>
+																<li><a [routerLink]="['authority']" routerLinkActive="active" title="Agregar Authority">Agregar Authority</a></li>
+															</ul>
+														</li>
+														<li>
+															<a title="Authority"><i class="fa fa-edit"></i>Modulo Accion<span class="fa fa-chevron-down"></span></a>
+															<ul class="nav child_menu" id="moduloaccion">
+																<li><a [routerLink]="['modulo_accion_authority']" routerLinkActive="active" title="Modulo Accion">Agregar Modulo Accion</a></li>
+															</ul>
+														</li>
 													
-													<a  title="Afiliado"><i class="fa fa-edit"></i>{{modulo.modulo}}<span class="fa fa-chevron-down"></span></a>
-													<ul class="nav child_menu" id="afiliado">
+														
+													
+												</ul>
+											 
+											
+
+											<!-- <div *ngFor="let modulo of moduloList">
+													
+											<ul  class="nav child_menu">				 -->
+													<!-- <li>
+													
+														<a title="Afiliado"><i class="fa fa-edit"></i>Afiliados<span class="fa fa-chevron-down"></span></a>
+														<ul class="nav child_menu" id="afiliado">
+															<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active"  title="Administrar Afiliado">Administrar Afiliado</a></li>
+															<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Afiliado">Agregar Afiliado</a></li>
+														</ul>
+
+													</li>
+													<li *ngIf="modulo.modulo === 'pensionado'">
+													
+													<a  title="pensionado"><i class="fa fa-edit"></i>Pensionado<span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu" id="pensionado">
 														<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar {{modulo.modulo}}</a></li>
 														<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar {{modulo.modulo}}</a></li> 
 													</ul> 
 													
+													</li>
+
+													<li *ngIf="modulo.modulo === 'jubilado'">
+													
+													<a  title="jubilado"><i class="fa fa-edit"></i>Jubilado<span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu" id="jubilado">
+														<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar {{modulo.modulo}}</a></li>
+														<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar {{modulo.modulo}}</a></li> 
+													</ul> 
 													
 													</li>
 
-													<li *ngIf="modulo.modulo === 'jubilados'">
+													<li *ngIf="modulo.modulo === 'beneficiario'">
 													
-														<a  title="Afiliado"><i class="fa fa-edit"></i>{{modulo.modulo}}<span class="fa fa-chevron-down"></span></a>
-														<ul class="nav child_menu" id="afiliado">
-															<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar {{modulo.modulo}}</a></li>
-															<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar {{modulo.modulo}}</a></li> 
-														</ul> 
-													</li>
-												</ul>
-											</div>
+													<a  title="beneficiario"><i class="fa fa-edit"></i>Beneficiario<span class="fa fa-chevron-down"></span></a>
+													<ul class="nav child_menu" id="beneficiario">
+														<li><a [routerLink]="['afiliado_mgmnt']" routerLinkActive="active" title="Administrar Beneficiario">Administrar {{modulo.modulo}}</a></li>
+														<li><a [routerLink]="['afiliado']" routerLinkActive="active" title="Agregar Beneficiario" >Agregar {{modulo.modulo}}</a></li> 
+													</ul> 
+													
+													</li> -->
+
+												
+												<!-- </ul>
+											</div> -->
 										</li>
 									</ul>
 								</div>

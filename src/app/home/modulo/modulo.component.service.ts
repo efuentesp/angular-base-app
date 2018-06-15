@@ -41,6 +41,7 @@ export class ModuloService {
 
     getModuloByRole(rol){
         console.log('Service: ', rol);
+        console.log('Respuesta', this.http.get(this.env.api + "/modulo/rol/"+rol).map(res => res.json()));
         return this.http.get(this.env.api + "/modulo/rol/"+rol).map(res => res.json());
     }
 
