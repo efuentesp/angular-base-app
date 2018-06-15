@@ -36,7 +36,13 @@ export class ModuloService {
     }
 
     getModuloById(idModulo){
-        return this.http.get(this.env.api + "/modulo/"+idModulo).map(res => res);
+        return this.http.get(this.env.api + "/modulo/"+idModulo).map(res => res.json());
+    }
+
+    getModuloByRole(rol){
+        console.log('Service: ', rol);
+        console.log('Respuesta', this.http.get(this.env.api + "/modulo/rol/"+rol).map(res => res.json()));
+        return this.http.get(this.env.api + "/modulo/rol/"+rol).map(res => res.json());
     }
 
     resetModulo(): Modulo {
@@ -50,7 +56,8 @@ export class ModuloService {
 					fechaCreacion: this.modulo.fechaCreacion, 
 					fechaModificacion: this.modulo.fechaModificacion, 
 					modulo: this.modulo.modulo, 
-					idModulo: this.modulo.idModulo
+                    idModulo: this.modulo.idModulo,
+                    isSelected: this.modulo.isSelected
         };
         return modulo;
     }

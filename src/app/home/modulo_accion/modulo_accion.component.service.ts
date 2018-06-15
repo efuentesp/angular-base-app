@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import { Authority }                           from '../authority/authority.component.model';
 
 @Injectable()
-export class AuthorityService {
+export class ModuloAccionService {
 
     private isAuthorityFormValid: boolean = false;
     private env: any = environment;
@@ -18,56 +18,62 @@ export class AuthorityService {
 
     constructor(private http: Http) {}
 
-    getAllAuthority(){
-      return this.http.get(this.env.api + "/authority").map(res => res.json()).catch(AuthorityService.handleError);
+    getAllModuloAccion(idModulo, idAccion){
+        console.log('getAllModuloAccion');
+      return this.http.get(this.env.api + "/moduloaccion/"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
     }
 
-    saveAuthority(authority){
-		if (!authority.idRol){
-            return this.http.post(this.env.api + "/authority", authority).map(res => res);
+    getModuloAccion(idModuloAccion){       
+      return this.http.get(this.env.api + "/moduloaccionbyid/"+idModuloAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
+    }
+
+    getAllModuloAccionById(idModulo, idAccion){
+        console.log('getAllModuloAccionById');
+        return this.http.get(this.env.api + "/moduloaccionid/"+idModulo+"/"+idAccion).map(res => res.json()).catch(ModuloAccionService.handleError);
+    }
+
+    save(authority){
+        console.log('Resultado: --> ',authority);
+		if (!authority.idModuloAccionAuthority){
+            return this.http.post(this.env.api + "/moduloAccionAuthority", authority).map(res => res);
         }else{
-            return this.http.put(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
+            return this.http.put(this.env.api + "/moduloAccionAuthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
         }
     }
 
-    deleteAuthority(authority){
-        return this.http.delete(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
+    deleteModuloAccionAuthority(authority){
+        return this.http.delete(this.env.api + "/moduloAccionAuthority/"+authority.idModuloAccionAuthority, authority).map(res => res);
     }
 
-    getAuthorityByName(rol){
-        return this.http.get(this.env.api + "/authority/rol/"+rol).map(res => res.json());
+    getModuloAccionAuthorityById(idModuloAccionAuthority){
+        return this.http.get(this.env.api + "/moduloAccionAuthority/"+idModuloAccionAuthority).map(res => res.json());
     }
 
-    getAuthorityById(idRol){
-        return this.http.get(this.env.api + "/authority/"+idRol).map(res => res.json());
-    }
-
-    resetAuthority(): Authority {
+    resetModuloAccionAuthority(): Authority {
         this.clear();
         return this.authority;
     }
 
-    getAuthority(): Authority {
+    getModuloAccionAuthority(): Authority {
         var authority: Authority = {
 					estatus: this.authority.estatus, 
 					fechaCreacion: this.authority.fechaCreacion, 
 					fechaModificacion: this.authority.fechaModificacion, 
 					idRol: this.authority.idRol, 
                     rol: this.authority.rol,
-                    isSelected:this.authority.isSelected
+                    isSelected: this.authority.isSelected
         };
         return authority;
     }
 
-    setAuthority(authority: Authority) {
+    setModuloAccionAuthority(authority: Authority) {
        
 	        this.isAuthorityFormValid = true;
 			this.authority.estatus = authority.estatus;    
 			this.authority.fechaCreacion = authority.fechaCreacion;    
 			this.authority.fechaModificacion = authority.fechaModificacion;    
 			this.authority.idRol = authority.idRol;    
-            this.authority.rol = authority.rol;  
-            this.authority.isSelected = authority.isSelected;
+			this.authority.rol = authority.rol;  
     }
 
     isFormValid() {
@@ -80,8 +86,7 @@ export class AuthorityService {
 			this.authority.fechaModificacion = '';    
 			this.authority.fechaCreacion = '';   
 			this.authority.idRol = null;    
-            this.authority.rol = null;
-            this.authority.isSelected = false;
+			this.authority.rol = null;
     }
 
     setEdit(flag){

@@ -53,7 +53,8 @@ export class AccionService {
 					idAccion: this.accion.idAccion, 
 					estatus: this.accion.estatus, 
 					fechaCreacion: this.accion.fechaCreacion, 
-					fechaModificacion: this.accion.fechaModificacion
+                    fechaModificacion: this.accion.fechaModificacion,
+                    isSelected: this.accion.isSelected
         };
         return accion;
     }
@@ -66,7 +67,7 @@ export class AccionService {
 			this.accion.estatus = accion.estatus;    
 			this.accion.fechaModificacion = accion.fechaModificacion;    
 			this.accion.fechaCreacion = accion.fechaCreacion;    
-		
+            this.accion.isSelected = accion.isSelected;  
         	
     }
 
@@ -81,6 +82,7 @@ export class AccionService {
         this.accion.estatus = null;    
         this.accion.fechaModificacion = '';    
         this.accion.fechaCreacion = ''; 
+        this.accion.isSelected = false; 
     }
 
     setEdit(flag){

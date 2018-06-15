@@ -5,5 +5,6 @@ export class Modulo {
 	estatus:  number = null;
 	fechaCreacion: string = '';
 	fechaModificacion: string = '';
+	isSelected : boolean = false;
 	
 }

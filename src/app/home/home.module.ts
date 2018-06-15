@@ -47,7 +47,10 @@ import { UserMngComponent } from './user_mgmnt/user_mgmnt.component';
 import { UserService } from './user/user.component.service';
 import { UserAuthorityComponent } from './user_authority/user-authority.component';
 import { ModuloAccionComponent } from './modulo_accion/modulo_accion.component';
+import { ModuloAccionService } from './modulo_accion/modulo_accion.component.service';
 import { SearchUserPipe } from './pipe/user.filter.pipe';
+import { ModuloAccionAuthorityService } from './modulo_accion_authority/modulo_accion_authority.component.service';
+import { ModuloAccionAuthorityComponent } from './modulo_accion_authority/modulo_accion_authority.component';
 
 @NgModule({
   imports: [     
@@ -87,7 +90,8 @@ import { SearchUserPipe } from './pipe/user.filter.pipe';
 		ModuloComponent,
 		ModuloMngComponent, 
 		UserAuthorityComponent,
-		ModuloAccionComponent
+		ModuloAccionComponent,
+		ModuloAccionAuthorityComponent
   ],
   providers: [ HomeService, 
 			   BeneficiarioService,
@@ -99,6 +103,8 @@ import { SearchUserPipe } from './pipe/user.filter.pipe';
 			   ModuloService,
 			   AccionService,
 			   AuthorityService,
-			   UserService
+			   UserService,
+			   ModuloAccionAuthorityService,
+			   ModuloAccionService
 ]})
 export class HomeModule { }

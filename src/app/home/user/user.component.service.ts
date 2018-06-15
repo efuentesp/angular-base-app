@@ -23,12 +23,16 @@ export class UserService {
       return this.http.get(this.env.api + "/user").map(res => res.json()).catch(UserService.handleError);
     }
 
+    getModulosAccionAuthorityByUserName(username){
+        return this.http.get(this.env.api + "/moduloByUsername/username/"+username).map(res => res);
+    }
+
     saveUser(user){
        
-
+        console.log('User: ', user.userName);
         user.imagen = user.userName + '.jpg';
-        user.rol    = 'admin';
-
+        //user.rol    = 'admin';
+        console.log('User: ', user.rol);
         console.log('User Service', user);
 
 		if (!user.idUser){

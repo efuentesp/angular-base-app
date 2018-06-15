@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import { Authority }                           from '../authority/authority.component.model';
 
 @Injectable()
-export class AuthorityService {
+export class ModuloAccionAuthorityService {
 
     private isAuthorityFormValid: boolean = false;
     private env: any = environment;
@@ -18,56 +18,74 @@ export class AuthorityService {
 
     constructor(private http: Http) {}
 
-    getAllAuthority(){
-      return this.http.get(this.env.api + "/authority").map(res => res.json()).catch(AuthorityService.handleError);
+    getAllModuloAccionAuthority(){
+      return this.http.get(this.env.api + "/moduloaccionauthority").map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);
     }
 
-    saveAuthority(authority){
-		if (!authority.idRol){
-            return this.http.post(this.env.api + "/authority", authority).map(res => res);
+
+    getAllModuloAccionAuthorityById(idModuloAccion,idAuthority){
+        console.log('ById');
+        return this.http.get(this.env.api + "/moduloaccionauthorityid/"+idModuloAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
+    }
+
+    getIsSelected(idModulo, idAccion, idAuthority){
+        //console.log('selected: ', idModulo+' '+idAccion+' '+idAuthority );
+        return this.http.get(this.env.api + "/moduloaccionauthorityid/"+idModulo+"/"+idAccion+"/"+idAuthority).map(res => res.json()).catch(ModuloAccionAuthorityService.handleError);     
+    }
+
+    save(authority){
+        console.log('ModuloAccionAuthorityService: --> ',authority);
+		if (!authority.idmoduloaccionauthority){
+            console.log('post');
+            return this.http.post(this.env.api + "/moduloaccionauthority", authority).map(res => res);
         }else{
-            return this.http.put(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
+            console.log('put');
+            return this.http.put(this.env.api + "/moduloaccionauthority/"+authority.idmoduloaccionauthority, authority).map(res => res);
         }
     }
 
-    deleteAuthority(authority){
-        return this.http.delete(this.env.api + "/authority/"+authority.idRol, authority).map(res => res);
+    saveMaa(idModulo, idAccion, idAuthority, res){
+        return this.http.get(this.env.api + "/moduloaccionauthority/"+idModulo+"/"+idAccion+"/"+idAuthority+"/"+res).map(res => res);
     }
 
-    getAuthorityByName(rol){
-        return this.http.get(this.env.api + "/authority/rol/"+rol).map(res => res.json());
+    deleteModuloAccionAuthority(authority){
+        return this.http.delete(this.env.api + "/moduloaccionauthority/"+authority.idmoduloaccionauthority, authority).map(res => res);
     }
 
-    getAuthorityById(idRol){
-        return this.http.get(this.env.api + "/authority/"+idRol).map(res => res.json());
+    getModuloAccionAuthorityById(idmoduloaccionauthority){
+        return this.http.get(this.env.api + "/moduloaccionauthority/"+idmoduloaccionauthority).map(res => res.json());
     }
 
-    resetAuthority(): Authority {
+    searchModuloAccionAuthorityById(idmoduloaccionauthority){
+        return this.http.get(this.env.api + "/moduloaccionauthority/search/"+idmoduloaccionauthority).map(res => res.json());
+    }
+
+    resetModuloAccionAuthority(): Authority {
         this.clear();
         return this.authority;
     }
 
-    getAuthority(): Authority {
+    getModuloAccionAuthority(): Authority {
         var authority: Authority = {
 					estatus: this.authority.estatus, 
 					fechaCreacion: this.authority.fechaCreacion, 
 					fechaModificacion: this.authority.fechaModificacion, 
 					idRol: this.authority.idRol, 
                     rol: this.authority.rol,
-                    isSelected:this.authority.isSelected
+                    isSelected: this.authority.isSelected
         };
         return authority;
     }
 
-    setAuthority(authority: Authority) {
+    setModuloAccionAuthority(authority: Authority) {
        
 	        this.isAuthorityFormValid = true;
 			this.authority.estatus = authority.estatus;    
 			this.authority.fechaCreacion = authority.fechaCreacion;    
 			this.authority.fechaModificacion = authority.fechaModificacion;    
 			this.authority.idRol = authority.idRol;    
-            this.authority.rol = authority.rol;  
-            this.authority.isSelected = authority.isSelected;
+            this.authority.rol = authority.rol; 
+            this.authority.isSelected = authority.isSelected; 
     }
 
     isFormValid() {

@@ -12,35 +12,49 @@ import { Location } from '@angular/common';
 import { AccionService } from '../accion/accion.component.service';
 import { Accion } from '../accion/accion.component.model';
 
-import { UserService }                                       from '../user/user.component.service';
-import { User }                                              from '../user/user.component.model';
+import { UserService }                                  from '../user/user.component.service';
+import { User }                                         from '../user/user.component.model';
 import { AuthorityService }                                  from '../authority/authority.component.service';
 import { Authority }                                         from '../authority/authority.component.model';
-import { ModuloAccionService } from './modulo_accion.component.service';
+import { ModuloAccionAuthority } from './modulo_accion_authority.component.model';
+import { ModuloAccionAuthorityService } from './modulo_accion_authority.component.service';
+import { ModuloAccionService } from '../modulo_accion/modulo_accion.component.service';
+import { ModuloAccion } from '../modulo_accion/modulo_accion.component.model';
+import { element } from 'protractor';
+import { ModuloAccionAuthorityAux } from './modulo_authority_accion.component.model';
+
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './modulo_accion.component.html'
+    templateUrl: './modulo_accion_authority.component.html',
+    styleUrls: ['./modulo_accion_authority.component.css']
 })
 
-export class ModuloAccionComponent implements OnInit {
+export class ModuloAccionAuthorityComponent implements OnInit {
   title = 'Nuevo User';
   userList: User;
   user: User;
   form: any;
-  
+  moduloAccionAuthority = new ModuloAccionAuthority;
   public flag: boolean = false;
 
   userArray: User[];
   selectedIndex = 4;
   timeVar = " hours";
   checkboxValue:boolean;
+  idModuloAccion : number = null;
 
   authorityList: Authority [] = [];
-  modulosList: Modulo;
-  accionsList: Accion;
+  modulosList: Modulo [] = [];
+  accionsList: Accion [] = [];
+  moduloaccionsList: ModuloAccion [] = [];
+  moduloAccion: ModuloAccion;
+  moduloAccionAuthorityList : ModuloAccionAuthority [] = [];
+  moduloAccionAuthorityAuxList : ModuloAccionAuthorityAux [] = [];
 
+  isActive:boolean = true;
   filter = false;
+  count: Number = 0;
 
   public busquedaBeneficiario='';
   filterInputBeneficiario = new FormControl();
@@ -53,23 +67,26 @@ export class ModuloAccionComponent implements OnInit {
   private moduloService: ModuloService,
   private accionService: AccionService,
   private route:ActivatedRoute,
+  private moduloAccionAuthorityService: ModuloAccionAuthorityService,
   private moduloAccionService: ModuloAccionService
 ) {
   
 }
 
   ngOnInit() {
-      
+      this.loadModuloAccionAuthority();
       this.loadUsers();
       this.loadAuthoritys();
       this.loadModules();
       this.loadAccions();
+      
       this.user = new User;
       this.flag = this.userService.getEdit();
       if (this.flag){
         this.user = this.userService.getUser();
       }
 
+      
   }
 
   save(user){  
@@ -150,10 +167,70 @@ loadAccions(){
   if (data) {
     console.log('Accions:', data);
     this.accionsList = data;
+    console.log('AccionList: ', this.accionsList.length);
   }
+
+  return this.accionsList;
+  
   }, error => {
   swal('Error...', 'An error occurred while calling the accions.', 'error');
 });
+}
+
+loadModuloAccionAuthority(){
+
+  this.moduloService.getAllModulo().subscribe(data => {
+    if (data) {
+      this.modulosList = data;
+
+        this.accionService.getAllAccion().subscribe(data => {
+          if (data) {
+            this.accionsList = data;
+      
+                this.authorityService.getAllAuthority().subscribe(data => {
+                  if (data) {
+                    this.authorityList = data;
+    
+                    let count = 0;
+
+                    for (let i = 0; i < this.modulosList.length; i++) {
+                      for (let j = 0; j < this.accionsList.length; j++) {
+                        for (let k = 0; k < this.authorityList.length; k++) { 
+                          
+                        count++;      
+            
+                          this.moduloAccionAuthorityService.getIsSelected(this.modulosList[i].idModulo, this.accionsList[j].idAccion, this.authorityList[k].idRol).subscribe(data => {
+                            
+                            let moduloAccionAuthorityAux = new ModuloAccionAuthorityAux;
+                            moduloAccionAuthorityAux.estatus = data.estatus;
+                            moduloAccionAuthorityAux.idAuthority = this.authorityList[k].idRol;
+                            moduloAccionAuthorityAux.idAccion = this.accionsList[j].idAccion;
+                            moduloAccionAuthorityAux.idModulo = this.modulosList[i].idModulo;
+
+                            this.moduloAccionAuthorityAuxList.push(moduloAccionAuthorityAux);
+
+                          });
+                        } 
+                      } 
+                    }
+                  }
+                  }, error => {
+                  swal('Error...', 'An error occurred while calling the authorities.', 'error');
+                });
+    
+              }
+              }, error => {
+              swal('Error...', 'An error occurred while calling the modules.', 'error');
+            });
+          }
+        
+          console.log('Numero de elementos:', this.moduloAccionAuthorityList.length);
+          //return this.accionsList;
+          
+          }, error => {
+          swal('Error...', 'An error occurred while calling the accions.', 'error');
+        });
+
 }
 
   setClickedRowAuthority(index, authority){
@@ -164,5 +241,22 @@ loadAccions(){
     this.location.back();
   }
 
+  saveRole(idModulo, idAuthority, idAccion, isChecked){
+
+    console.log('saveRole-- Inicio'); 
+    console.log('Valores Iniciales Modulo: ', idModulo); 
+    console.log('Valores Iniciales Accion: ', idAccion); 
+    console.log('Valores Iniciales Authority: ', idAuthority); 
+    
+    if(isChecked.target.checked){
+      this.moduloAccionAuthorityService.saveMaa(idModulo, idAccion, idAuthority, true).subscribe(data =>{
+        console.log(data.json());
+      });
+    }else{
+      this.moduloAccionAuthorityService.saveMaa(idModulo, idAccion, idAuthority, false).subscribe(data =>{
+        console.log(data.json());
+      });
+    }  
+  }
 
 }

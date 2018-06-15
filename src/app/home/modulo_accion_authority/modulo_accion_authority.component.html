@@ -1,0 +1,115 @@
+
+
+			<div class="x_panel">
+                    <div class="x_title">
+                    <h2>Administrar <small>Modulo - Rol</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+
+                    <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+    
+                        
+                        <form #moduloAccionAuthorityForm="ngForm" id="moduloAccionAuthorityForm" data-parsley-validate>
+    
+                                <table border="0">
+                                    <!-- <th></th>
+                                    <th class="title_2" *ngFor="let authority of authorityList; let b = index">{{authority.rol | uppercase}}
+                                   
+                                    </th> -->
+
+                                    
+                                    <tr *ngFor="let modulo of modulosList; let i = index" class="modulos"><h2>MANTENIMIENTO {{modulo.modulo | uppercase }}</h2>
+                                    <br/>
+                                    <td>
+                                       <table>
+                                           <tr *ngFor="let accion of accionsList; let k = index">
+                                            <td class="col-md-4">{{accion.accion | uppercase}}</td>
+                                           </tr>
+                                           <br/>
+                                       </table>
+                                     </td>
+                                     <td>  
+                                         <table>
+                                             <tr *ngFor="let accion of accionsList; let k = index">
+                                                 <td *ngFor="let authority of authorityList; let j = index" class="col-md-2">
+                                                    <div *ngFor="let maa of moduloAccionAuthorityAuxList" >
+                                                        <div *ngIf="modulo.idModulo == maa.idModulo && accion.idAccion == maa.idAccion && authority.idRol == maa.idAuthority;">
+                                                            <div *ngIf="authority.rol =='administrador'" >
+                                                            <input type="checkbox" class="control control--checkbox" disabled [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
+                                                            </div> 
+                                                            <div *ngIf="authority.rol != 'administrador'" >
+                                                            <input type="checkbox"   [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
+                                                            </div>     
+                                                        </div>
+                                                    </div>
+                                                 </td>
+                                             </tr>
+                                             <br/>
+                                         </table> 
+
+                                    <!-- <div *ngFor="let modulo of modulosList; let i = index" class="modulos"> -->
+
+                                    <!-- <table ng-table="tableParams" show-filter="true"> -->
+                                        <!-- <tr *ngFor="let accion of accionsList; let k = index">   
+                                            <td >{{accion.accion}}</td>
+                                            <td *ngFor="let authority of authorityList; let j = index" >
+                                                <div *ngFor="let maa of moduloAccionAuthorityAuxList" >
+                                                <div *ngIf="modulo.idModulo == maa.idModulo && accion.idAccion == maa.idAccion && authority.idRol == maa.idAuthority;">
+                                                    <div *ngIf="authority.rol =='administrador'">
+                                                    <input type="checkbox" disabled [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
+                                                    </div> 
+                                                    <div *ngIf="authority.rol != 'administrador'">
+                                                    <input type="checkbox" class="flat" [checked] = "maa.estatus" (change)="saveRole(modulo.idModulo,authority.idRol,accion.idAccion,$event)"  name="{{i}}{{j}}{{k}}" value="{{i}}{{j}}{{k}}" />       
+                                                    </div>     
+                                                </div>
+                                                </div>
+                                            </td>
+                                        </tr> -->
+                                    <!-- </table> -->
+                                    <!-- <br/>
+                                    </div> -->
+                                    </td> 
+                                    </tr>
+                                   
+                                </table>
+
+                                
+                                    
+                                        
+
+                                    
+                            
+                                
+                               
+
+                            <div class="col-sm-12">
+                                <br/>
+                                <br/>
+                                <div class="input-group">
+                                <div *ngIf="flag">	
+                                <!-- <button class="btn btn-danger" (click)="delete(moduloAccionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button> -->
+                                <!-- <button class="btn btn-primary" (click)="save(moduloAccionAuthorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button> -->
+                                <button class="btn btn-default" (click)="return(moduloAccionAuthorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+                                </div>
+                                <div *ngIf="!flag">
+                                <!-- <button class="btn btn-primary" (click)="save(moduloAccionAuthorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button> -->
+                                <button class="btn btn-default" (click)="return(moduloAccionAuthorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+                                </div>
+                                </div>
+                            </div>
+    
+                        </form>
+                        
+                        
+    
+                    </div>
+                </div>	
+    
+    
+    
+    
+    
