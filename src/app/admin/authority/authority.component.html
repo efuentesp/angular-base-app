@@ -1,0 +1,55 @@
+			<div class="x_panel">
+				<div class="x_title">
+				<h2>Authority <small>Agregar Authority</small></h2>
+				<ul class="nav navbar-right panel_toolbox">
+					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+
+					
+					<form #authorityForm="ngForm" id="authorityForm" data-parsley-validate>
+						
+						<input class="form-control" #idAuthority="ngModel" idrol="idAuthority" name="idAuthority" type="hidden" [(ngModel)]="authority.idAuthority">
+
+						<label for="rol">Authority * :</label>
+						<input class="form-control" #name="ngModel" id="name" name="name" type="text" [(ngModel)]="authority.name" required>
+		
+						<br/>
+						<label>Estatus * :</label>
+						<p>
+						Activo:        <input type="radio"  value="true"     name="estatus" [(ngModel)]="authority.enabled" />		
+						Inactivo:      <input type="radio"  value="false"     name="estatus" [(ngModel)]="authority.enabled" />		
+						</p>
+
+						
+						<div class="ln_solid"></div>
+						<div class="col-sm-12">
+							<div class="input-group">
+								<div *ngIf="flagDelete">
+									<button class="btn btn-danger" (click)="delete(authorityForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+									<button class="btn btn-link" (click)="return(authorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+								</div>
+								<div *ngIf="flag && !flagDelete">
+									<button class="btn btn-primary" (click)="save(authorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+									<button class="btn btn-link" (click)="return(authorityForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+								</div>
+								<div *ngIf="!flag && !flagDelete">
+									<button class="btn btn-primary" (click)="save(authorityForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+									<button class="btn btn-link" (click)="return(authorityForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+					
+					
+
+				</div>
+			</div>
+
+
+
+

@@ -1,0 +1,80 @@
+<div>
+		<div class="page-title" style="background: #F7F7F7;">
+			<div class="title_left">
+				<h3>Administrar Beneficiario</h3>
+			</div>
+		</div>
+
+		<div class="x_panel">
+		  <div class="x_content">
+				<form #beneficiarioMngForm="ngForm" class="editForm" novalidate>
+					<div class='row'>
+						<div class="col-lg-6">
+							<button *ngIf="afiliadocreate" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
+							<br/>
+						</div>
+						<div class="col-lg-6">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Criterios de busqueda..." name="busquedaBeneficiario" [(ngModel)]="busquedaBeneficiario">
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default"><em class="fa fa-search"></em></button>
+									</span>
+							</div>
+						</div>
+					</div>
+
+					<br/>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>Resultados de la busqueda</h2>
+									<div class="clearfix"></div>
+								</div>
+
+								<div class="x_content">
+									<br/>
+									<table id="datatable" class="table table-striped">
+										<thead>
+											<tr>
+													<th>Apellido_materno</th>
+													<th>Curp</th>
+													<th>Fecha_nacimiento</th>
+													<th>Parentesco</th>
+													<th>Nombre</th>
+													<th>Apellido_paterno</th>
+													<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor="let beneficiario of beneficiarioList | filterBeneficiario: busquedaBeneficiario | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableBeneficiario'}; let i = index" (click)="setClickedRowBeneficiario(i, beneficiario)" >
+													<td>{{beneficiario.apellido_materno}}</td>
+													<td>{{beneficiario.curp}}</td>
+													<td>{{beneficiario.fecha_nacimiento}}</td>
+													<td>{{beneficiario.parentescoId}}</td>
+													<td>{{beneficiario.nombre}}</td>
+													<td>{{beneficiario.apellido_paterno}}</td>
+													<td>
+														<button *ngIf="afiliadoupdate" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
+														<button *ngIf="afiliadodelete" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+													</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="row" align="right">
+										<div align="left" style="margin-top:15px; background: #DDDDDD; width: 35%; position: relative;">
+											<pagination-controls (pageChange)="page = $event" id="paginationTableBeneficiario" maxSize="5" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+											</pagination-controls>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							</div>
+						</div>
+				   </form>
+		  	</div>
+		</div>
+</div>

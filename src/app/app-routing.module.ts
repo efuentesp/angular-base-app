@@ -1,23 +1,40 @@
-import { NgModule }      from '@angular/core';
+import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard }                  		 from './guards/auth.guard';
-import { PageNotFoundComponent }           from './page-not-found.component';
-import { LoginComponent}              		 from './login/login.component';	
-import { HomeComponent }                   from './home/home.component';
 
-const routes: Routes = [	
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'login', component: LoginComponent },
-  { path: '**', component: PageNotFoundComponent 
-  }	
+import { ComposeMessageComponent }  from './compose-message.component';
+import { PageNotFoundComponent }    from './not-found.component';
+
+import { CanDeactivateGuard }       from './can-deactivate-guard.service';
+import { AuthGuard }                from './auth-guard.service';
+import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
+
+const appRoutes: Routes = [
+  {
+    path: 'admin',
+    loadChildren: 'app/admin/admin.module#AdminModule',
+    canLoad: [AuthGuard]
+  },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
 ];
+
 @NgModule({
-  imports: [ 
-          RouterModule.forRoot(routes) 
+  imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      {
+        enableTracing: true, // <-- debugging purposes only
+        preloadingStrategy: SelectivePreloadingStrategy,
+
+      }
+    )
   ],
-  exports: [ 
-          RouterModule 
+  exports: [
+    RouterModule
+  ],
+  providers: [
+    CanDeactivateGuard,
+    SelectivePreloadingStrategy
   ]
 })
-export class AppRoutingModule{ } 
+export class AppRoutingModule { }

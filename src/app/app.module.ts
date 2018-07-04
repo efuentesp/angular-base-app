@@ -1,40 +1,55 @@
-import { NgModule }           from '@angular/core';
-import { BrowserModule }      from '@angular/platform-browser';
-import { FormsModule }        from '@angular/forms';
+import { NgModule }       from '@angular/core';
+import { BrowserModule }  from '@angular/platform-browser';
+import { FormsModule }    from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { Router } from '@angular/router';
+
+import { AppComponent }            from './app.component';
+import { AppRoutingModule }        from './app-routing.module';
+
+import { ComposeMessageComponent } from './compose-message.component';
+import { PageNotFoundComponent }   from './not-found.component';
+
+import { DialogService }           from './dialog.service';
 import { HttpModule, Http }   from '@angular/http';  
 import { NgxPaginationModule} from 'ngx-pagination'; 
-
-import { AppComponent }  from './app.component';
-import { PageNotFoundComponent }  from './page-not-found.component';
-
-import { LoginComponent }      from './login/login.component';
-import { HomeModule }          from './home/home.module';
-import { AppRoutingModule }    from './app-routing.module';
-
-import { AuthGuard }             from './guards/auth.guard';
-import { AuthenticationService } from './user/authentication.component.service';
-import { UserService }           from './user/user.component.service';
+import {HttpClientModule} from '@angular/common/http';
+import { LoadingModule } from 'ngx-loading';
+import { LoginRoutingModule } from './login/login-routing.module';
+import { LoginComponent } from './login/login.component';
+import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
+import { AuthenticationService } from './authentication.component.service';
 
 @NgModule({
-  imports: [     
-		BrowserModule,
-		FormsModule,
-		HomeModule,
+  imports: [
+    BrowserModule,
+    FormsModule,
+    LoginRoutingModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
 		AppRoutingModule,
 		NgxPaginationModule,
-		HttpModule
+    HttpModule,
+    HttpClientModule,
+    LoadingModule
   ],
   declarations: [
-	  	LoginComponent,
-        AppComponent,
-		PageNotFoundComponent
+    AppComponent,
+    ComposeMessageComponent,
+    LoginComponent,
+    PageNotFoundComponent
   ],
   providers: [
-	AuthGuard,
-	AuthenticationService,
-	UserService,
-   ],
+    DialogService,
+    SelectivePreloadingStrategy, 
+    AuthenticationService
+  ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
-
+export class AppModule {
+  // Diagnostic only: inspect router configuration
+  constructor(router: Router) {
+    console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+}

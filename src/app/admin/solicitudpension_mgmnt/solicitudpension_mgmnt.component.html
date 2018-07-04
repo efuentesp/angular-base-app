@@ -1,0 +1,75 @@
+<div>
+	<div class="page-title" style="background: #F7F7F7;">
+		<div class="title_left">
+			<h3>Administrar Solicitud Pension</h3>
+		</div>
+	</div>
+
+	<div class="x_panel">
+		<div class="x_content">
+			<form #solicitudpensionMngForm="ngForm" class="editForm" novalidate>
+				<div class='row'>
+					<div class="col-lg-6">
+						<button class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
+					</div>
+					<div class="col-lg-6">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Criterios de busqueda..." name="busquedaSolicitudpension" [(ngModel)]="busquedaSolicitudpension">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"><em class="fa fa-search"></em></button>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<br/>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Resultados de la busqueda</h2>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+								<br/>
+								<table id="datatable" class="table table-striped">
+									<thead>
+										<tr>
+											<th>Numero</th>
+											<th>Afiliado</th>
+											<th>Tipopension</th>
+											<th>Observaciones</th>
+											<th>Fecha_solicitud</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let solicitudpension of solicitudpensionList | filterSolicitudpension: busquedaSolicitudpension | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableSolicitudPension'}; let i = index" (click)="setClickedRowSolicitudpension(i, solicitudpension)" >
+											<td>{{solicitudpension.numero}}</td>
+											<td>{{solicitudpension.afiliadoId}}</td>
+											<td>{{solicitudpension.tipopensionId}}</td>
+											<td>{{solicitudpension.observaciones}}</td>
+											<td>{{solicitudpension.fecha_solicitud}}</td>
+											<td>
+												<button class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
+												<button class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+
+								<div class="row" align="right">
+									<div align="left" style="margin-top:15px; background: #DDDDDD; width: 35%; position: relative;">
+										<pagination-controls (pageChange)="page = $event" id="paginationTableSolicitudPension" maxSize="5" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">	
+										</pagination-controls>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

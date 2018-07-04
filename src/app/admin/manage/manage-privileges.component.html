@@ -1,0 +1,81 @@
+
+
+    <div class="x_panel">
+        <div class="x_title">
+        <h2>Administrar</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+        </ul>
+
+        <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+            
+            <form #adminPermisoForm="ngForm" id="adminPermisoForm" data-parsley-validate> 
+                <table id="datatable" class="table table-striped">
+                        <thead>
+                                <tr>
+                                    <!-- <th>Id Grupo</th> -->
+                                    <th>Nombre Grupo</th>
+                                    <th>Id Privilege</th>
+                                    <th>Nombre Privilege</th>
+                                    <th>Admin</th>
+                                    <th>User</th>
+                                    <th>Anonymous</th>
+                                    <!-- <th>idAuthorityAdmin</th>
+                                    <th>idPrivilegeAdmin</th>
+                                    <th>idAuthorityUser</th>
+                                    <th>idPrivilegeUser</th>
+                                    <th>idAuthorityAnonymous</th>
+                                    <th>idPrivilegeAnonymous</th> -->
+
+                                    <!-- <th>activeUser</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr *ngFor="let adminPermiso of adminPermisoList; let k = index">
+                                            <!-- <td> {{adminPermiso.idGrupo}}</td> -->
+                                            <td>{{adminPermiso.nombreGrupo}}</td>
+                                            <td>{{adminPermiso.idPrivilege}}</td>
+                                            <td>{{adminPermiso.nombrePrivilege}}</td>
+                                            <td>
+                                            <div>
+                                            <input type="checkbox" disabled class="control control--checkbox" [checked] = "adminPermiso.admin" (change)= "saveData(adminPermiso, 1, $event, adminPermiso.admin)"  name="adminPermiso.admin" value="adminPermiso.admin" />       
+                                            </div> 
+                                            </td>
+                                            <td>
+                                            <div>
+                                            <input type="checkbox" class="control control--checkbox" [checked] = "adminPermiso.user"  (change)= "saveData(adminPermiso, 2, $event, adminPermiso.user)" name="adminPermiso.user" value="adminPermiso.user" />       
+                                            </div> 
+                                            </td>
+                                            <td>
+                                            <div>
+                                            <input type="checkbox" class="control control--checkbox" [checked] = "adminPermiso.anonymous"  (change)= "saveData(adminPermiso, 3, $event, adminPermiso.anonymous)" name="adminPermiso.anonymous" value="adminPermiso.anonymous" />       
+                                            </div> 
+                                            </td>
+                                                    
+                                            <!-- <td>{{adminPermiso.admin}}</td>
+                                            <td>{{adminPermiso.user}}</td>
+                                            <td>{{adminPermiso.anonymous}}</td> -->
+                                            <!-- <td>{{adminPermiso.idAuthorityAdmin}}</td>
+                                            <td>{{adminPermiso.idPrivilegeAdmin}}</td>
+                                            <td>{{adminPermiso.idAuthorityUser}}</td>
+                                            <td>{{adminPermiso.idPrivilegeUser}}</td>
+                                            <td>{{adminPermiso.idAuthorityAnonymous}}</td>
+                                            <td>{{adminPermiso.idPrivilegeAnonymous}}</td> -->
+                                            <!-- <td>{{adminPermiso.activeUser}}</td> -->
+                                </tr>
+                            </tbody>
+                    </table>
+            </form>
+            
+            
+
+        </div>
+    </div>	
+
+
+
+

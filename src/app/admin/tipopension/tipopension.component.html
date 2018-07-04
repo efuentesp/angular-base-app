@@ -1,0 +1,56 @@
+<div>
+		<div class="page-title" style="background: #F7F7F7;">
+			<div class="title_left">
+				<h3 *ngIf="flagDelete">Eliminar Tipo Pension</h3>
+				<h3 *ngIf="flag && !flagDelete">Actualizar Tipo Pension</h3>
+				<h3 *ngIf="!flag !flagDelete">Agregar Tipo Pension</h3>
+			</div>
+		</div>
+
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>Datos del tipo pension</h2>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="x_content">
+					<!-- <form #tipopensionForm="ngForm" class="editForm" novalidate> -->
+					<form #tipopensionForm="ngForm" id="tipopensionForm" class="form-horizontal form-label-left" data-parsley-validate>
+						<input class="form-control" #tipopensionId="ngModel" tipopensionId="tipopensionId" name="tipopensionId" type="hidden" placeholder="tipopensionId" [(ngModel)]="tipopension.tipopensionId">
+
+						<div class="form-group">
+							<label class="control-label" for="nombre">Nombre <span class="required">*</span></label>
+							<input *ngIf="flagDelete" class="form-control col-md-12" #nombre="ngModel" id="nombre" name="nombre" type="text" [(ngModel)]="tipopension.nombre" required readonly="true">
+							<input *ngIf="!flagDelete" class="form-control col-md-12" #nombre="ngModel" id="nombre" name="nombre" type="text" [(ngModel)]="tipopension.nombre" required>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="clave">Clave <span class="required">*</span></label>
+							<input *ngIf="flagDelete" class="form-control col-md-12" #clave="ngModel" id="clave" name="clave" type="text" [(ngModel)]="tipopension.clave" required readonly="true">
+							<input *ngIf="!flagDelete" class="form-control col-md-12" #clave="ngModel" id="clave" name="clave" type="text" [(ngModel)]="tipopension.clave" required>
+						</div>
+
+						<br />
+						<div class="ln_solid"></div>
+
+						<div class="col-sm-12">
+							<div class="input-group">
+								<div *ngIf="flagDelete">
+									<button class="btn btn-danger" (click)="delete(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+									<button class="btn btn-link" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+								</div>
+								<div *ngIf="flag && !flagDelete">
+									<button class="btn btn-primary" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+									<button class="btn btn-link" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+								</div>
+								<div *ngIf="!flag && !flagDelete">
+									<button class="btn btn-primary" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+									<button class="btn btn-link" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
