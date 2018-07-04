@@ -9,7 +9,8 @@ import { AuthorityService } from '../authority/authority.component.service';
 import { Authority } from '../authority/authority.component.model';
 
 @Component({
-  templateUrl: 'manage-privilege.component.html'
+  templateUrl: 'manage-privilege.component.html',
+  styleUrls: ['manage-privilege.component.css']
 })
 
 export class ManagePrivilegeComponent implements OnInit {
