@@ -18,13 +18,12 @@
                         <thead>
                                 <tr>
                                     <!-- <th>Id Grupo</th> -->
-                                    <th>Nombre Grupo</th>
-                                    <th>Id Privilege</th>
-                                    <th>Nombre Privilege</th>
-                                    <th>XXXXXXXXXXX</th>
-                                    <th>XXXXXXXXXXX</th>
-                                    <th>XXXXXXXXXXX</th>
-                                    <th>XXXXXXXXXXX</th>
+                                   
+                                   
+                                    <th colspan="2">NOMBRE</th>
+                                    <th *ngFor="let authority of authorityList; let a = index">
+                                        {{authority.name | uppercase}}
+                                    </th> 
                                     <!-- Columnas dinamicas -->
                                     <!-- <th>Admin</th>
                                     <th>User</th>
@@ -32,29 +31,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr *ngFor="let adminPermiso of adminPermisoList; let k = index">
-                                            <!-- <td> {{adminPermiso.idGrupo}}</td> -->
-                                            <div *ngIf="k==0">
-                                                    <td>{{adminPermiso.nombreGrupo}}</td>
-                                                    <td>{{adminPermiso.idPrivilege}}</td>
-                                                    <td>{{adminPermiso.nombrePrivilege}}</td>
-                                            </div>
-                                            <div *ngIf="k!=0">
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                            </div>
-                                            
-                                            <td *ngFor="let configAuthority of adminPermiso.lstConfigAuthority; let j = index" style="float: left;">
-                                                    
-
+                                    <div *ngFor="let adminPermiso of adminPermisoList; let k = index">
+                                            <!-- <tr *ngIf = "k==0">MANTENIMIENTO {{adminPermiso.nombreGrupo | uppercase}}</tr>
+                                            <tr *ngIf = "k==0">
+                                                <td colspan="2"></td>
+                                            </tr> -->
+                                            <tr> 
+                                            <td colspan="2"> {{adminPermiso.nombrePrivilege}}</td>
+                                           
+                                            <div *ngFor="let configAuthority of adminPermiso.lstConfigAuthority; let j = index" style="float: left;">
+                                                <!-- <div *ngIf = "j==0">    
+                                                <td> {{adminPermiso.nombreGrupo}}</td>
+                                                <td> {{adminPermiso.nombrePrivilege}}</td>
+                                                </div>  -->
+                                               
                                                 <!-- {{configAuthority.nameAuthority}} -->
-                                                <input type="checkbox" class="control control--checkbox" [checked] = "configAuthority.enabled"  (change)= "saveData(adminPermiso, configAuthority, $event)" name="[k][j]" value="adminPermiso.idAuthority" />       
+                                                <td><input type="checkbox" class="control control--checkbox" [checked] = "configAuthority.enabled"  (change)= "saveData(adminPermiso, configAuthority, $event)" name="[k][j]" value="adminPermiso.idAuthority" /></td>       
+
+                                                
                                                 <!-- <td>{{configAuthority.idAuthority}} {{j}}</td>
                                                 <td>{{configAuthority.nameAuthority}} {{j}}</td>
                                                 <td>{{configAuthority.idPrivilege}} {{j}}</td>
                                                 <td>{{configAuthority.enabled}} {{j}}</td> -->
-                                            </td>
+                                            </div>
                                             <!-- Columnas dinamicas -->
                                             <!-- <td>
                                             <div>
@@ -72,6 +71,8 @@
                                             </div> 
                                             </td> -->
                                 </tr>
+                                
+                                </div>
                             </tbody>
                     </table>
             </form>

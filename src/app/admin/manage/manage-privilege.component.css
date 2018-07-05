@@ -1,12 +1,13 @@
 table{
     table-layout: fixed;
-    border: 1;
+    width: 100%;
 }
 
 th, td {
-    border: 1px solid blue;
-    width: 120px;
+    /*border: 1px solid #73879C;*/
+    width: 180px;
     word-wrap: break-word;
     float: left;
-    height: 60px;
+    height: 35px;
+    text-align: center;
 }
