@@ -14,14 +14,14 @@
 
             
             <form #adminPermisoForm="ngForm" id="adminPermisoForm" data-parsley-validate> 
-                <table id="datatable" class="table table-striped" style="overflow: scroll;" >
+                <table id="datatable" class="table table-striped">
                         <thead>
                                 <tr>
                                     <!-- <th>Id Grupo</th> -->
                                    
                                    
-                                    <th colspan="2">NOMBRE</th>
-                                    <th *ngFor="let authority of authorityList; let a = index">
+                                    <th class="header-content">NOMBRE</th>
+                                    <th *ngFor="let authority of authorityList; let a = index" class="rotate">
                                         {{authority.name | uppercase}}
                                     </th> 
                                     <!-- Columnas dinamicas -->
@@ -31,13 +31,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <div *ngFor="let adminPermiso of adminPermisoList; let k = index">
+                                    <div *ngFor="let adminPermiso of adminPermisoList; let k = index" >
                                             <!-- <tr *ngIf = "k==0">MANTENIMIENTO {{adminPermiso.nombreGrupo | uppercase}}</tr>
                                             <tr *ngIf = "k==0">
                                                 <td colspan="2"></td>
                                             </tr> -->
                                             <tr> 
-                                            <td colspan="2"> {{adminPermiso.nombrePrivilege}}</td>
+                                            <td style="width:250px"> {{adminPermiso.nombrePrivilege}}</td>
                                            
                                             <div *ngFor="let configAuthority of adminPermiso.lstConfigAuthority; let j = index" style="float: left;">
                                                 <!-- <div *ngIf = "j==0">    
