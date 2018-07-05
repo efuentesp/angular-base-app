@@ -14,65 +14,27 @@
 
             
             <form #adminPermisoForm="ngForm" id="adminPermisoForm" data-parsley-validate> 
-                <table id="datatable" class="table table-striped">
+                <table id="datatable" class="table table-striped box_header">
                         <thead>
                                 <tr>
-                                    <!-- <th>Id Grupo</th> -->
-                                   
-                                   
+                                    <th class="header-content">GRUPO</th>
                                     <th class="header-content">NOMBRE</th>
                                     <th *ngFor="let authority of authorityList; let a = index" class="rotate">
                                         {{authority.name | uppercase}}
-                                    </th> 
-                                    <!-- Columnas dinamicas -->
-                                    <!-- <th>Admin</th>
-                                    <th>User</th>
-                                    <th>Anonymous</th> -->
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <div *ngFor="let adminPermiso of adminPermisoList; let k = index" >
-                                            <!-- <tr *ngIf = "k==0">MANTENIMIENTO {{adminPermiso.nombreGrupo | uppercase}}</tr>
-                                            <tr *ngIf = "k==0">
-                                                <td colspan="2"></td>
-                                            </tr> -->
                                             <tr> 
-                                            <td style="width:250px"> {{adminPermiso.nombrePrivilege}}</td>
+                                            <td style="width:250px"> {{adminPermiso.nombreGrupo | uppercase}}</td>
+                                            <td style="width:250px"> {{adminPermiso.nombrePrivilege | uppercase}}</td>
                                            
                                             <div *ngFor="let configAuthority of adminPermiso.lstConfigAuthority; let j = index" style="float: left;">
-                                                <!-- <div *ngIf = "j==0">    
-                                                <td> {{adminPermiso.nombreGrupo}}</td>
-                                                <td> {{adminPermiso.nombrePrivilege}}</td>
-                                                </div>  -->
-                                               
-                                                <!-- {{configAuthority.nameAuthority}} -->
                                                 <td><input type="checkbox" class="control control--checkbox" [checked] = "configAuthority.enabled"  (change)= "saveData(adminPermiso, configAuthority, $event)" name="[k][j]" value="adminPermiso.idAuthority" /></td>       
-
-                                                
-                                                <!-- <td>{{configAuthority.idAuthority}} {{j}}</td>
-                                                <td>{{configAuthority.nameAuthority}} {{j}}</td>
-                                                <td>{{configAuthority.idPrivilege}} {{j}}</td>
-                                                <td>{{configAuthority.enabled}} {{j}}</td> -->
                                             </div>
-                                            <!-- Columnas dinamicas -->
-                                            <!-- <td>
-                                            <div>
-                                            <input type="checkbox" disabled class="control control--checkbox" [checked] = "adminPermiso.admin" (change)= "saveData(adminPermiso, 1, $event, adminPermiso.admin)"  name="adminPermiso.admin" value="adminPermiso.admin" />       
-                                            </div> 
-                                            </td>
-                                            <td>
-                                            <div>
-                                            <input type="checkbox" class="control control--checkbox" [checked] = "adminPermiso.user"  (change)= "saveData(adminPermiso, 2, $event, adminPermiso.user)" name="adminPermiso.user" value="adminPermiso.user" />       
-                                            </div> 
-                                            </td>
-                                            <td>
-                                            <div>
-                                            <input type="checkbox" class="control control--checkbox" [checked] = "adminPermiso.anonymous"  (change)= "saveData(adminPermiso, 3, $event, adminPermiso.anonymous)" name="adminPermiso.anonymous" value="adminPermiso.anonymous" />       
-                                            </div> 
-                                            </td> -->
-                                </tr>
-                                
-                                </div>
+                                            </tr>
+                                    </div>
                             </tbody>
                     </table>
             </form>
