@@ -15,7 +15,7 @@ import { AfiliadoMngComponent } from './afiliado_mgmnt/afiliado_mgmnt.component'
 import { AfiliadoComponent } from './afiliado/afiliado.component';
 
 import { AuthGuard }                from '../auth-guard.service';
-import { ManagePrivilegeComponent } from './manage/manage-privileges.component';
+import { ManagePrivilegeComponent } from './manage/manage-privilege.component';
 import { UserComponent } from './user/user.component';
 import { UserMngComponent } from './user_mgmnt/user_mgmnt.component';
 import { AuthorityComponent } from './authority/authority.component';

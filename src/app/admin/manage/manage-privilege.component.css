@@ -1,0 +1,12 @@
+table{
+    table-layout: fixed;
+    border: 1;
+}
+
+th, td {
+    border: 1px solid blue;
+    width: 120px;
+    word-wrap: break-word;
+    float: left;
+    height: 60px;
+}

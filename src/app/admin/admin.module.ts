@@ -27,7 +27,7 @@ import { SearchBeneficiarioPipe } from './pipe/beneficiario.filter.pipe';
 import { SearchSolicitudpensionPipe } from './pipe/solicitudpension.filter.pipe';
 import { AfiliadoService } from './afiliado/afiliado.component.service';
 import {HttpClientModule} from '@angular/common/http';
-import { ManagePrivilegeComponent } from './manage/manage-privileges.component';
+import { ManagePrivilegeComponent } from './manage/manage-privilege.component';
 import { ManagePrivilegeService } from './manage/manage-privilege.component.service';
 import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.component.service';
