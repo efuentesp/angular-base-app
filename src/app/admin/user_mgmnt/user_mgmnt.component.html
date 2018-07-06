@@ -31,7 +31,7 @@
 								<h2>Resultados de la busqueda</h2>
 								<div class="clearfix"></div>
 							</div>
-							<div class="x_content">
+							<div class="x_content" style="width: 100%; overflow-x: scroll;">
 								<br />
 								<table id="datatable" class="table table-striped">
 									<thead>
@@ -60,7 +60,7 @@
 								</table>
 								<div class="row" align="right">
 									<div align="left" style="margin-top:15px; background: #DDDDDD; width: 35%; position: relative;">
-										<pagination-controls (pageChange)="page = $event" id="paginationTableUser" maxSize="10" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">	
+										<pagination-controls (pageChange)="page = $event" id="paginationTableUser" maxSize="10" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 										</pagination-controls>
 									</div>
 								</div>
