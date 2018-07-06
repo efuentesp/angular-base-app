@@ -50,7 +50,7 @@ export class AfiliadoService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        return this.http.delete(this.env.api + "/afiliado/"+afiliado.afiliadoId, afiliado).pipe(map(res => res));
+        return this.http.delete(this.env.api + "/afiliado/"+afiliado.afiliadoId, opts).pipe(map(res => res));
     }
 
     resetAfiliado(): Afiliado {

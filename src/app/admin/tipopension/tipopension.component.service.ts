@@ -50,7 +50,7 @@ export class TipopensionService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        return this.http.delete(this.env.api + "/tipopension/"+tipopension.tipopensionId, tipopension).pipe(map(res => res));
+        return this.http.delete(this.env.api + "/tipopension/"+tipopension.tipopensionId, opts).pipe(map(res => res));
     }
 
     geteTipopensionById(tipopensionId){

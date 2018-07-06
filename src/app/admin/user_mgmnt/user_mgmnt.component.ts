@@ -75,20 +75,20 @@ export class UserMngComponent implements OnInit {
     }
 
   add(){
-    this.userService.setEdit(false);
-    this.userService.setDelete(false);
-    this.userService.clear();
+    this.userServiceAux.setEdit(false);
+    this.userServiceAux.setDelete(false);
+    this.userServiceAux.clear();
     this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
 
   editar(){
-    this.userService.setEdit(true);
-    this.userService.setDelete(false);
+    this.userServiceAux.setEdit(true);
+    this.userServiceAux.setDelete(false);
   }
 
   eliminar(){
-    this.userService.setEdit(false);
-    this.userService.setDelete(true);
+    this.userServiceAux.setEdit(false);
+    this.userServiceAux.setDelete(true);
   }
 
   setClickedRowUser(index, user){

@@ -52,6 +52,8 @@ export class UserService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
+
+        console.log("Elimina usuario", user.idUser);
         return this.http.delete(this.env.api + "/users/"+user.idUser, opts).pipe(map(res => res));
     }
 

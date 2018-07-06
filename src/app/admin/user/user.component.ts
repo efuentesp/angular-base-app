@@ -65,6 +65,7 @@ export class UserComponent implements OnInit {
         
          this.flag = this.userServiceAux.getEdit();
          console.log("La flag es: ", this.flag);
+         
          if (this.flag){
 
            this.useraux = this.userServiceAux.getUser();
@@ -82,7 +83,7 @@ export class UserComponent implements OnInit {
          }
 
          this.loadAuthority();
-         this.flagDelete = this.userService.getDelete();
+         this.flagDelete = this.userServiceAux.getDelete();
          this.habilita();
 
     }
@@ -168,8 +169,6 @@ export class UserComponent implements OnInit {
   }
 
   habilita(){
-
-    
 
     this.userAdmin.authorities.forEach(element => {
 
