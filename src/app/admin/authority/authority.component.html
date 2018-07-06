@@ -9,22 +9,22 @@
 				</div>
 				<div class="x_content">
 
-					
+
 					<form #authorityForm="ngForm" id="authorityForm" data-parsley-validate>
-						
+
 						<input class="form-control" #idAuthority="ngModel" idrol="idAuthority" name="idAuthority" type="hidden" [(ngModel)]="authority.idAuthority">
 
-						<label for="rol">Authority * :</label>
+						<label for="rol">Authority <span class="required">*</span> :</label>
 						<input class="form-control" #name="ngModel" id="name" name="name" type="text" [(ngModel)]="authority.name" required>
-		
+
 						<br/>
 						<label>Estatus * :</label>
 						<p>
-						Activo:        <input type="radio"  value="true"     name="estatus" [(ngModel)]="authority.enabled" />		
-						Inactivo:      <input type="radio"  value="false"     name="estatus" [(ngModel)]="authority.enabled" />		
+						Activo:        <input type="radio"  value="true"     name="estatus" [(ngModel)]="authority.enabled" />
+						Inactivo:      <input type="radio"  value="false"     name="estatus" [(ngModel)]="authority.enabled" />
 						</p>
 
-						
+
 						<div class="ln_solid"></div>
 						<div class="col-sm-12">
 							<div class="input-group">
@@ -44,12 +44,8 @@
 						</div>
 
 					</form>
-					
-					
+
+
 
 				</div>
 			</div>
-
-
-
-

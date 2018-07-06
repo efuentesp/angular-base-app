@@ -63,3 +63,7 @@ nav a.active {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.required{
+  color: #FF0000;
+}

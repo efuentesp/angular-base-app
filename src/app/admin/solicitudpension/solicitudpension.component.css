@@ -1,3 +1,7 @@
 .required{
   color: #FF0000;
 }
+
+.horizontalScroll{
+  overflow-x: scroll;
+}
