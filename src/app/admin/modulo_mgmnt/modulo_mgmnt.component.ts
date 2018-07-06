@@ -53,7 +53,6 @@ export class ModuloMngComponent implements OnInit {
   }
 
   setClickedRowModulo(index, modulo){
-    console.log('Modulo:', modulo);
     this.moduloService.setModulo(modulo);
     this.moduloService.setEdit(true);
     this.router.navigate([ '../modulo' ], { relativeTo: this.route })

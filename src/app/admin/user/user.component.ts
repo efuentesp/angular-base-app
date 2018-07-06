@@ -8,8 +8,9 @@ import { User }                                         from '../user/user.compo
                               
 import { Location } from '@angular/common';
 import { Useraux } from './useraux.component.model';
-import { Authority } from '../../user/authorities.component.model';
 import { UserServiceAuxiliar } from './useraux.component.service';
+import { AuthorityService } from '../authority/authority.component.service';
+import { Authority } from '../authority/authority.component.model';
 
 @Component ({
     selector: 'app-view',
@@ -19,57 +20,80 @@ import { UserServiceAuxiliar } from './useraux.component.service';
 
 export class UserComponent implements OnInit {
 
-    title = 'Nuevo User';
-    userList: Useraux;
-    user: User;
-    form: any;
+    public title = 'Nuevo User';
+    public userList: Useraux;
+    public user: User;
+    public form: any;
     public flag: boolean = false;
     public flagDelete: boolean = false;
     public selectedValue: string = '';
     private authority = Authority;
-    useraux: Useraux;
+    public useraux: Useraux;
+    public userArray: User[];
+    public selectElem: string;
 
-    userArray: User[];
-    selectedIndex = 4;
-    timeVar = " hours";
-    checkboxValue:boolean;
-
-	//authorityList: Authority [] = [];
+	  public authorityList: Authority [];
 
 		public busquedaBeneficiario='';
-    filterInputBeneficiario = new FormControl();
+    public filterInputBeneficiario = new FormControl();
     public isChecked: boolean;
+    public passwordChange: boolean = false;
+
+    public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
+    
+    // Buttons 
+    private searchActive: boolean = false;
+    private updateActive: boolean = false;
+    private createActive: boolean = false;
+    private deleteActive: boolean = false;
 
     constructor(private router: Router,
-    private userService: UserService,
-    //private authorityService: AuthorityService,
-    private location: Location,
-    // private moduloService: ModuloService,
-    // private accionService: AccionService,
-    private route:ActivatedRoute,
-    private userServiceaux: UserServiceAuxiliar
+                private userService: UserService,
+                private authorityService: AuthorityService,
+                private location: Location,
+                private route:ActivatedRoute,
+                private userServiceAux: UserServiceAuxiliar
    
-) {
-
-	}
+    ) {	}
 
     ngOnInit() {
 
-        this.loadUsers();
-       
-         this.user = new User();
+         //this.loadUsers();
+         //this.user = new User();
          this.useraux = new Useraux();
-         this.flag = this.userService.getEdit();
+         //this.authority = new Authority();
+        
+         this.flag = this.userServiceAux.getEdit();
+         console.log("La flag es: ", this.flag);
          if (this.flag){
-           this.user = this.userService.getUser();
+
+           this.useraux = this.userServiceAux.getUser();
+           console.log("El usuario en init: ", this.useraux);
+           console.log("El usuario en init: ", this.useraux.authorities);
+
+           this.useraux.authorities.forEach(element => {
+            console.log("Role: ",element.idAuthority);
+            this.setRole(element.idAuthority);
+            this.selectElem = element.name;
+           });
+           
+           //this.selectedValue = this.useraux.
+           //this.loadNameAuthority(this.user);
          }
 
+         this.loadAuthority();
          this.flagDelete = this.userService.getDelete();
+         this.habilita();
+
     }
 
-    save(user){
+    save(){
        
-       this.userService.saveUser(this.user, this.selectedValue).subscribe(res => {
+      console.log("El usuario seleccionado: ", this.useraux);
+      console.log("El usuario de selecct: ", this.selectedValue);
+      console.log("El usuario de selecct: ", this.passwordChange);
+
+       this.userService.saveUser(this.useraux, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
            this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
@@ -79,7 +103,7 @@ export class UserComponent implements OnInit {
        } );
     }
 
-    delete(user){
+    delete(){
       swal({
         title: "Are you sure?",
         text: "You will not be able to recover this user!",
@@ -90,7 +114,7 @@ export class UserComponent implements OnInit {
         cancelButtonText: "No, cancel!"
       }).then((isConfirm) => {
         if (isConfirm.value) {
-          this.userService.deleteUser(this.user).subscribe(res => {
+          this.userService.deleteUser(this.useraux).subscribe(res => {
             if (res.status == 201 || res.status == 200){
               swal('Success...', 'User item has been deleted successfully.', 'success');
               this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
@@ -107,8 +131,6 @@ export class UserComponent implements OnInit {
     loadUsers(){
       this.userService.getAllUser().subscribe(data => {
         if (data) {
-
-          console.log('Usuarios: ', data);
           this.userList = data;
         }
       }, error => {
@@ -116,14 +138,27 @@ export class UserComponent implements OnInit {
       });
     }
 
-
-    setRole(item){
-      this.selectedValue = item;
-      console.log('Valor del item', item);
+    loadAuthority(){
+      this.authorityService.getAllAuthority().subscribe( data => {
+        if (data) {
+          this.authorityList = data;
+        }}, error => {
+          swal('Error...', 'An error occurred while calling the authorities.', 'error');
+        });
     }
 
+    setRole(item){
+      console.log ("El cambio es: ", item);
+      this.selectedValue = item;
+    }
+
+    setClange(){
+      this.passwordChange = true;
+    }
+
+
 	  setClickedRowAuthority(index, authority){
-      this.user.password = '';
+      //this.user.password = '';
       
 			    //this.user.rol = authority.rol;
     }
@@ -132,6 +167,27 @@ export class UserComponent implements OnInit {
       this.location.back();
   }
 
+  habilita(){
 
+    
+
+    this.userAdmin.authorities.forEach(element => {
+
+      console.log("Permisos: User", element.authority);
+
+      if (element.authority == 'ROLE_USERDELETE'){
+        this.deleteActive = true;
+      }
+      if (element.authority == 'ROLE_USERCREATE'){
+        this.createActive = true;
+      }
+      if (element.authority == 'ROLE_USERUPDATE'){
+        this.updateActive = true;
+      }
+      if (element.authority == 'ROLE_USERSEARCH'){
+        this.searchActive = true;
+      }
+    });
+  }
 
 }

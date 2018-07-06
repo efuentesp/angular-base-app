@@ -10,7 +10,7 @@
 				<form #beneficiarioMngForm="ngForm" class="editForm" novalidate>
 					<div class='row'>
 						<div class="col-lg-6">
-							<button *ngIf="afiliadocreate" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
+							<button *ngIf="createActive" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
 							<br/>
 						</div>
 						<div class="col-lg-6">
@@ -48,7 +48,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr *ngFor="let beneficiario of beneficiarioList | filterBeneficiario: busquedaBeneficiario | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableBeneficiario'}; let i = index" (click)="setClickedRowBeneficiario(i, beneficiario)" >
+											<tr *ngFor="let beneficiario of beneficiarioList | filterBeneficiario: busquedaBeneficiario | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableBeneficiario'}; let i = index" (click)="updateActive ? setClickedRowBeneficiario(i, beneficiario): false">
 													<td>{{beneficiario.apellido_materno}}</td>
 													<td>{{beneficiario.curp}}</td>
 													<td>{{beneficiario.fecha_nacimiento}}</td>
@@ -56,8 +56,8 @@
 													<td>{{beneficiario.nombre}}</td>
 													<td>{{beneficiario.apellido_paterno}}</td>
 													<td>
-														<button *ngIf="afiliadoupdate" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
-														<button *ngIf="afiliadodelete" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+														<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
+														<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
 													</td>
 											</tr>
 										</tbody>

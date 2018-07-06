@@ -10,7 +10,7 @@
 				<form #afiliadoMngForm="ngForm" class="editForm" novalidate>
 					<div class='row'>
 						<div class="col-lg-6">
-							<button *ngIf="afiliadocreate" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
+							<button *ngIf="createActive" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
 						</div>
 						<div class="col-lg-6">
 							<div class="input-group">
@@ -48,8 +48,10 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr *ngFor="let afiliado of afiliadoList | filterAfiliado: busquedaAfiliado | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableAfiliado'}; let i = index" (click)="setClickedRowAfiliado(i, afiliado)" >
-														<td>{{afiliado.beneficiarioId}}</td>
+												
+												<tr  *ngFor="let afiliado of afiliadoList | filterAfiliado: busquedaAfiliado | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableAfiliado'}; let i = index" (click)="updateActive ? setClickedRowAfiliado(i, afiliado): false" >
+												
+													<td>{{afiliado.beneficiarioId}}</td>
 														<td>{{afiliado.fecha_afiliacion}}</td>
 														<td>{{afiliado.foto}}</td>
 														<td>{{afiliado.correo}}</td>
@@ -59,8 +61,8 @@
 														<td>{{afiliado.apellido_paterno}}</td>
 														<td>{{afiliado.nombre}}</td>
 														<td>
-															<button *ngIf="afiliadoupdate" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
-															<button *ngIf="afiliadodelete" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+															<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
+															<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
 														</td>
 												</tr>
 											</tbody>

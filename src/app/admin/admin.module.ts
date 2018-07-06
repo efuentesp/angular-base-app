@@ -37,6 +37,7 @@ import { AuthorityComponent } from './authority/authority.component';
 import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.component';
 import { AuthorityService } from './authority/authority.component.service';
 import { UserServiceAuxiliar } from './user/useraux.component.service';
+import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { UserServiceAuxiliar } from './user/useraux.component.service';
     UserComponent,
     UserMngComponent,
     AuthorityComponent, 
-    AuthorityMngComponent  
+    AuthorityMngComponent,
+    SearchAuthorityPipe  
   ],
   providers: [ 
     AfiliadoService,

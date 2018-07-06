@@ -15,40 +15,52 @@
 	<div class="x_content">
 		<form #userForm="ngForm" id="userForm" data-parsley-validate>
 
+			<input class="form-control" #idUser="ngModel" idUser="idUser" name="idUser" type="hidden" [(ngModel)]="useraux.idUser">
 			<div  class="form-group">
-				<label class="control-label" for="username">Username <span class="required">*</span></label>
-				<input  class="form-control col-md-12" #username="ngModel" username="username" name="username" type="text"  [(ngModel)]="user.username" required >
+				<label class="control-label" for="userName">Username <span class="required">*</span></label>
+				<input  *ngIf="flagDelete" class="form-control col-md-12" #userName="ngModel" userName="userName" name="userName" type="text"  [(ngModel)]="useraux.userName" required readonly="true"> 
+				<input  *ngIf="!flagDelete" class="form-control col-md-12" #userName="ngModel" userName="userName" name="userName" type="text"  [(ngModel)]="useraux.userName"  > 
 			</div>
 			<div  class="form-group">
 				<label class="control-label" for="password">Password <span class="required">*</span></label>
-				<input  class="form-control col-md-12" #password="ngModel" password="password" name="password" type="text"  [(ngModel)]="user.password" required >
+				<input *ngIf="flagDelete" onchange="setClange()" class="form-control col-md-12" #password="ngModel" password="password" name="password" type="password"  [(ngModel)]="useraux.password" required readonly="true">
+				<input *ngIf="!flagDelete" class="form-control col-md-12" #password="ngModel" password="password" name="password" type="password"  [(ngModel)]="useraux.password" required >
 			</div>
 			<div  class="form-group">
 				<label class="control-label" for="firstname">Firstname <span class="required">*</span></label>
-				<input  class="form-control col-md-12" #firstname="ngModel" firstname="firstname" name="firstname" type="text"  [(ngModel)]="user.firstname" required >
-				
+				<input *ngIf="flagDelete" class="form-control col-md-12" #firstname="ngModel" firstname="firstname" name="firstname" type="text"  [(ngModel)]="useraux.firstname" required readonly="true">
+				<input *ngIf="!flagDelete" class="form-control col-md-12" #firstname="ngModel" firstname="firstname" name="firstname" type="text"  [(ngModel)]="useraux.firstname" required >
 			</div>
 
 			<div  class="form-group">
 				<label class="control-label" for="lastname">Lastname <span class="required">*</span></label>
-				<input  class="form-control col-md-12" #lastname="ngModel" lastname="lastname" name="lastname" type="text"  [(ngModel)]="user.lastname" required >
+				<input *ngIf="flagDelete" class="form-control col-md-12" #lastname="ngModel" lastname="lastname" name="lastname" type="text"  [(ngModel)]="useraux.lastname" required readonly="true">
+				<input *ngIf="!flagDelete" class="form-control col-md-12" #lastname="ngModel" lastname="lastname" name="lastname" type="text"  [(ngModel)]="useraux.lastname" required >
 				
 			</div>
 
 			<div class="form-group">
 				<label class="control-label" for="email">Email <span class="required">*</span></label>
-				<input  class="form-control col-md-12" #email="ngModel" email="email" name="email" type="text"  [(ngModel)]="user.email" required >
+				<input *ngIf="flagDelete" class="form-control col-md-12" #email="ngModel" email="email" name="email" type="text"  [(ngModel)]="useraux.email" required readonly="true">
+				<input *ngIf="!flagDelete" class="form-control col-md-12" #email="ngModel" email="email" name="email" type="text"  [(ngModel)]="useraux.email" required >
 				
 			</div>
 			<br/>
 			<div >
 				<label class="control-label" for="authority">Authority <span class="required">*</span></label>
-				<select #selectElem (change)="setRole(selectElem.value)" class="form-control col-md-12">
-					<option value="">Seleccionar</option>	
-					<option value="1">Administrador</option>	
-					<option value="2">User</option>
-					<option value="3">Anonimo</option>
-				</select>
+				<select *ngIf="flagDelete" name="selectElem" #selectElem (change)="setRole(selectElem.value)" class="form-control col-md-12" disabled>
+					<option [ngValue]="0">Selecciona...</option>
+					<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}">
+						{{ authority.name }}
+					</option>
+				</select> 
+				<select *ngIf="!flagDelete" name="selectElem" #selectElem (change)="setRole(selectElem.value)" class="form-control col-md-12" >
+					<option [ngValue]="0">Selecciona...</option>
+					<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}">
+						{{ authority.name }}
+					</option>
+				</select> 
+
 			</div>
 
 			<div class="ln_solid"></div>
@@ -56,15 +68,15 @@
 			<div class="col-sm-12">
 				<div class="input-group">
 					<div *ngIf="flagDelete">
-						<button class="btn btn-danger" (click)="delete(userForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+						<button class="btn btn-danger" (click)="delete()"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
 						<button class="btn btn-link" (click)="return(userForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 					</div>
 					<div *ngIf="flag && !flagDelete">
-						<button class="btn btn-primary" (click)="save(userForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+						<button class="btn btn-primary" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
 						<button class="btn btn-link" (click)="return(userForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 					</div>
 					<div *ngIf="!flag && !flagDelete">
-						<button class="btn btn-primary" (click)="save(userForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+						<button class="btn btn-primary" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 						<button class="btn btn-link" (click)="return(userForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 					</div>
 				</div>

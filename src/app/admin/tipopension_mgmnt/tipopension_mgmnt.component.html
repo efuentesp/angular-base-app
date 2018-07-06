@@ -11,7 +11,7 @@
 
 					<div class='row'>
 						<div class="col-lg-6">
-							<button *ngIf="afiliadocreate" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
+							<button *ngIf="createActive" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
 							<br />
 						</div>
 						<div class="col-lg-6">
@@ -43,12 +43,12 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr *ngFor="let tipopension of tipopensionList | filterTipopension: busquedaTipopension | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableTipoPension'}; let i = index" (click)="setClickedRowTipopension(i, tipopension)" >
+												<tr *ngFor="let tipopension of tipopensionList | filterTipopension: busquedaTipopension | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableTipoPension'}; let i = index" (click)="updateActive ? setClickedRowAfiliado(i, afiliado): false" (click)="updateActive ? setClickedRowTipopension(i, tipopension) : false" >
 														<td class="col-md-5">{{tipopension.nombre}}</td>
 														<td class="col-md-5">{{tipopension.clave}}</td>
 														<td class="col-md-2 text-center">
-															<button *ngIf="afiliadoupdate" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
-															<button *ngIf="afiliadodelete" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+															<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
+															<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
 														</td>
 												</tr>
 											</tbody>

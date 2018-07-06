@@ -3,8 +3,10 @@ import { ActivatedRoute, Router }                                          from 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
- import { AuthorityService }                                  from '../authority/authority.component.service';
+import { AuthorityService }                                  from '../authority/authority.component.service';
 import { Authority }                                         from '../authority/authority.component.model';
+import { SearchAuthorityPipe }                               from "../pipe/authority.filter.pipe";
+import { User } from '../user/user.component.model';
 
 //import { SearchAuthorityPipe }                               from "../pipe/authority.filter.pipe";
 @Component ({
@@ -14,37 +16,54 @@ import { Authority }                                         from '../authority/
 
 export class AuthorityMngComponent implements OnInit {
 
-    title = 'Authority';
-    authorityList: Authority;
-    authority: Authority;
-    form: any;
+    public title = 'Authority';
+    public authorityList: Authority;
+    public authority: Authority;
+    public form: any;
     public flag: boolean = false;
+    public busquedaAuthority='';
+    public user: User;
+    public valueName: string;
+    public token: string;
+    public filterInputAuthority = new FormControl();
 
-  	public busquedaAuthority='';
-    filterInputAuthority = new FormControl();
+    public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
+    
+    // Buttons 
+    private searchActive: boolean = false;
+    private updateActive: boolean = false;
+    private createActive: boolean = false;
+    private deleteActive: boolean = false;
 
       constructor(
-         private authorityService: AuthorityService, 
+                  private authorityService: AuthorityService, 
                   private route: ActivatedRoute,
                   private router: Router) {
-          this.filterInputAuthority.valueChanges.subscribe(busquedaAuthority => {
+
+            this.filterInputAuthority.valueChanges.subscribe(busquedaAuthority => {
             this.busquedaAuthority = busquedaAuthority;
           });
     }
 
     ngOnInit() {
-        this.loadAuthoritys();
-        // this.authorityService.setEdit(false);
-        this.authorityService.setEdit(false);
-        this.authorityService.setDelete(false);
 
+      // Get data user
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      this.valueName = this.user.username;
+      this.token = this.user.token;
 
+      // Manage buttons table
+      this.authorityService.setEdit(false);
+      this.authorityService.setDelete(false);
+
+      // Load data
+      this.loadAuthoritysCatalog();
+      this.habilita();
     }
 
-    loadAuthoritys() {
-       this.authorityService.getAllAuthority().subscribe(data => {
+    loadAuthoritysCatalog() {
+       this.authorityService.getAllAuthorityCatalog().subscribe(data => {
          if (data) {
-           console.log('data:', data);
            this.authorityList = data;
          }
        }, error => {
@@ -54,17 +73,11 @@ export class AuthorityMngComponent implements OnInit {
 	
   add(){
     this.authorityService.setEdit(false);
+    this.authorityService.setDelete(false);
     this.authorityService.clear();
     this.router.navigate([ '../authority' ], { relativeTo: this.route })  
   }
 
-  setClickedRowAuthority(index, authority){
-    console.log("Authority:", authority);
-     this.authorityService.setAuthority(authority);
-     this.authorityService.setEdit(true);
-    this.router.navigate([ '../authority' ], { relativeTo: this.route })
-  }
-  
   editar(){
     this.authorityService.setEdit(true);
     this.authorityService.setDelete(false);
@@ -73,6 +86,31 @@ export class AuthorityMngComponent implements OnInit {
   eliminar(){
     this.authorityService.setEdit(false);
     this.authorityService.setDelete(true);
+  }
+
+  // Select row
+  setClickedRowAuthority(index, authority){
+     this.authorityService.setAuthority(authority);
+     console.log("Radio:", authority);
+     this.authorityService.setEdit(true);
+    this.router.navigate([ '../authority' ], { relativeTo: this.route })
+  }
+
+  habilita(){
+    this.userAdmin.authorities.forEach(element => {
+      if (element.authority == 'ROLE_AUTHORITYDELETE'){
+        this.deleteActive = true;
+      }
+      if (element.authority == 'ROLE_AUTHORITYCREATE'){
+        this.createActive = true;
+      }
+      if (element.authority == 'ROLE_AUTHORITYUPDATE'){
+        this.updateActive = true;
+      }
+      if (element.authority == 'ROLE_AUTHORITYSEARCH'){
+        this.searchActive = true;
+      }
+    });
   }
 
 }
