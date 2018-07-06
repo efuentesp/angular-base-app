@@ -37,8 +37,6 @@ export class UserServiceAuxiliar {
 
         user.imagen = user.username + '.jpg';
 
-        console.log('User Service', user);
-
 		if (!user.idUser){
             return this.http.post(this.env.api + "/user", user, opts).pipe(map(res => res));
         }else{
@@ -72,7 +70,8 @@ export class UserServiceAuxiliar {
             token: this.user.token,
             firstname: this.user.firstname,
             lastname: this.user.lastname,
-            email: this.user.email
+            email: this.user.email,
+            authorities: this.user.authorities
         };
         return user;
     }
@@ -80,14 +79,15 @@ export class UserServiceAuxiliar {
     setUser(user: Useraux) {
 
     this.isUserFormValid = true;
-
+    console.log("Usuario auxiliar:", user);
     this.user.idUser = user.idUser;
     this.user.userName = user.userName;
     this.user.password = user.password;
-    this.user.token= this.user.token,
-    this.user.firstname= this.user.firstname,
-    this.user.lastname= this.user.lastname,
-    this.user.email = this.user.email
+    this.user.token= user.token;
+    this.user.firstname= user.firstname;
+    this.user.lastname= user.lastname;
+    this.user.email = user.email;
+    this.user.authorities = user.authorities;
     }
 
     isFormValid() {
@@ -102,6 +102,11 @@ export class UserServiceAuxiliar {
         this.user.idUser = null;
         this.user.userName = '';
         this.user.password = '';
+        this.user.token= '';
+        this.user.firstname= '';
+        this.user.lastname='';
+        this.user.email = '';
+        this.user.authorities = null;
     }
 
     setEdit(flag){

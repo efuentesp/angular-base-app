@@ -27,30 +27,32 @@ export class UserService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-      return this.http.get(this.env.api + "/userList",opts).pipe(map(res => res.json()));
+      return this.http.get(this.env.api + "/usersList",opts).pipe(map(res => res.json()));
     }
 
-    saveUser(user, privileges){
+    saveUser(user, privileges, flag){
+
+        console.log("El usuario seleccionado service: ", user);
+        console.log("El usuario de selecct service: ", privileges);
 
         let headers = new Headers;
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
 
-        //user.imagen = user.username + '.jpg';
-
-        console.log('User Service', user);
-
 		if (!user.idUser){
-            console.log("UserId:", this.user.idUser);
-            return this.http.post(this.env.api + "/user/"+ user.username + "/" + privileges, user , opts).pipe(map(res => res));
+            return this.http.post(this.env.api + "/users/"+ user.userName + "/" + privileges, user , opts).pipe(map(res => res));
         }else{
-            return this.http.put(this.env.api + "/user/"+this.user, this.useraux, opts).pipe(map(res => res));
+            return this.http.put(this.env.api + "/users/"+ user.idUser + "/"+ user.userName + "/" + privileges+"/" + flag, user , opts).pipe(map(res => res));
         }
     }
 
     deleteUser(user){
-        return this.http.delete(this.env.api + "/user/"+user.idUser, user).pipe(map(res => res));
+        let headers = new Headers;
+        headers.append('Content-Type','application/json');
+        headers.append('Authorization','Bearer ' + this.user.token+'');
+        let opts = new RequestOptions({ headers: headers });
+        return this.http.delete(this.env.api + "/users/"+user.idUser, opts).pipe(map(res => res));
     }
 
     getUserById(idUser){
@@ -58,7 +60,7 @@ export class UserService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        return this.http.get(this.env.api + "/user/"+idUser, opts).pipe(map(res => res));
+        return this.http.get(this.env.api + "/users/"+idUser, opts).pipe(map(res => res));
     }
 
     resetUser(): User {
@@ -83,8 +85,8 @@ export class UserService {
 
     setUser(user: User) {
 
-    this.isUserFormValid = true;
 
+    console.log ("Usearioservice:", user);
     this.user.idUser = user.idUser;
     this.user.username = user.username;
     this.user.password = user.password;
@@ -93,6 +95,7 @@ export class UserService {
     this.user.lastname= this.user.lastname,
     this.user.authorities =this.user.authorities,
     this.user.email = this.user.email
+
     }
 
     isFormValid() {

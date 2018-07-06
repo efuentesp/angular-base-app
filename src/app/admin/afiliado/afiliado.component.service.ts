@@ -22,7 +22,6 @@ export class AfiliadoService {
     
     public user: User = JSON.parse(localStorage.getItem('currentUser'));
     
-
     constructor(private http: Http) {}
 
     getAllAfiliado(){

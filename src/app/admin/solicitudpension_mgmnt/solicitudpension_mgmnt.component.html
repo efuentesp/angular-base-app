@@ -10,7 +10,7 @@
 			<form #solicitudpensionMngForm="ngForm" class="editForm" novalidate>
 				<div class='row'>
 					<div class="col-lg-6">
-						<button class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
+						<button *ngIf="createActive" class="btn btn-primary" (click)="add()"><span class="fa fa-plus"></span></button>
 					</div>
 					<div class="col-lg-6">
 						<div class="input-group">
@@ -45,15 +45,15 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr *ngFor="let solicitudpension of solicitudpensionList | filterSolicitudpension: busquedaSolicitudpension | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableSolicitudPension'}; let i = index" (click)="setClickedRowSolicitudpension(i, solicitudpension)" >
+										<tr *ngFor="let solicitudpension of solicitudpensionList | filterSolicitudpension: busquedaSolicitudpension | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableSolicitudPension'}; let i = index" (click)="updateActive ? setClickedRowSolicitudpension(i, solicitudpension): false" >
 											<td>{{solicitudpension.numero}}</td>
 											<td>{{solicitudpension.afiliadoId}}</td>
 											<td>{{solicitudpension.tipopensionId}}</td>
 											<td>{{solicitudpension.observaciones}}</td>
 											<td>{{solicitudpension.fecha_solicitud}}</td>
 											<td>
-												<button class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
-												<button class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+												<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
+												<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
 											</td>
 										</tr>
 									</tbody>

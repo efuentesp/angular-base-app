@@ -69,16 +69,14 @@ export class AdminComponent {
     this.buildMenu(this.userAdmin.authorities);
 
     });
-
   }
 
   enabledLinks(user){
   }
 
   buildMenu(authorities){
-
     authorities.forEach(element => {
-      console.log("Elementos home: ", element.authority);
+
       // Afiliado  --> (1)
       if (element.authority == 'ROLE_AFILIADOSEARCH'){
         this.afiliado_mgmnt = true;

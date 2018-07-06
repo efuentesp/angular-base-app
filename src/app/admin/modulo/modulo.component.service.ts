@@ -22,7 +22,6 @@ export class ModuloService {
     }
 
     saveModulo(modulo){
-        console.log('Modulo', modulo);
 		if (!modulo.idModulo){
             return this.http.post(this.env.api + "/modulo", modulo).pipe(map(res => res));
         }else{

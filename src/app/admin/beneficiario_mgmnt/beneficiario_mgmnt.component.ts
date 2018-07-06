@@ -23,10 +23,12 @@ export class BeneficiarioMngComponent implements OnInit {
     public flagDelete: boolean = false;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    private afiliadosearch: boolean = false;
-    private afiliadoupdate: boolean = false;
-    private afiliadocreate: boolean = false;
-    private afiliadodelete: boolean = false;
+    
+    // Buttons 
+    private searchActive: boolean = false;
+    private updateActive: boolean = false;
+    private createActive: boolean = false;
+    private deleteActive: boolean = false;
     
   	public busquedaBeneficiario='';
     filterInputBeneficiario = new FormControl();
@@ -82,16 +84,16 @@ export class BeneficiarioMngComponent implements OnInit {
 
     this.userAdmin.authorities.forEach(element => {
       if (element.authority == 'ROLE_BENEFICIARIODELETE'){
-        this.afiliadodelete = true;
+        this.deleteActive = true;
       }
       if (element.authority == 'ROLE_BENEFICIARIOCREATE'){
-        this.afiliadocreate = true;
+        this.createActive = true;
       }
       if (element.authority == 'ROLE_BENEFICIARIOUPDATE'){
-        this.afiliadoupdate = true;
+        this.updateActive = true;
       }
       if (element.authority == 'ROLE_BENEFICIARIOSEARCH'){
-        this.afiliadosearch = true;
+        this.searchActive = true;
       }
     });
 

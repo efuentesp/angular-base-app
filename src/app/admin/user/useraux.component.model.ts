@@ -1,3 +1,5 @@
+import { Authority } from "../authority/authority.component.model";
+
 export class Useraux {
 
 	idUser: number = null;   // <--- On Session
@@ -10,4 +12,5 @@ export class Useraux {
 	firstname: string = '';
 	email: string = '';
 	userName:  string = '';
+	authorities: Authority[];
 }

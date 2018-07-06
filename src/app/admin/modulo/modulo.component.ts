@@ -35,8 +35,6 @@ export class ModuloComponent implements OnInit {
     }
 
     save(modulo){  
-
-      console.log('Modulo:', this.modulo)
       this.moduloService.saveModulo(this.modulo).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Modulo save successfully.', 'success');

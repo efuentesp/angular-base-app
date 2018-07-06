@@ -12,6 +12,7 @@ export class Authority {
 	idAuthority: number = null;
 	enabled: boolean = false;
 	name: string = '';
-	//privilege: Privilege;
+	creationDate: string = '';
+	modifiedDate:string = '';
 
 }

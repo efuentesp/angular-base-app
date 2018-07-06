@@ -34,7 +34,6 @@ export class ManagePrivilegeService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        console.log("AdminPermiso:", adminPermiso);
         return this.http.put(this.env.api + "/adminPermiso", adminPermiso, opts).pipe(map(res => res));
     }
    

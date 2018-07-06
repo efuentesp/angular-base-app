@@ -19,24 +19,25 @@ import { User } from '../user/user.component.model';
 
 export class AfiliadoComponent implements OnInit {
 
-    title = 'Nuevo Afiliado';
-    afiliadoList: Afiliado;
-    afiliado: Afiliado;
-    beneficiario: Beneficiario;
+    public title = 'Nuevo Afiliado';
+    public afiliadoList: Afiliado;
+    public afiliado: Afiliado;
+    public beneficiario: Beneficiario;
     public flag: boolean;
     public flagDelete: boolean;
     public beneficiarioNombre: string = '';
-    form: any;
-
+    public form: any;
     public user: User;
     public valueName: string;
     public token: string;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    private afiliadosearch: boolean = false;
-    private afiliadoupdate: boolean = false;
-    private afiliadocreate: boolean = false;
-    private afiliadodelete: boolean = false;
+    
+    // Buttons 
+    private searchActive: boolean = false;
+    private updateActive: boolean = false;
+    private createActive: boolean = false;
+    private deleteActive: boolean = false;
 
 	  beneficiarioList: Beneficiario;
 
@@ -49,11 +50,11 @@ export class AfiliadoComponent implements OnInit {
         private afiliadoService: AfiliadoService,
         private beneficiarioService: BeneficiarioService,
         private location: Location
-) {
+    ) {
       this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
         this.busquedaBeneficiario = busquedaBeneficiario;
       });
-	}
+	  }
 
     ngOnInit() {
 
@@ -62,16 +63,7 @@ export class AfiliadoComponent implements OnInit {
         this.flag = this.afiliadoService.getEdit();
         if (this.flag){
           this.afiliado = this.afiliadoService.getAfiliado();
-          
-          this.beneficiarioService.getBeneficiarioById(this.afiliado.beneficiarioId).subscribe(data => {
-            if (data) {
-              this.beneficiario = data;
-              console.log('Beneficiario Init',this.beneficiario);
-              this.beneficiarioNombre   = this.beneficiario.nombre + " " + this.beneficiario.apellido_paterno;
-            }
-          }, error => {
-            swal('Error...', 'An error occurred while calling the afiliados.', 'error');
-          });
+          this.loadNameBeneficiario(this.afiliado);
         }
 		    this.loadBeneficiarios();
         this.flagDelete = this.afiliadoService.getDelete();
@@ -81,15 +73,15 @@ export class AfiliadoComponent implements OnInit {
     save(afiliado){
        this.afiliadoService.saveAfiliado(this.afiliado).subscribe(res => {
          if (res.status == 201 || res.status == 200){
-           swal('Success...', 'Afiliado save successfully.', 'success');
-       //this.router.navigate(['/afiliado_mgmnt']);
-       this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
+            swal('Success...', 'Afiliado save successfully.', 'success');
+            this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
+         }else if (res.status == 403){
+            swal('Error...', 'Usuario no tiene permiso para guardar Afiliado.', 'error');
          }else{
            swal('Error...', 'Afiliado save unsuccessfully.', 'error');
          }
        } );
     }
-
 
     delete(afiliado){
       swal({
@@ -106,6 +98,8 @@ export class AfiliadoComponent implements OnInit {
             if (res.status == 201 || res.status == 200){
               swal('Success...', 'Afiliado item has been deleted successfully.', 'success');
               this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
+            }else if (res.status == 403){
+              swal('Error...', 'Usuario no tiene permiso para guardar Afiliado.', 'error');
             }else{
               swal('Error...', 'Afiliado deleted unsuccessfully.', 'error');
             }
@@ -130,28 +124,37 @@ export class AfiliadoComponent implements OnInit {
       });
   }
 
+  loadNameBeneficiario(afiliado){
+    this.beneficiarioService.getBeneficiarioById(afiliado.beneficiarioId).subscribe(data => {
+      if (data) {
+        this.beneficiario = data;
+        this.beneficiarioNombre   = this.beneficiario.nombre + " " + this.beneficiario.apellido_paterno;
+      }
+    }, error => {
+      swal('Error...', 'An error occurred while calling the afiliados.', 'error');
+    });
+  }
+
   setClickedRowBeneficiario(index, beneficiario){
     this.afiliado.beneficiarioId                   = beneficiario.beneficiarioId;
     this.beneficiarioNombre                        = beneficiario.nombre + " " + beneficiario.apellido_paterno;
   }
 
   habilita(){
-
     this.userAdmin.authorities.forEach(element => {
       if (element.authority == 'ROLE_AFILIADODELETE'){
-        this.afiliadodelete = true;
+        this.deleteActive = true;
       }
       if (element.authority == 'ROLE_AFILIADOCREATE'){
-        this.afiliadocreate = true;
+        this.createActive = true;
       }
       if (element.authority == 'ROLE_AFILIADOUPDATE'){
-        this.afiliadoupdate = true;
+        this.updateActive = true;
       }
       if (element.authority == 'ROLE_AFILIADOSEARCH'){
-        this.afiliadosearch = true;
+        this.searchActive = true;
       }
     });
-
   }
 
 }

@@ -23,12 +23,14 @@ export class TipopensionMngComponent implements OnInit {
     form: any;
     public flag: boolean = false;
     public flagDelete: boolean = false;
-
+    
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    private afiliadosearch: boolean = false;
-    private afiliadoupdate: boolean = false;
-    private afiliadocreate: boolean = false;
-    private afiliadodelete: boolean = false;
+    
+    // Buttons 
+    private searchActive: boolean = false;
+    private updateActive: boolean = false;
+    private createActive: boolean = false;
+    private deleteActive: boolean = false;
 
   	public busquedaTipopension='';
 	  filterInputTipopension = new FormControl();
@@ -86,16 +88,16 @@ export class TipopensionMngComponent implements OnInit {
 
       this.userAdmin.authorities.forEach(element => {
         if (element.authority == 'ROLE_SOLICITUDPENSIONDELETE'){
-          this.afiliadodelete = true;
+          this.deleteActive = true;
         }
         if (element.authority == 'ROLE_SOLICITUDPENSIONCREATE'){
-          this.afiliadocreate = true;
+          this.createActive = true;
         }
         if (element.authority == 'ROLE_SOLICITUDPENSIONUPDATE'){
-          this.afiliadoupdate = true;
+          this.updateActive = true;
         }
         if (element.authority == 'ROLE_SOLICITUDPENSIONSEARCH'){
-          this.afiliadosearch = true;
+          this.searchActive = true;
         }
       });
     }
