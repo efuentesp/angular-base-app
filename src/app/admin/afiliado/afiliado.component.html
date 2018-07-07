@@ -14,126 +14,40 @@
 			</div>
 
 			<div class="x_content">
-				<!-- start form for validation -->
-				<form #afiliadoForm="ngForm" id="afiliadoForm" class="form-horizontal form-label-left" data-parsley-validate>
-					<input class="form-control" #afiliadoId="ngModel" afiliadoId="afiliadoId" name="afiliadoId" type="hidden" [(ngModel)]="afiliado.afiliadoId">
 
-					<div class="form-group">
-						<label class="control-label" for="fecha_afiliacion">Fecha_afiliacion <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #fecha_afiliacion="ngModel" id="fecha_afiliacion" name="fecha_afiliacion" type="text" [(ngModel)]="afiliado.fecha_afiliacion" required readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #fecha_afiliacion="ngModel" id="fecha_afiliacion" name="fecha_afiliacion" type="text" [(ngModel)]="afiliado.fecha_afiliacion" required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label" for="foto">Foto <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #foto="ngModel" id="foto" name="foto" type="text"  [(ngModel)]="afiliado.foto" required readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #foto="ngModel" id="foto" name="foto" type="text"  [(ngModel)]="afiliado.foto" required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label" for="correo">Correo <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #correo="ngModel" id="correo" name="correo" type="email" [(ngModel)]="afiliado.correo" required readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #correo="ngModel" id="correo" name="correo" type="email" [(ngModel)]="afiliado.correo" required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label" for="apellido_materno">Apellido_materno <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #apellido_materno="ngModel" id="apellido_materno" name="apellido_materno" type="text" [(ngModel)]="afiliado.apellido_materno" required readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #apellido_materno="ngModel" id="apellido_materno" name="apellido_materno" type="text" [(ngModel)]="afiliado.apellido_materno" required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label" for="acta_nacimiento">Acta_nacimiento <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #acta_nacimiento="ngModel" id="acta_nacimiento" name="acta_nacimiento" type="text" [(ngModel)]="afiliado.acta_nacimiento" required readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #acta_nacimiento="ngModel" id="acta_nacimiento" name="acta_nacimiento" type="text" [(ngModel)]="afiliado.acta_nacimiento" required>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"  for="monto_pension">Monto_pension <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #monto_pension="ngModel" required id="monto_pension" name="monto_pension" type="text" [(ngModel)]="afiliado.monto_pension" readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #monto_pension="ngModel" required id="monto_pension" name="monto_pension" type="text" [(ngModel)]="afiliado.monto_pension">
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"  for="apellido_paterno">Apellido_paterno <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #apellido_paterno="ngModel" required id="apellido_paterno" name="apellido_paterno" type="text" [(ngModel)]="afiliado.apellido_paterno" readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #apellido_paterno="ngModel" required id="apellido_paterno" name="apellido_paterno" type="text" [(ngModel)]="afiliado.apellido_paterno">
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"  for="observaciones">Observaciones <span class="required">*</span></label>
-						<textarea *ngIf="flagDelete" class="form-control col-md-12" #observaciones="ngModel" required="required"  data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10" id="observaciones" name="observaciones" type="text" [(ngModel)]="afiliado.observaciones" readonly="true"></textarea>
-						<textarea *ngIf="!flagDelete" class="form-control col-md-12" #observaciones="ngModel" required="required"  data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10" id="observaciones" name="observaciones" type="text" [(ngModel)]="afiliado.observaciones"></textarea>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"  for="nombre">Nombre <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #nombre="ngModel" required id="nombre" name="nombre" type="text" [(ngModel)]="afiliado.nombre" readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #nombre="ngModel" required id="nombre" name="nombre" type="text" [(ngModel)]="afiliado.nombre">
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"  for="semanas_cotizadas">Semanas_cotizadas <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #semanas_cotizadas="ngModel" required id="semanas_cotizadas" name="semanas_cotizadas" type="text" [(ngModel)]="afiliado.semanas_cotizadas" readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #semanas_cotizadas="ngModel" required id="semanas_cotizadas" name="semanas_cotizadas" type="text" [(ngModel)]="afiliado.semanas_cotizadas">
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"  for="nss">Nss <span class="required">*</span></label>
-						<input *ngIf="flagDelete" class="form-control col-md-12" #nss="ngModel" required id="nss" name="nss" type="text" [(ngModel)]="afiliado.nss" readonly="true">
-						<input *ngIf="!flagDelete" class="form-control col-md-12" #nss="ngModel" required id="nss" name="nss" type="text" [(ngModel)]="afiliado.nss">
-					</div>
-
-					<div class="form-group">
-						<label class="control-label" for="genero">Genero <span class="required">*</span></label>
-						<div layout="row" layout-align="center center" class="col-md-12" style="border: 0px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
-								<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
-									<input *ngIf="flagDelete" type="radio" value="female" name="genero" [(ngModel)]="afiliado.generoId" disabled="true" />
-									<input *ngIf="!flagDelete" type="radio" value="female" name="genero" [(ngModel)]="afiliado.generoId" />
-									 Female
+					<form [formGroup]="afiliadoForm">
+						<div class="row">
+				
+							<div class="col-md-12">
+								<div class="form-group">
+								<label class="control-label" for="fecha_afiliacion">Fecha_afiliacion <span class="required">*</span></label>
+									<input *ngIf="flagDelete"  class="form-control col-md-12" type="text" id="fecha_afiliacion" formControlName="fecha_afiliacion" readonly="true"/>
+									<input *ngIf="!flagDelete" class="form-control col-md-12" type="text" id="fecha_afiliacion" formControlName="fecha_afiliacion" required>
+									<control-messages class="control-messages"   [control]="afiliadoForm.controls.fecha_afiliacion"></control-messages>
 								</div>
-								<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
-									<input *ngIf="flagDelete" type="radio" value="male" name="genero" [(ngModel)]="afiliado.generoId" disabled="true" />
-									<input *ngIf="!flagDelete" type="radio" value="male" name="genero" [(ngModel)]="afiliado.generoId" />
-									 Male <br/>
+							</div><!-- /.col-md-12 -->
+
+							<div class="col-md-12">
+								<div class="form-group">
+								<label class="control-label" for="foto">Foto <span class="required">*</span></label>
+									<input *ngIf="flagDelete"  class="form-control col-md-12" id="foto" formControlName="foto" name="foto" type="text" readonly="true">
+									<input *ngIf="!flagDelete" class="form-control col-md-12" id="foto" formControlName="foto" name="foto" type="text" required>
+								<control-messages class="control-messages"   [control]="afiliadoForm.controls.foto"></control-messages>
 								</div>
-								<div layout="column" class="col-md-8" style="padding-left: 0px; padding-right: 0px; top: 5px;"></div>
-						</div>
-					</div>
+							</div><!-- /.col-md-12 -->
+						
+							<div class="col-md-12">
+								<div class="ln_solid"></div>
 
-					<div class="form-group">
-						<label  class="control-label" for="beneficiario">Beneficiario <span class="required">*</span></label>
-						<div class="input-group">
-							<input *ngIf="flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}} readonly="true">
-							<input *ngIf="!flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}}>
+								
+								<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+							</div><!-- /.col-md-12 -->
+					
+						</div><!-- /.row -->
+					</form> 
+					
 
-							<input type="hidden" class="form-control"  name="beneficiarioId"  [(ngModel)]="afiliado.beneficiarioId" #beneficiarioId="ngModel">
-							<span class="input-group-btn">
-								<button *ngIf="flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario" disabled="true"><em class="fa fa-search"></em></button>
-								<button *ngIf="!flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario"><em class="fa fa-search"></em></button>
-							</span>
-						</div>
-					</div>
 
-					<div class="ln_solid"></div>
-					<div class="col-sm-12">
-						<div class="input-group">
-							<div *ngIf="flagDelete">
-								<button class="btn btn-danger" (click)="delete(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
-								<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
-							</div>
-							<div *ngIf="flag && !flagDelete">
-								<button class="btn btn-primary" (click)="save(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
-								<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
-							</div>
-							<div *ngIf="!flag && !flagDelete">
-								<button class="btn btn-primary" (click)="save(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
-								<button class="btn btn-link" (click)="return(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
-							</div>
-						</div>
-					</div>
-				</form>
-				<!-- end form for validation -->
 			</div>
 		</div>
 
@@ -203,3 +117,137 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+<!-- <form [formGroup]="form" #afiliadoForm="ngForm" id="afiliadoForm" class="form-horizontal form-label-left" data-parsley-validate>
+		<input class="form-control" #afiliadoId="ngModel" afiliadoId="afiliadoId" name="afiliadoId" type="hidden" [(ngModel)]="afiliado.afiliadoId">
+
+		<div class="form-group">
+			<label class="control-label" for="fecha_afiliacion">Fecha_afiliacion <span class="required">*</span></label>
+			
+			
+			<input type="text" class="form-control" 
+		 id="fecha_afiliacion" formControlName="fecha_afiliacion"
+		 placeholder="Fecha_afiliado" 
+		 [(ngModel)]="afiliado.fecha_afiliacion"/>
+  <control-messages class="control-messages"   [control]="form.controls.countryname">
+  </control-messages>
+
+
+			<control-messages class="control-messages"   [control]="form.controls.fecha_afiliacion">
+			</control-messages>
+  
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label" for="foto">Foto <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #foto="ngModel" id="foto" name="foto" type="text"  [(ngModel)]="afiliado.foto" required readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #foto="ngModel" id="foto" name="foto" type="text"  [(ngModel)]="afiliado.foto" required>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="correo">Correo <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #correo="ngModel" id="correo" name="correo" type="email" [(ngModel)]="afiliado.correo" required readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #correo="ngModel" id="correo" name="correo" type="email" [(ngModel)]="afiliado.correo" required>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="apellido_materno">Apellido_materno <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #apellido_materno="ngModel" id="apellido_materno" name="apellido_materno" type="text" [(ngModel)]="afiliado.apellido_materno" required readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #apellido_materno="ngModel" id="apellido_materno" name="apellido_materno" type="text" [(ngModel)]="afiliado.apellido_materno" required>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="acta_nacimiento">Acta_nacimiento <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #acta_nacimiento="ngModel" id="acta_nacimiento" name="acta_nacimiento" type="text" [(ngModel)]="afiliado.acta_nacimiento" required readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #acta_nacimiento="ngModel" id="acta_nacimiento" name="acta_nacimiento" type="text" [(ngModel)]="afiliado.acta_nacimiento" required>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label"  for="monto_pension">Monto_pension <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #monto_pension="ngModel" required id="monto_pension" name="monto_pension" type="text" [(ngModel)]="afiliado.monto_pension" readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #monto_pension="ngModel" required id="monto_pension" name="monto_pension" type="text" [(ngModel)]="afiliado.monto_pension">
+		</div>
+
+		<div class="form-group">
+			<label class="control-label"  for="apellido_paterno">Apellido_paterno <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #apellido_paterno="ngModel" required id="apellido_paterno" name="apellido_paterno" type="text" [(ngModel)]="afiliado.apellido_paterno" readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #apellido_paterno="ngModel" required id="apellido_paterno" name="apellido_paterno" type="text" [(ngModel)]="afiliado.apellido_paterno">
+		</div>
+
+		<div class="form-group">
+			<label class="control-label"  for="observaciones">Observaciones <span class="required">*</span></label>
+			<textarea *ngIf="flagDelete" class="form-control col-md-12" #observaciones="ngModel" required="required"  data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10" id="observaciones" name="observaciones" type="text" [(ngModel)]="afiliado.observaciones" readonly="true"></textarea>
+			<textarea *ngIf="!flagDelete" class="form-control col-md-12" #observaciones="ngModel" required="required"  data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10" id="observaciones" name="observaciones" type="text" [(ngModel)]="afiliado.observaciones"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label"  for="nombre">Nombre <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #nombre="ngModel" required id="nombre" name="nombre" type="text" [(ngModel)]="afiliado.nombre" readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #nombre="ngModel" required id="nombre" name="nombre" type="text" [(ngModel)]="afiliado.nombre">
+		</div>
+
+		<div class="form-group">
+			<label class="control-label"  for="semanas_cotizadas">Semanas_cotizadas <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #semanas_cotizadas="ngModel" required id="semanas_cotizadas" name="semanas_cotizadas" type="text" [(ngModel)]="afiliado.semanas_cotizadas" readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #semanas_cotizadas="ngModel" required id="semanas_cotizadas" name="semanas_cotizadas" type="text" [(ngModel)]="afiliado.semanas_cotizadas">
+		</div>
+
+		<div class="form-group">
+			<label class="control-label"  for="nss">Nss <span class="required">*</span></label>
+			<input *ngIf="flagDelete" class="form-control col-md-12" #nss="ngModel" required id="nss" name="nss" type="text" [(ngModel)]="afiliado.nss" readonly="true">
+			<input *ngIf="!flagDelete" class="form-control col-md-12" #nss="ngModel" required id="nss" name="nss" type="text" [(ngModel)]="afiliado.nss">
+		</div>
+
+		<div class="form-group">
+			<label class="control-label" for="genero">Genero <span class="required">*</span></label>
+			<div layout="row" layout-align="center center" class="col-md-12" style="border: 0px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
+					<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
+						<input *ngIf="flagDelete" type="radio" value="female" name="genero" [(ngModel)]="afiliado.generoId" disabled="true" />
+						<input *ngIf="!flagDelete" type="radio" value="female" name="genero" [(ngModel)]="afiliado.generoId" required #generoControl=/>
+						 Female
+					</div>
+					<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
+						<input *ngIf="flagDelete" type="radio" value="male" name="genero" [(ngModel)]="afiliado.generoId" disabled="true"  />
+						<input *ngIf="!flagDelete" type="radio" value="male" name="genero" [(ngModel)]="afiliado.generoId" />
+						 Male <br/>
+					</div>
+					<div layout="column" class="col-md-8" style="padding-left: 0px; padding-right: 0px; top: 5px;"></div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label  class="control-label" for="beneficiario">Beneficiario <span class="required">*</span></label>
+			<div class="input-group">
+				<input *ngIf="flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}} readonly="true">
+				<input *ngIf="!flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}}>
+
+				<input type="hidden" class="form-control"  name="beneficiarioId"  [(ngModel)]="afiliado.beneficiarioId" #beneficiarioId="ngModel">
+				<span class="input-group-btn">
+					<button *ngIf="flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario" disabled="true"><em class="fa fa-search"></em></button>
+					<button *ngIf="!flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario"><em class="fa fa-search"></em></button>
+				</span>
+			</div>
+		</div>
+
+		<div class="ln_solid"></div>
+		<div class="col-sm-12">
+			<div class="input-group">
+				<div *ngIf="flagDelete">
+					<button class="btn btn-danger" (click)="delete()"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+					<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+				</div>
+				<div *ngIf="flag && !flagDelete">
+					<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save()"> <span style="margin-right:10px;"  class="fa fa-save"></span> Modificar</button>
+					<!-- <button class="btn btn-primary" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button> -->
+					<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+				</div>
+				<div *ngIf="!flag && !flagDelete">
+					<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+					<button class="btn btn-link" (click)="return(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+				</div>
+			</div>
+		</div>
+	</form> -->

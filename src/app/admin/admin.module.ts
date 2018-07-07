@@ -38,6 +38,8 @@ import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.compone
 import { AuthorityService } from './authority/authority.component.service';
 import { UserServiceAuxiliar } from './user/useraux.component.service';
 import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
+import { ValidationService } from './validators/validation.component.service';
+import { ControlMessagesComponent } from './validators/control-messages.component';
 
 @NgModule({
   imports: [
@@ -72,7 +74,8 @@ import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
     UserMngComponent,
     AuthorityComponent, 
     AuthorityMngComponent,
-    SearchAuthorityPipe  
+    SearchAuthorityPipe  ,
+    ControlMessagesComponent
   ],
   providers: [ 
     AfiliadoService,
@@ -82,7 +85,8 @@ import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
     ManagePrivilegeService,
     UserService,
     AuthorityService ,
-    UserServiceAuxiliar
+    UserServiceAuxiliar,
+    ValidationService
 ]
 })
 export class AdminModule {}

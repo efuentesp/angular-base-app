@@ -33,9 +33,9 @@ button:hover {
   background-color: #cfd8dc;
 }
 button:disabled {
-  background-color: #eee;
+  /*background-color: #eee;
   color: #aaa;
-  cursor: auto;
+  cursor: auto;*/
 }
 
 /* Navigation link styles */

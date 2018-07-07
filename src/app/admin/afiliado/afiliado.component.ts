@@ -26,7 +26,7 @@ export class AfiliadoComponent implements OnInit {
     public flag: boolean;
     public flagDelete: boolean;
     public beneficiarioNombre: string = '';
-    public form: any;
+    public afiliadoForm: any;
     public user: User;
     public valueName: string;
     public token: string;
@@ -49,8 +49,21 @@ export class AfiliadoComponent implements OnInit {
         private route: ActivatedRoute,
         private afiliadoService: AfiliadoService,
         private beneficiarioService: BeneficiarioService,
-        private location: Location
+        private location: Location,
+        private formBuilder: FormBuilder
     ) {
+
+    let fecha_afiliacion = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]);
+    let foto = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+    
+
+    this.afiliadoForm = this.formBuilder.group({  
+      fecha_afiliacion: fecha_afiliacion,
+      foto: foto
+    });
+
+
+  
       this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
         this.busquedaBeneficiario = busquedaBeneficiario;
       });
@@ -58,6 +71,7 @@ export class AfiliadoComponent implements OnInit {
 
     ngOnInit() {
 
+  
         this.afiliado = new Afiliado;
         this.beneficiario = new Beneficiario;
         this.flag = this.afiliadoService.getEdit();
