@@ -70,7 +70,7 @@ export class AfiliadoComponent implements OnInit {
         this.habilita();
     }
 
-    save(afiliado){
+    save(){
        this.afiliadoService.saveAfiliado(this.afiliado).subscribe(res => {
          if (res.status == 201 || res.status == 200){
             swal('Success...', 'Afiliado save successfully.', 'success');
@@ -83,7 +83,7 @@ export class AfiliadoComponent implements OnInit {
        } );
     }
 
-    delete(afiliado){
+    delete(){
       swal({
         title: "Are you sure?",
         text: "You will not be able to recover this afiliado!",

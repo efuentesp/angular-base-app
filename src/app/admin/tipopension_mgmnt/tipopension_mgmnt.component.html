@@ -32,7 +32,7 @@
 									<div class="clearfix"></div>
 								</div>
 
-								<div class="x_content" style="width: 100%; overflow-x: scroll;">
+								<div class="x_content table-responsive">
 									<br/>
 									<table id="datatable" class="table table-striped">
 											<thead>
@@ -43,7 +43,7 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr *ngFor="let tipopension of tipopensionList | filterTipopension: busquedaTipopension | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableTipoPension'}; let i = index" (click)="updateActive ? setClickedRowAfiliado(i, afiliado): false" (click)="updateActive ? setClickedRowTipopension(i, tipopension) : false" >
+												<tr *ngFor="let tipopension of tipopensionList | filterTipopension: busquedaTipopension | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableTipoPension'}; let i = index" (click)="updateActive ? setClickedRowTipopension(i, tipopension) : false" >
 														<td class="col-md-5">{{tipopension.nombre}}</td>
 														<td class="col-md-5">{{tipopension.clave}}</td>
 														<td class="col-md-2 text-center">

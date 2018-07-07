@@ -45,6 +45,7 @@ export class BeneficiarioMngComponent implements OnInit {
         this.loadBeneficiarios();
         this.beneficiarioService.setEdit(false);
         this.beneficiarioService.setDelete(false);
+        this.habilita();
     }
 
     loadBeneficiarios() {
