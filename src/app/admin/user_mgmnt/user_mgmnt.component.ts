@@ -7,6 +7,7 @@ import { UserService }                                  from '../user/user.compo
 
 import { User }                                         from '../user/user.component.model';
 import { SearchUserPipe }                               from "../pipe/user.filter.pipe";
+
 import { AuthorityService } from '../authority/authority.component.service';
 import { Authority } from '../authority/authority.component.model';
 
@@ -47,6 +48,9 @@ export class UserMngComponent implements OnInit {
               ) {
           
            this.filterInputUser.valueChanges.subscribe(busquedaUser => {
+
+            console.log('Busqueda: ', busquedaUser);
+
 	         this.busquedaUser = busquedaUser;
 	       });
 	  }

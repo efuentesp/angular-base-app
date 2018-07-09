@@ -59,7 +59,6 @@ import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
 		SearchAfiliadoPipe,
 		SearchBeneficiarioPipe,
     SearchSolicitudpensionPipe,
-    SearchUserPipe,
     BeneficiarioComponent,
 		BeneficiarioMngComponent,
 		TipopensionComponent,
@@ -71,7 +70,8 @@ import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
     UserMngComponent,
     AuthorityComponent, 
     AuthorityMngComponent,
-    SearchAuthorityPipe  
+    SearchAuthorityPipe,
+    SearchUserPipe
   ],
   providers: [ 
     AfiliadoService,
