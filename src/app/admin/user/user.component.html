@@ -52,13 +52,13 @@
 					<label class="control-label" for="enabled">Estatus <span class="required">*</span></label>
 					<div layout="row" layout-align="center center" class="col-md-12" style="border: 0px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
 							<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
-								<input *ngIf="flagDelete" type="radio" value="true" name="enabled" [(ngModel)]="user.enabled" disabled="true" />
-								<input *ngIf="!flagDelete" type="radio" value="true" name="enabled" [(ngModel)]="user.enabled" />
+								<input *ngIf="flagDelete" type="radio"  value="true" [checked]="isChecked" name="enabled"   disabled="true" />
+								<input *ngIf="!flagDelete" type="radio" value="true" [checked]="isChecked"  name="enabled" (click)="user.enabled='true'" />
 									Activo
 							</div>
 							<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
-								<input *ngIf="flagDelete" type="radio" value="false" name="enabled" [(ngModel)]="user.enabled" disabled="true" />
-								<input *ngIf="!flagDelete" type="radio" value="false" name="enabled" [(ngModel)]="user.enabled" />
+								<input *ngIf="flagDelete" type="radio" value="false" [checked]="!isChecked"  name="enabled"  disabled="true" />
+								<input *ngIf="!flagDelete" type="radio" value="false" [checked]="!isChecked"  name="enabled" (click)="user.enabled='false'" />
 									Inactivo
 							</div>
 					</div>
@@ -74,9 +74,9 @@
 							{{ authority.name }}
 						</option>
 					</select> 
-					<select *ngIf="!flagDelete" name="selectElem" #selectElem (change)="setRole(selectElem.value)" class="form-control col-md-12" >
+					<select *ngIf="!flagDelete" name="selectElem" #selectElem (change)="setRole(selectElem.value)"  class="form-control col-md-12" >
 						<option [ngValue]="0">Selecciona...</option>
-						<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}">
+						<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}" [selected]="selectedVal === authority.idAuthority ">
 							{{ authority.name }}
 						</option>
 					</select> 
@@ -92,11 +92,11 @@
 							<button class="btn btn-link" (click)="return(userForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 						</div>
 						<div *ngIf="flag && !flagDelete">
-							<button class="btn btn-primary" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+							<button class="btn btn-primary" [disabled]="!userForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
 							<button class="btn btn-link" (click)="return(userForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 						</div>
 						<div *ngIf="!flag && !flagDelete">
-							<button class="btn btn-primary" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+							<button class="btn btn-primary" [disabled]="!userForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 							<button class="btn btn-link" (click)="return(userForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 						</div>
 					</div>

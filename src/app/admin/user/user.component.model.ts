@@ -1,4 +1,5 @@
-import { Authority } from "../../user/authorities.component.model";
+import { Authority } from "../authority/authority.component.model";
+
 
 
 

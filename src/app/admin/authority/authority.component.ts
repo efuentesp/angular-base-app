@@ -20,6 +20,7 @@ export class AuthorityComponent implements OnInit {
     public flag: boolean = false;
     public form: any;
     public flagDelete: boolean;
+    public isChecked: boolean;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
     
@@ -41,9 +42,12 @@ export class AuthorityComponent implements OnInit {
     ngOnInit() {
         this.authority = new Authority;
 
+        
+
         this.flag = this.authorityService.getEdit();
         if (this.flag){
           this.authority = this.authorityService.getAuthority();
+          this.isChecked = this.authority.enabled;
         }
 
         

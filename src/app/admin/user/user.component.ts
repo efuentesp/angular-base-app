@@ -24,10 +24,11 @@ export class UserComponent implements OnInit {
     public form: any;
     public flag: boolean = false;
     public flagDelete: boolean = false;
-    public selectedValue: string = '';
+    public selectedValue: number = null;
     private authority = Authority;
     public userArray: User[];
     public selectElem: string;
+    public selectedVal: number;
 
 	  public authorityList: Authority [];
 
@@ -35,6 +36,7 @@ export class UserComponent implements OnInit {
     public filterInputBeneficiario = new FormControl();
     public isChecked: boolean;
     public passwordChange: boolean = false;
+    public changeCombo: boolean = false;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
     
@@ -50,7 +52,6 @@ export class UserComponent implements OnInit {
                 private location: Location,
                 private route:ActivatedRoute
                
-   
     ) {	}
 
     ngOnInit() {
@@ -61,25 +62,30 @@ export class UserComponent implements OnInit {
          
          if (this.flag){
 
-          this.user = this.userService.getUser();
-          console.log("Usuario seleccionado: ", this.user);
-          //  this.useraux.authorities.forEach(element => {
-          //   console.log("Role: ",element.idAuthority);
-          //   this.setRole(element.idAuthority);
-          //   this.selectElem = element.name;
-          //  });
-           
-           //this.selectedValue = this.useraux.
-           //this.loadNameAuthority(this.user);
+          this.user = this.userService.getUser();  
+          this.isChecked = this.user.enabled;
+          
+          console.log("User:", this.user);
+          this.user.authorities.forEach(element => {
+            console.log('Authority: ', element.idAuthority);
+            this.selectedVal = element.idAuthority;
+          });
+     
          }
 
          this.loadAuthority();
          this.flagDelete = this.userService.getDelete();
-         this.habilita();
+         //this.habilita();
 
     }
 
     save(){
+
+      if (!this.changeCombo){
+        console.log("this.selectedVal", this.selectedVal);
+        console.log("selectedValue", this.selectedValue);
+        this.selectedValue = this.selectedVal; 
+      }
 
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
@@ -138,6 +144,7 @@ export class UserComponent implements OnInit {
     setRole(item){
       console.log ("El cambio es: ", item);
       this.selectedValue = item;
+      this.changeCombo = true;
     }
 
     setClange(){
@@ -155,25 +162,25 @@ export class UserComponent implements OnInit {
       this.location.back();
   }
 
-  habilita(){
+  // habilita(){
 
-    this.userAdmin.authorities.forEach(element => {
+  //   this.userAdmin.authorities.forEach(element => {
 
-      console.log("Permisos: User", element.authority);
+  //     console.log("Permisos: User", element.authority);
 
-      if (element.authority == 'ROLE_USERDELETE'){
-        this.deleteActive = true;
-      }
-      if (element.authority == 'ROLE_USERCREATE'){
-        this.createActive = true;
-      }
-      if (element.authority == 'ROLE_USERUPDATE'){
-        this.updateActive = true;
-      }
-      if (element.authority == 'ROLE_USERSEARCH'){
-        this.searchActive = true;
-      }
-    });
-  }
+  //     if (element.authority == 'ROLE_USERDELETE'){
+  //       this.deleteActive = true;
+  //     }
+  //     if (element.authority == 'ROLE_USERCREATE'){
+  //       this.createActive = true;
+  //     }
+  //     if (element.authority == 'ROLE_USERUPDATE'){
+  //       this.updateActive = true;
+  //     }
+  //     if (element.authority == 'ROLE_USERSEARCH'){
+  //       this.searchActive = true;
+  //     }
+  //   });
+  // }
 
 }
