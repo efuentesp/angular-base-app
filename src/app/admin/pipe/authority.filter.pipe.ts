@@ -9,7 +9,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 export class SearchAuthorityPipe implements PipeTransform {
       transform(items: any[], busquedaAuthority): any {
         return busquedaAuthority && items ? items.filter(item =>
-		(item.name.indexOf(busquedaAuthority) !== -1) 
+		(item.name.toLowerCase().indexOf(busquedaAuthority.toLowerCase()) !== -1) 
         ): items;
     }
 }

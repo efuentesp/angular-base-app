@@ -12,7 +12,7 @@ export class SearchSolicitudpensionPipe implements PipeTransform {
 	(item.numero.indexOf(busquedaSolicitudpension) !== -1) 
 ||	((item.afiliadoId+"").toString().indexOf(busquedaSolicitudpension) !== -1)
 ||	((item.tipopensionId+"").toString().indexOf(busquedaSolicitudpension) !== -1)
-||	(item.observaciones.indexOf(busquedaSolicitudpension) !== -1) 
+||	(item.observaciones.toLowerCase().indexOf(busquedaSolicitudpension.toLowerCase()) !== -1) 
 ||	((item.solicitudpensionId+"").indexOf(busquedaSolicitudpension) !== -1) 
 ||	(item.fecha_solicitud.indexOf(busquedaSolicitudpension) !== -1) 
         ): items;

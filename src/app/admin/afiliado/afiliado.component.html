@@ -123,11 +123,11 @@
 								<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 							</div>
 							<div *ngIf="flag && !flagDelete">
-								<button class="btn btn-primary" (click)="save(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+								<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
 								<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 							</div>
 							<div *ngIf="!flag && !flagDelete">
-								<button class="btn btn-primary" (click)="save(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+								<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 								<button class="btn btn-link" (click)="return(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
 							</div>
 						</div>
