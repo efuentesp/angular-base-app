@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 
 import { UserService }                                  from '../user/user.component.service';
 import { User }                                         from '../user/user.component.model';
-                              
+
 import { Location } from '@angular/common';
 import { AuthorityService } from '../authority/authority.component.service';
 import { Authority } from '../authority/authority.component.model';
@@ -39,8 +39,8 @@ export class UserComponent implements OnInit {
     public changeCombo: boolean = false;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    
-    // Buttons 
+
+    // Buttons
     private searchActive: boolean = false;
     private updateActive: boolean = false;
     private createActive: boolean = false;
@@ -51,7 +51,7 @@ export class UserComponent implements OnInit {
                 private authorityService: AuthorityService,
                 private location: Location,
                 private route:ActivatedRoute
-               
+
     ) {	}
 
     ngOnInit() {
@@ -59,18 +59,18 @@ export class UserComponent implements OnInit {
          this.user = new User();
          this.flag = this.userService.getEdit();
          console.log("La flag es: ", this.flag);
-         
+
          if (this.flag){
 
-          this.user = this.userService.getUser();  
+          this.user = this.userService.getUser();
           this.isChecked = this.user.enabled;
-          
+
           console.log("User:", this.user);
           this.user.authorities.forEach(element => {
             //console.log('Authority: ', element.idAuthority);
             //this.selectedVal = element.idAuthority;
           });
-     
+
          }
 
          this.loadAuthority();
@@ -84,9 +84,10 @@ export class UserComponent implements OnInit {
       if (!this.changeCombo){
         console.log("this.selectedVal", this.selectedVal);
         console.log("selectedValue", this.selectedValue);
-        this.selectedValue = this.selectedVal; 
+        this.selectedValue = this.selectedVal;
       }
 
+        console.log('this.passwordChange: ' + this.passwordChange);
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
@@ -147,14 +148,19 @@ export class UserComponent implements OnInit {
       this.changeCombo = true;
     }
 
-    setClange(){
+    setChange(){
+      console.log("Antes de modififcar: " + this.passwordChange)
       this.passwordChange = true;
+      console.log("Despues de modififcar: " + this.passwordChange)
     }
 
+    myFunction(){
+      console.log("Mensaje mensaje...");
+    }
 
 	  setClickedRowAuthority(index, authority){
       //this.user.password = '';
-      
+
 			    //this.user.rol = authority.rol;
     }
 

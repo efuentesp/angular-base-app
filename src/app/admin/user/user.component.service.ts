@@ -30,7 +30,6 @@ export class UserService {
     }
 
     saveUser(user, privileges, flag){
-
         let headers = new Headers;
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.userAdmin.token+'');
