@@ -1,10 +1,11 @@
-import { Authority } from "../../user/authorities.component.model";
+import { Authority } from "../authority/authority.component.model";
 
 
 
 
 
-export class User {
+
+export class UserAux {
 
 	idUser: number = null;   // <--- On Session
 	username:  string = '';
