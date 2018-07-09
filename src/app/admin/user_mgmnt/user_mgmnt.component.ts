@@ -90,7 +90,6 @@ export class UserMngComponent implements OnInit {
 
   setClickedRowUser(index, user){
 
-    console.log("UserMng:", user);
     let userName = user.userName;
 
     let userAux = new User();

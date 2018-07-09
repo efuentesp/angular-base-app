@@ -19,19 +19,19 @@
 
 				<div class="form-group">
 					<label class="control-label" for="numero">Numero: <span class="required">*</span></label>
-					<input *ngIf="flagDelete" class="form-control col-md-12" #numero="ngModel" [(ngModel)]="solicitudpension.numero" id="numero" name="numero" type="text" required="required" readonly="true">
+					<input *ngIf="flagDelete" class="form-control col-md-12" #numero="ngModel" [(ngModel)]="solicitudpension.numero" id="numero" name="numero" type="text"  readonly="true">
 					<input *ngIf="!flagDelete" class="form-control col-md-12" #numero="ngModel" [(ngModel)]="solicitudpension.numero" id="numero" name="numero" type="text" required="required" >
 				</div>
 
 				<div class="form-group">
 					<label class="control-label" for="observaciones">Observaciones: <span class="required">*</span></label>
-					<input *ngIf="flagDelete" class="form-control col-md-12" #observaciones="ngModel" [(ngModel)]="solicitudpension.observaciones" id="observaciones" name="observaciones" type="text" required="required" readonly="true">
+					<input *ngIf="flagDelete" class="form-control col-md-12" #observaciones="ngModel" [(ngModel)]="solicitudpension.observaciones" id="observaciones" name="observaciones" type="text"  readonly="true">
 					<input *ngIf="!flagDelete" class="form-control col-md-12" #observaciones="ngModel" [(ngModel)]="solicitudpension.observaciones" id="observaciones" name="observaciones" type="text" required="required" >
 				</div>
 
 				<div class="form-group">
 					<label class="control-label" for="fecha_solicitud">Fechasolicitud: <span class="required">*</span></label>
-					<input *ngIf="flagDelete" class="form-control col-md-12" #fecha_solicitud="ngModel" [(ngModel)]="solicitudpension.fecha_solicitud" id="fecha_solicitud" name="fecha_solicitud" type="text" required="required" readonly="true">
+					<input *ngIf="flagDelete" class="form-control col-md-12" #fecha_solicitud="ngModel" [(ngModel)]="solicitudpension.fecha_solicitud" id="fecha_solicitud" name="fecha_solicitud" type="text"  readonly="true">
 					<input *ngIf="!flagDelete" class="form-control col-md-12" #fecha_solicitud="ngModel" [(ngModel)]="solicitudpension.fecha_solicitud" id="fecha_solicitud" name="fecha_solicitud" type="text" required="required" >
 				</div>
 
@@ -68,15 +68,15 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<div *ngIf="flagDelete">
-							<button class="btn btn-danger" (click)="delete(solicitudpensionForm)"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+							<button class="btn btn-danger" (click)="delete()"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
 							<button class="btn btn-link" (click)="return(solicitudpensionForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 						</div>
 						<div *ngIf="flag && !flagDelete">
-							<button class="btn btn-primary" (click)="save(solicitudpensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+							<button class="btn btn-primary" [disabled]="!solicitudpensionForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
 							<button class="btn btn-link" (click)="return(solicitudpensionForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 						</div>
 						<div *ngIf="!flag && !flagDelete">
-							<button class="btn btn-primary" (click)="save(solicitudpensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+							<button class="btn btn-primary" [disabled]="!solicitudpensionForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 							<button class="btn btn-link" (click)="return(solicitudpensionForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 						</div>
 					</div>

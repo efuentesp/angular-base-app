@@ -20,13 +20,13 @@
 
 						<div class="form-group">
 							<label class="control-label" for="nombre">Nombre <span class="required">*</span></label>
-							<input *ngIf="flagDelete" class="form-control col-md-12" #nombre="ngModel" id="nombre" name="nombre" type="text" [(ngModel)]="tipopension.nombre" required readonly="true">
+							<input *ngIf="flagDelete" class="form-control col-md-12" #nombre="ngModel" id="nombre" name="nombre" type="text" [(ngModel)]="tipopension.nombre"  readonly="true">
 							<input *ngIf="!flagDelete" class="form-control col-md-12" #nombre="ngModel" id="nombre" name="nombre" type="text" [(ngModel)]="tipopension.nombre" required>
 						</div>
 
 						<div class="form-group">
 							<label class="control-label" for="clave">Clave <span class="required">*</span></label>
-							<input *ngIf="flagDelete" class="form-control col-md-12" #clave="ngModel" id="clave" name="clave" type="text" [(ngModel)]="tipopension.clave" required readonly="true">
+							<input *ngIf="flagDelete" class="form-control col-md-12" #clave="ngModel" id="clave" name="clave" type="text" [(ngModel)]="tipopension.clave"  readonly="true">
 							<input *ngIf="!flagDelete" class="form-control col-md-12" #clave="ngModel" id="clave" name="clave" type="text" [(ngModel)]="tipopension.clave" required>
 						</div>
 
@@ -40,11 +40,11 @@
 									<button class="btn btn-link" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 								</div>
 								<div *ngIf="flag && !flagDelete">
-									<button class="btn btn-primary" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+									<button class="btn btn-primary" [disabled]="!tipopensionForm.valid" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
 									<button class="btn btn-link" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 								</div>
 								<div *ngIf="!flag && !flagDelete">
-									<button class="btn btn-primary" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+									<button class="btn btn-primary" [disabled]="!tipopensionForm.valid" (click)="save(tipopensionForm)"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
 									<button class="btn btn-link" (click)="return(tipopensionForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span> Regresar</button>
 								</div>
 							</div>
