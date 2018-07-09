@@ -13,6 +13,7 @@ export class User {
 	firstname: string;
 	lastname:string;
 	authorities: Authority[];
+	
 	email: string = '';
 	enabled: boolean = false;
 

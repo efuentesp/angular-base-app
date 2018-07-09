@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
 
 	  public authorityList: Authority [];
 
+    public auth = Authority;
 		public busquedaBeneficiario='';
     public filterInputBeneficiario = new FormControl();
     public isChecked: boolean;
@@ -56,26 +57,24 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
 
-         this.user = new User();
+         //let userAux = new UserAux();
          this.flag = this.userService.getEdit();
-         console.log("La flag es: ", this.flag);
 
          if (this.flag){
 
-          this.user = this.userService.getUser();
-          this.isChecked = this.user.enabled;
 
-          console.log("User:", this.user);
-          this.user.authorities.forEach(element => {
-            //console.log('Authority: ', element.idAuthority);
-            //this.selectedVal = element.idAuthority;
-          });
 
+           this.user = this.userService.getUser();
+           this.isChecked = this.user.enabled;
+
+           var obj = JSON.parse(JSON.stringify(this.user.authorities));
+           var idAuthority = obj[0]['idAuthority'];
+           this.selectedVal = idAuthority;
          }
 
          this.loadAuthority();
          this.flagDelete = this.userService.getDelete();
-         //this.habilita();
+         this.habilita();
 
     }
 
@@ -92,6 +91,8 @@ export class UserComponent implements OnInit {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
            this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
+         }else if (res.status == 406) {
+          swal('Error...', 'User duplicated.', 'error');
          }else{
            swal('Error...', 'User save unsuccessfully.', 'error');
          }
@@ -154,6 +155,7 @@ export class UserComponent implements OnInit {
       console.log("Despues de modififcar: " + this.passwordChange)
     }
 
+<<<<<<< HEAD
     myFunction(){
       console.log("Mensaje mensaje...");
     }
@@ -164,29 +166,31 @@ export class UserComponent implements OnInit {
 			    //this.user.rol = authority.rol;
     }
 
+=======
+>>>>>>> 2cd9f2b5bd4cf641a36072eef6db414155e25eb3
 	return(beneficiario){
       this.location.back();
   }
 
-  // habilita(){
+  habilita(){
 
-  //   this.userAdmin.authorities.forEach(element => {
+    this.userAdmin.authorities.forEach(element => {
 
-  //     console.log("Permisos: User", element.authority);
+      console.log("Permisos: User", element.authority);
 
-  //     if (element.authority == 'ROLE_USERDELETE'){
-  //       this.deleteActive = true;
-  //     }
-  //     if (element.authority == 'ROLE_USERCREATE'){
-  //       this.createActive = true;
-  //     }
-  //     if (element.authority == 'ROLE_USERUPDATE'){
-  //       this.updateActive = true;
-  //     }
-  //     if (element.authority == 'ROLE_USERSEARCH'){
-  //       this.searchActive = true;
-  //     }
-  //   });
-  // }
+      if (element.authority == 'ROLE_USERDELETE'){
+        this.deleteActive = true;
+      }
+      if (element.authority == 'ROLE_USERCREATE'){
+        this.createActive = true;
+      }
+      if (element.authority == 'ROLE_USERUPDATE'){
+        this.updateActive = true;
+      }
+      if (element.authority == 'ROLE_USERSEARCH'){
+        this.searchActive = true;
+      }
+    });
+  }
 
 }

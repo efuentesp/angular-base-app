@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import swal from 'sweetalert2';
 
 import { UserService }                                  from '../user/user.component.service';
+
 import { User }                                         from '../user/user.component.model';
 import { SearchUserPipe }                               from "../pipe/user.filter.pipe";
 import { AuthorityService } from '../authority/authority.component.service';
@@ -25,6 +26,7 @@ export class UserMngComponent implements OnInit {
     public valueName: string;
     public token: string;
     public authorityList: Authority;
+    public authority: Authority;
   	public busquedaUser='';
     public filterInputUser = new FormControl();
     
@@ -39,7 +41,10 @@ export class UserMngComponent implements OnInit {
     constructor(private router: Router, 
                 private userService: UserService, 
                 private route: ActivatedRoute,
-                private authorityService: AuthorityService) {
+                private authorityService: AuthorityService
+                
+               
+              ) {
           
            this.filterInputUser.valueChanges.subscribe(busquedaUser => {
 	         this.busquedaUser = busquedaUser;
@@ -52,6 +57,7 @@ export class UserMngComponent implements OnInit {
         // this.userAdmin = JSON.parse(localStorage.getItem('currentUser'));
         // this.valueName = this.userAdmin.username;
         // this.token = this.user.token;
+        
         this.userService.setEdit(false);
         this.userService.setDelete(false);
 
@@ -105,6 +111,18 @@ export class UserMngComponent implements OnInit {
     userAux.idUser = user.idUser;
 
     this.userService.setUser(userAux);
+    
+    console.log("user.authorities",userAux.authorities);
+
+    // userAux.authorities.forEach(element => {
+
+    //   this.authority = element.authority;
+    //   console.log("Elemento: ", element.authority);
+    // });
+
+
+    //this.userServiceAux.setAuth(userAux.authorities);
+    
     this.userService.setEdit(true);
     this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
