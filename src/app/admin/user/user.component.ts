@@ -67,8 +67,8 @@ export class UserComponent implements OnInit {
           
           console.log("User:", this.user);
           this.user.authorities.forEach(element => {
-            console.log('Authority: ', element.idAuthority);
-            this.selectedVal = element.idAuthority;
+            //console.log('Authority: ', element.idAuthority);
+            //this.selectedVal = element.idAuthority;
           });
      
          }
