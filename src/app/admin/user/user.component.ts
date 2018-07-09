@@ -5,7 +5,7 @@ import swal from 'sweetalert2';
 
 import { UserService }                                  from '../user/user.component.service';
 import { User }                                         from '../user/user.component.model';
-                              
+
 import { Location } from '@angular/common';
 import { AuthorityService } from '../authority/authority.component.service';
 import { Authority } from '../authority/authority.component.model';
@@ -40,8 +40,8 @@ export class UserComponent implements OnInit {
     public changeCombo: boolean = false;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    
-    // Buttons 
+
+    // Buttons
     private searchActive: boolean = false;
     private updateActive: boolean = false;
     private createActive: boolean = false;
@@ -52,19 +52,19 @@ export class UserComponent implements OnInit {
                 private authorityService: AuthorityService,
                 private location: Location,
                 private route:ActivatedRoute
-               
+
     ) {	}
 
     ngOnInit() {
 
          this.user = new User();
          this.flag = this.userService.getEdit();
-         
+
          if (this.flag){
 
            this.user = this.userService.getUser();  
            this.isChecked = this.user.enabled;
-         
+
            var obj = JSON.parse(JSON.stringify(this.user.authorities));
            var idAuthority = obj[0]['idAuthority'];
            this.selectedVal = idAuthority;
@@ -81,9 +81,10 @@ export class UserComponent implements OnInit {
       if (!this.changeCombo){
         console.log("this.selectedVal", this.selectedVal);
         console.log("selectedValue", this.selectedValue);
-        this.selectedValue = this.selectedVal; 
+        this.selectedValue = this.selectedVal;
       }
 
+        console.log('this.passwordChange: ' + this.passwordChange);
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
@@ -146,8 +147,10 @@ export class UserComponent implements OnInit {
       this.changeCombo = true;
     }
 
-    setClange(){
+    setChange(){
+      console.log("Antes de modififcar: " + this.passwordChange)
       this.passwordChange = true;
+      console.log("Despues de modififcar: " + this.passwordChange)
     }
 
 	return(beneficiario){
