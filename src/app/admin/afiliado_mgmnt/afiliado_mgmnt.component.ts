@@ -9,6 +9,7 @@ import { Beneficiario } from '../beneficiario/beneficiario.component.model';
 import { User } from '../user/user.component.model';
 
 import swal from 'sweetalert2';
+import { ValidationService } from '../validators/validation.component.service';
 
 @Component ({
     selector: 'app-view',
@@ -21,7 +22,7 @@ export class AfiliadoMngComponent implements OnInit {
     public afiliadoList: Afiliado;
     public afiliado: Afiliado;
     public beneficiario: Beneficiario;
-    public form: any;
+    public afiliadoForm: any;
     public user: User;
     public valueName: string;
     public token: string;
@@ -39,8 +40,10 @@ export class AfiliadoMngComponent implements OnInit {
     constructor(private afiliadoService: AfiliadoService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private beneficiarioService: BeneficiarioService) {
-            
+                private beneficiarioService: BeneficiarioService,
+                private formBuilder: FormBuilder
+              ) {
+                
             this.filterInputAfiliado.valueChanges.subscribe(busquedaAfiliado => {
 	          this.busquedaAfiliado = busquedaAfiliado;
             });
@@ -62,13 +65,15 @@ export class AfiliadoMngComponent implements OnInit {
 
     loadAfiliados() {
       this.afiliadoService.getAllAfiliado().subscribe(data => {
-        if (data) {
+        if (data){
           this.afiliadoList = data;
-        }
-      }, error => {
-        swal('Error...', 'An error occurred while calling the afiliados.', 'error');
-      });
-    }
+       }else if (data.status == 403 || data.status == 401){
+          swal('Error...', 'Usuario no tiene permiso para guardar Afiliado.', 'error');
+       }else{
+         swal('Error...', 'Afiliado save unsuccessfully.', 'error');
+       }
+     } );
+  }
 
   add(){
     this.afiliadoService.setEdit(false);

@@ -8,7 +8,6 @@ import { User }                                         from '../user/user.compo
 import { SearchUserPipe }                               from "../pipe/user.filter.pipe";
 import { AuthorityService } from '../authority/authority.component.service';
 import { Authority } from '../authority/authority.component.model';
-import { UserServiceAuxiliar } from '../user/useraux.component.service';
 
 @Component ({
     selector: 'app-view',
@@ -39,7 +38,6 @@ export class UserMngComponent implements OnInit {
 
     constructor(private router: Router, 
                 private userService: UserService, 
-                private userServiceAux: UserServiceAuxiliar, 
                 private route: ActivatedRoute,
                 private authorityService: AuthorityService) {
           
@@ -50,10 +48,11 @@ export class UserMngComponent implements OnInit {
 
     ngOnInit() {
 
-        // Get data user
-        this.user = JSON.parse(localStorage.getItem('currentUser'));
-        this.valueName = this.user.username;
-        this.token = this.user.token;
+        // // Get data user
+        // this.userAdmin = JSON.parse(localStorage.getItem('currentUser'));
+
+        // this.valueName = this.userAdmin.username;
+        // this.token = this.user.token;
 
         this.userService.setEdit(false);
         this.userService.setDelete(false);
@@ -75,27 +74,41 @@ export class UserMngComponent implements OnInit {
     }
 
   add(){
-    this.userServiceAux.setEdit(false);
-    this.userServiceAux.setDelete(false);
-    this.userServiceAux.clear();
+    this.userService.setEdit(false);
+    this.userService.setDelete(false);
+    this.userService.clear();
     this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
 
   editar(){
-    this.userServiceAux.setEdit(true);
-    this.userServiceAux.setDelete(false);
+    this.userService.setEdit(true);
+    this.userService.setDelete(false);
   }
 
   eliminar(){
-    this.userServiceAux.setEdit(false);
-    this.userServiceAux.setDelete(true);
+    this.userService.setEdit(false);
+    this.userService.setDelete(true);
   }
 
   setClickedRowUser(index, user){
-    console.log("Usuario Seleccionado:", user);
-    this.userServiceAux.setUser(user);
-    //this.userService.setUser(user);
-    this.userServiceAux.setEdit(true);
+
+    console.log("UserMng:", user);
+    let userName = user.userName;
+
+    let userAux = new User();
+
+    userAux.authorities = user.authorities;
+    userAux.email = user.email;
+    userAux.enabled = user.enabled;
+    userAux.firstname = user.firstname;
+    userAux.lastname = user.lastname;
+    userAux.password = user.password;
+    userAux.token = user.token;
+    userAux.username = user.userName;
+    userAux.idUser = user.idUser;
+
+    this.userService.setUser(userAux);
+    this.userService.setEdit(true);
     this.router.navigate([ '../user' ], { relativeTo: this.route })
   }
 

@@ -8,7 +8,6 @@ import { User }                                         from '../user/user.compo
                               
 import { Location } from '@angular/common';
 import { Useraux } from './useraux.component.model';
-import { UserServiceAuxiliar } from './useraux.component.service';
 import { AuthorityService } from '../authority/authority.component.service';
 import { Authority } from '../authority/authority.component.model';
 
@@ -51,50 +50,40 @@ export class UserComponent implements OnInit {
                 private userService: UserService,
                 private authorityService: AuthorityService,
                 private location: Location,
-                private route:ActivatedRoute,
-                private userServiceAux: UserServiceAuxiliar
+                private route:ActivatedRoute
+               
    
     ) {	}
 
     ngOnInit() {
 
-         //this.loadUsers();
-         //this.user = new User();
-         this.useraux = new Useraux();
-         //this.authority = new Authority();
-        
-         this.flag = this.userServiceAux.getEdit();
+         this.user = new User();
+         this.flag = this.userService.getEdit();
          console.log("La flag es: ", this.flag);
          
          if (this.flag){
 
-           this.useraux = this.userServiceAux.getUser();
-           console.log("El usuario en init: ", this.useraux);
-           console.log("El usuario en init: ", this.useraux.authorities);
-
-           this.useraux.authorities.forEach(element => {
-            console.log("Role: ",element.idAuthority);
-            this.setRole(element.idAuthority);
-            this.selectElem = element.name;
-           });
+          this.user = this.userService.getUser();
+          console.log("Usuario seleccionado: ", this.user);
+          //  this.useraux.authorities.forEach(element => {
+          //   console.log("Role: ",element.idAuthority);
+          //   this.setRole(element.idAuthority);
+          //   this.selectElem = element.name;
+          //  });
            
            //this.selectedValue = this.useraux.
            //this.loadNameAuthority(this.user);
          }
 
          this.loadAuthority();
-         this.flagDelete = this.userServiceAux.getDelete();
+         this.flagDelete = this.userService.getDelete();
          this.habilita();
 
     }
 
     save(){
-       
-      console.log("El usuario seleccionado: ", this.useraux);
-      console.log("El usuario de selecct: ", this.selectedValue);
-      console.log("El usuario de selecct: ", this.passwordChange);
 
-       this.userService.saveUser(this.useraux, this.selectedValue, this.passwordChange).subscribe(res => {
+       this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
            this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
@@ -115,7 +104,7 @@ export class UserComponent implements OnInit {
         cancelButtonText: "No, cancel!"
       }).then((isConfirm) => {
         if (isConfirm.value) {
-          this.userService.deleteUser(this.useraux).subscribe(res => {
+          this.userService.deleteUser(this.user).subscribe(res => {
             if (res.status == 201 || res.status == 200){
               swal('Success...', 'User item has been deleted successfully.', 'success');
               this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })

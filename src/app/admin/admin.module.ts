@@ -36,7 +36,6 @@ import { SearchUserPipe } from './pipe/user.filter.pipe';
 import { AuthorityComponent } from './authority/authority.component';
 import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.component';
 import { AuthorityService } from './authority/authority.component.service';
-import { UserServiceAuxiliar } from './user/useraux.component.service';
 import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
 import { ValidationService } from './validators/validation.component.service';
 import { ControlMessagesComponent } from './validators/control-messages.component';
@@ -85,7 +84,6 @@ import { ControlMessagesComponent } from './validators/control-messages.componen
     ManagePrivilegeService,
     UserService,
     AuthorityService ,
-    UserServiceAuxiliar,
     ValidationService
 ]
 })

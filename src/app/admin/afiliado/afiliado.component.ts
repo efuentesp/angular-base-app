@@ -10,6 +10,7 @@ import { BeneficiarioService }                                  from '../benefic
 import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
 import { Location } from '@angular/common';
 import { User } from '../user/user.component.model';
+import { ValidationService } from '../validators/validation.component.service';
 
 @Component ({
     selector: 'app-view',
@@ -55,15 +56,34 @@ export class AfiliadoComponent implements OnInit {
 
     let fecha_afiliacion = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]);
     let foto = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+    let correo = new FormControl('', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(100), ValidationService.emailValidator]));
+    let apellido_materno = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]);
+    let acta_nacimiento = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+    let monto_pension = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+    let apellido_paterno = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]);
+    let observaciones = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(300)]);
+    let nombre = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]);
+    let semanas_cotizadas = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+    let nss = new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]);
+    let genero = new FormControl();
+    let beneficiarioId = new FormControl();
     
-
     this.afiliadoForm = this.formBuilder.group({  
       fecha_afiliacion: fecha_afiliacion,
-      foto: foto
+      foto: foto,
+      correo: correo,
+      apellido_materno: apellido_materno,
+      acta_nacimiento: acta_nacimiento,
+      monto_pension: monto_pension,
+      apellido_paterno: apellido_paterno,
+      observaciones: observaciones,
+      nombre: nombre,
+      semanas_cotizadas: semanas_cotizadas,
+      nss:nss,
+      genero: genero,
+      beneficiarioId:beneficiarioId
     });
 
-
-  
       this.filterInputBeneficiario.valueChanges.subscribe(busquedaBeneficiario => {
         this.busquedaBeneficiario = busquedaBeneficiario;
       });
@@ -77,6 +97,7 @@ export class AfiliadoComponent implements OnInit {
         this.flag = this.afiliadoService.getEdit();
         if (this.flag){
           this.afiliado = this.afiliadoService.getAfiliado();
+          this.afiliadoForm.value = this.afiliado;
           this.loadNameBeneficiario(this.afiliado);
         }
 		    this.loadBeneficiarios();
@@ -85,6 +106,14 @@ export class AfiliadoComponent implements OnInit {
     }
 
     save(){
+
+      let beneficiario = this.afiliado.beneficiarioId;
+
+      // Fill
+      this.afiliado = this.afiliadoForm.value;
+      this.afiliado.generoId = this.afiliadoForm.controls['genero'].value;
+      this.afiliado.beneficiarioId = beneficiario;
+
        this.afiliadoService.saveAfiliado(this.afiliado).subscribe(res => {
          if (res.status == 201 || res.status == 200){
             swal('Success...', 'Afiliado save successfully.', 'success');
