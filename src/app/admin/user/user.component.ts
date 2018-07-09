@@ -57,12 +57,10 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
 
-         //let userAux = new UserAux();
+         this.user = new User();
          this.flag = this.userService.getEdit();
          
          if (this.flag){
-
-          
 
            this.user = this.userService.getUser();  
            this.isChecked = this.user.enabled;
