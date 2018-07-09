@@ -23,12 +23,12 @@
 				<div layout="row" layout-align="center center" class="col-md-12" style="border: 0px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
 						<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
 							<input *ngIf="flagDelete" type="radio" value="true" [checked]="isChecked" name="enabled"  disabled="true" />
-							<input *ngIf="!flagDelete" type="radio" value="true" [checked]="isChecked" name="enabled"  />
+							<input *ngIf="!flagDelete" type="radio" value="true" [checked]="isChecked" name="enabled"  (click)="authority.enabled='true'"/>
 								Activo
 						</div>
 						<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
 							<input *ngIf="flagDelete" type="radio" value="false" [checked]="!isChecked"  name="enabled"  disabled="true" />
-							<input *ngIf="!flagDelete" type="radio" value="false" [checked]="!isChecked" name="enabled"  />
+							<input *ngIf="!flagDelete" type="radio" value="false" [checked]="!isChecked" name="enabled" (click)="authority.enabled='false'" />
 								Inactivo
 						</div>
 				</div>

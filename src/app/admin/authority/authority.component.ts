@@ -46,8 +46,11 @@ export class AuthorityComponent implements OnInit {
 
         this.flag = this.authorityService.getEdit();
         if (this.flag){
+
           this.authority = this.authorityService.getAuthority();
+          console.log("Valor del check:", this.authority.enabled);
           this.isChecked = this.authority.enabled;
+        
         }
 
         
@@ -57,6 +60,7 @@ export class AuthorityComponent implements OnInit {
     }
 
     save(){  
+
 
       // Change to uppercase
       this.authority.name = this.authority.name.toUpperCase();
