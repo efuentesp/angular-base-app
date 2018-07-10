@@ -36,7 +36,7 @@ export class UserService {
         let opts = new RequestOptions({ headers: headers });
 
 		if (!user.idUser){
-            return this.http.post(this.env.api + "/users/"+ user.username + "/" + privileges, user , opts).pipe(map(res => res));
+            return this.http.post(this.env.api + "/users/"+ user.username + "/" + privileges, user , opts).pipe(map(res => res, error => error));
         }else{
             return this.http.put(this.env.api + "/users/"+ user.idUser + "/"+ user.username + "/" + privileges+"/" + flag, user , opts).pipe(map(res => res));
         }

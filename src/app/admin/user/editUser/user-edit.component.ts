@@ -73,8 +73,21 @@ export class UserEditComponent implements OnInit {
          this.loadAuthority();
          this.flagDelete = this.userService.getDelete();
          this.habilita();
+         //this.checkAuthority();
 
     }
+
+    checkAuthority(){
+
+      for (let i = 0; i < this.authorityList.length; i++) {
+          if(this.authorityList[i].idAuthority == this.selectedVal){
+            this.selectedValue = this.selectedVal;
+          }else{
+            swal('Success...', 'The assigned role is inactive, please chege role.', 'warning');
+          }
+      }
+    }
+
 
     save(){
 
@@ -88,7 +101,7 @@ export class UserEditComponent implements OnInit {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
            this.router.navigate([ '../manageUser' ], { relativeTo: this.route })
-         }else if (res.status == 406) {
+         }else if (res.status === 406) {
           swal('Error...', 'User duplicated.', 'error');
          }else{
            swal('Error...', 'User save unsuccessfully.', 'error');

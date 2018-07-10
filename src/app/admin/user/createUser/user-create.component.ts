@@ -73,14 +73,22 @@ export class UserCreateComponent implements OnInit {
       }
 
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
-         if (res.status == 201 || res.status == 200){
+         
+        console.log('Resultado:', res);
+
+        if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
            this.router.navigate([ '../manageUser' ], { relativeTo: this.route })
-         }else if (res.status == 406) {
+         }else if (res.status === 406) {
           swal('Error...', 'User duplicated.', 'error');
          }else{
            swal('Error...', 'User save unsuccessfully.', 'error');
          }
+       },error =>{
+        if (error.status == 401 || error.status == 406){
+          swal('Error...', 'User duplicated.', 'error');
+        }
+
        } );
     }
 
