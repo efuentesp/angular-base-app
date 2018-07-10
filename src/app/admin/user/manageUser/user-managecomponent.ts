@@ -3,20 +3,20 @@ import { Router, ActivatedRoute }                                          from 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
-import { UserService }                                  from '../user/user.component.service';
+import { UserService }                                  from '../../user/user.component.service';
 
-import { User }                                         from '../user/user.component.model';
-import { SearchUserPipe }                               from "../pipe/user.filter.pipe";
+import { User }                                         from '../../user/user.component.model';
+import { SearchUserPipe }                               from "../../pipe/user.filter.pipe";
 
-import { AuthorityService } from '../authority/authority.component.service';
-import { Authority } from '../authority/authority.component.model';
+import { AuthorityService } from '../../authority/authority.component.service';
+import { Authority } from '../../authority/authority.component.model';
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './user_mgmnt.component.html'
+    templateUrl: './user-manage.component.html'
 })
 
-export class UserMngComponent implements OnInit {
+export class UserManageComponent implements OnInit {
 
     public title = 'Nuevo User';
     public userList: User;
@@ -128,7 +128,7 @@ export class UserMngComponent implements OnInit {
     //this.userServiceAux.setAuth(userAux.authorities);
     
     this.userService.setEdit(true);
-    this.router.navigate([ '../user' ], { relativeTo: this.route })
+    this.router.navigate([ '../editUser' ], { relativeTo: this.route })
   }
 
   habilita(){

@@ -107,7 +107,7 @@
 							<input *ngIf="flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}} readonly="true">
 							<input *ngIf="!flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}}>
 
-							<input type="hidden" class="form-control"  name="beneficiarioId"  [(ngModel)]="afiliado.beneficiarioId" #beneficiarioId="ngModel">
+							<input type="hidden" class="form-control"  name="beneficiarioId"  [(ngModel)]="afiliado.beneficiarioId" #beneficiarioId="ngModel" required>
 							<span class="input-group-btn">
 								<button *ngIf="flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario" disabled="true"><em class="fa fa-search"></em></button>
 								<button *ngIf="!flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario"><em class="fa fa-search"></em></button>
