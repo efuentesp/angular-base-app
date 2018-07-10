@@ -48,7 +48,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr *ngFor="let beneficiario of beneficiarioList | filterBeneficiario: busquedaBeneficiario | paginate: {itemsPerPage: 2, currentPage:page, id: 'paginationTableBeneficiario'}; let i = index" (click)="updateActive ? setClickedRowBeneficiario(i, beneficiario): false">
+											<tr *ngFor="let beneficiario of beneficiarioList | filterBeneficiario: busquedaBeneficiario | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableBeneficiario'}; let i = index" (click)="updateActive ? setClickedRowBeneficiario(i, beneficiario): false">
 													<td>{{beneficiario.apellido_materno}}</td>
 													<td>{{beneficiario.curp}}</td>
 													<td>{{beneficiario.fecha_nacimiento}}</td>
