@@ -1,21 +1,21 @@
 import { Component, OnInit, ViewChild}                     from '@angular/core';
 import { ActivatedRoute, Router }                                          from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AfiliadoService }                                  from '../afiliado/afiliado.component.service';
-import { Afiliado }                                         from '../afiliado/afiliado.component.model';
-import { SearchAfiliadoPipe }                               from "../pipe/afiliado.filter.pipe";
-import { BeneficiarioService } from '../beneficiario/beneficiario.component.service';
-import { Beneficiario } from '../beneficiario/beneficiario.component.model';
-import { User } from '../user/user.component.model';
+
+import { User } from '../../user/user.component.model';
 
 import swal from 'sweetalert2';
+import { Afiliado } from '../afiliado.component.model';
+import { Beneficiario } from '../../beneficiario/beneficiario.component.model';
+import { AfiliadoService } from '../afiliado.component.service';
+import { BeneficiarioService } from '../../beneficiario/beneficiario.component.service';
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './afiliado_mgmnt.component.html'
+    templateUrl: './afiliado-manage.component.html'
 })
 
-export class AfiliadoMngComponent implements OnInit {
+export class AfiliadoManageComponent implements OnInit {
 
     public title = 'Afiliado';
     public afiliadoList: Afiliado;
@@ -71,27 +71,30 @@ export class AfiliadoMngComponent implements OnInit {
     }
 
   add(){
-    this.afiliadoService.setEdit(false);
-    this.afiliadoService.setDelete(false);
     this.afiliadoService.clear();
-    this.router.navigate([ '../afiliado' ], { relativeTo: this.route })
+    this.router.navigate([ '../createAfiliado' ], { relativeTo: this.route })
   }
 
-  editar(){
+  editar(afiliado){
+    this.afiliadoService.setAfiliado(afiliado);
     this.afiliadoService.setEdit(true);
     this.afiliadoService.setDelete(false);
+    this.router.navigate([ '../editAfiliado' ], { relativeTo: this.route })
   }
 
-  eliminar(){
+  eliminar(afiliado){
+    this.afiliadoService.setAfiliado(afiliado);
     this.afiliadoService.setEdit(false);
     this.afiliadoService.setDelete(true);
+    this.router.navigate([ '../editAfiliado' ], { relativeTo: this.route })
   }
 
   // Select row
   setClickedRowAfiliado(index, afiliado){
     this.afiliadoService.setAfiliado(afiliado);
     this.afiliadoService.setEdit(true);
-    this.router.navigate([ '../afiliado' ], { relativeTo: this.route })
+    this.afiliadoService.setDelete(false);
+    this.router.navigate([ '../editAfiliado' ], { relativeTo: this.route })
   }
   
   habilita(){

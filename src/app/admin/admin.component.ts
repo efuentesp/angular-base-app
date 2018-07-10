@@ -4,6 +4,8 @@ import { AuthenticationService } from '../authentication.component.service';
 import { Router,
   NavigationExtras } from '@angular/router';
 import { Authority } from '../user/authorities.component.model';
+import { AfiliadoService } from './afiliado/afiliado.component.service';
+import { Afiliado } from './afiliado/afiliado.component.model';
 
 @Component({
   templateUrl: 'admin.components.html'
@@ -50,7 +52,7 @@ export class AdminComponent {
   private user_mgmnt: boolean = false;
 
 
-  constructor(public authService: AuthenticationService, public router: Router) {
+  constructor(public authService: AuthenticationService, public router: Router, public afiliadoService: AfiliadoService) {
   }
 
   ngOnInit() {
@@ -157,7 +159,6 @@ export class AdminComponent {
     });
 
   }
-
 
   logout(): void {
     // clear token remove user from local storage to log user out

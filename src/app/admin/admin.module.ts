@@ -8,7 +8,7 @@ import { AdminComponent }           from './admin.component';
 import { AdminDashboardComponent }  from './admin-dashboard.component';
 //import { ManageHeroesComponent }    from './manage-heroes.component';
 
-import { AfiliadoComponent } from './afiliado/afiliado.component';
+
 import { BeneficiarioComponent} from './beneficiario/beneficiario.component';
 import { BeneficiarioMngComponent } from './beneficiario_mgmnt/beneficiario_mgmnt.component';
 import { Tipopension } from './tipopension/tipopension.component.model';
@@ -20,7 +20,6 @@ import { TipopensionService } from './tipopension/tipopension.component.service'
 import { SolicitudpensionService } from './solicitudpension/solicitudpension.component.service';
 import { AdminRoutingModule }       from './admin-routing.module';
 import { BeneficiarioService } from './beneficiario/beneficiario.component.service';
-import { AfiliadoMngComponent } from './afiliado_mgmnt/afiliado_mgmnt.component';
 import { SearchTipopensionPipe } from './pipe/tipopension.filter.pipe';
 import { SearchAfiliadoPipe } from './pipe/afiliado.filter.pipe';
 import { SearchBeneficiarioPipe } from './pipe/beneficiario.filter.pipe';
@@ -37,6 +36,9 @@ import { AuthorityComponent } from './authority/authority.component';
 import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.component';
 import { AuthorityService } from './authority/authority.component.service';
 import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
+import { AfiliadoManageComponent } from './afiliado/manageAfiliado/afiliado-manage.component';
+import { AfiliadoCreateComponent } from './afiliado/createAfiliado/afiliado-create.component';
+import { AfiliadoEditComponent } from './afiliado/editAfiliado/afiliado-edit.component';
 
 @NgModule({
   imports: [
@@ -52,9 +54,9 @@ import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
   declarations: [
     AdminComponent,
     AdminDashboardComponent,
-    //ManageHeroesComponent,
-    AfiliadoComponent,
-    AfiliadoMngComponent,
+    AfiliadoCreateComponent,
+    AfiliadoManageComponent,
+    AfiliadoEditComponent,
     SearchTipopensionPipe,
 		SearchAfiliadoPipe,
 		SearchBeneficiarioPipe,

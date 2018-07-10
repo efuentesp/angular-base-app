@@ -145,6 +145,7 @@ export class UserComponent implements OnInit {
       console.log ("El cambio es: ", item);
       this.selectedValue = item;
       this.changeCombo = true;
+      this.user.selected = item;
     }
 
     setChange(){

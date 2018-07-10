@@ -1,0 +1,205 @@
+<div>
+		<div class="page-title" style="background: #F7F7F7;">
+			<div class="title_left">
+				<h3 *ngIf="flagDelete">Eliminar Afiliado</h3>
+				<h3 *ngIf="flag && !flagDelete">Actualizar Afiliado</h3>
+				<h3 *ngIf="!flag && !flagDelete">Agregar Afiliado</h3>
+			</div>
+		</div>
+
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>Datos del afiliado</h2>
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="x_content">
+				<!-- start form for validation -->
+				<form #afiliadoForm="ngForm" id="afiliadoForm" class="form-horizontal form-label-left" data-parsley-validate>
+					<input class="form-control" #afiliadoId="ngModel" afiliadoId="afiliadoId" name="afiliadoId" type="hidden" [(ngModel)]="afiliado.afiliadoId">
+
+					<div class="form-group">
+						<label class="control-label" for="fecha_afiliacion">Fecha_afiliacion <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #fecha_afiliacion="ngModel" id="fecha_afiliacion" name="fecha_afiliacion" type="text" [(ngModel)]="afiliado.fecha_afiliacion" required readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #fecha_afiliacion="ngModel" id="fecha_afiliacion" name="fecha_afiliacion" type="text" [(ngModel)]="afiliado.fecha_afiliacion" required>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="foto">Foto <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #foto="ngModel" id="foto" name="foto" type="text"  [(ngModel)]="afiliado.foto" required readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #foto="ngModel" id="foto" name="foto" type="text"  [(ngModel)]="afiliado.foto" required>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="correo">Correo <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #correo="ngModel" id="correo" name="correo" type="email" [(ngModel)]="afiliado.correo" required readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #correo="ngModel" id="correo" name="correo" type="email" [(ngModel)]="afiliado.correo" required>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="apellido_materno">Apellido_materno <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #apellido_materno="ngModel" id="apellido_materno" name="apellido_materno" type="text" [(ngModel)]="afiliado.apellido_materno" required readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #apellido_materno="ngModel" id="apellido_materno" name="apellido_materno" type="text" [(ngModel)]="afiliado.apellido_materno" required>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="acta_nacimiento">Acta_nacimiento <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #acta_nacimiento="ngModel" id="acta_nacimiento" name="acta_nacimiento" type="text" [(ngModel)]="afiliado.acta_nacimiento" required readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #acta_nacimiento="ngModel" id="acta_nacimiento" name="acta_nacimiento" type="text" [(ngModel)]="afiliado.acta_nacimiento" required>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label"  for="monto_pension">Monto_pension <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #monto_pension="ngModel" required id="monto_pension" name="monto_pension" type="text" [(ngModel)]="afiliado.monto_pension" readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #monto_pension="ngModel" required id="monto_pension" name="monto_pension" type="text" [(ngModel)]="afiliado.monto_pension">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label"  for="apellido_paterno">Apellido_paterno <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #apellido_paterno="ngModel" required id="apellido_paterno" name="apellido_paterno" type="text" [(ngModel)]="afiliado.apellido_paterno" readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #apellido_paterno="ngModel" required id="apellido_paterno" name="apellido_paterno" type="text" [(ngModel)]="afiliado.apellido_paterno">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label"  for="observaciones">Observaciones <span class="required">*</span></label>
+						<textarea *ngIf="flagDelete" class="form-control col-md-12" #observaciones="ngModel" required="required"  data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10" id="observaciones" name="observaciones" type="text" [(ngModel)]="afiliado.observaciones" readonly="true"></textarea>
+						<textarea *ngIf="!flagDelete" class="form-control col-md-12" #observaciones="ngModel" required="required"  data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.." data-parsley-validation-threshold="10" id="observaciones" name="observaciones" type="text" [(ngModel)]="afiliado.observaciones"></textarea>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label"  for="nombre">Nombre <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #nombre="ngModel" required id="nombre" name="nombre" type="text" [(ngModel)]="afiliado.nombre" readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #nombre="ngModel" required id="nombre" name="nombre" type="text" [(ngModel)]="afiliado.nombre">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label"  for="semanas_cotizadas">Semanas_cotizadas <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #semanas_cotizadas="ngModel" required id="semanas_cotizadas" name="semanas_cotizadas" type="text" [(ngModel)]="afiliado.semanas_cotizadas" readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #semanas_cotizadas="ngModel" required id="semanas_cotizadas" name="semanas_cotizadas" type="text" [(ngModel)]="afiliado.semanas_cotizadas">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label"  for="nss">Nss <span class="required">*</span></label>
+						<input *ngIf="flagDelete" class="form-control col-md-12" #nss="ngModel" required id="nss" name="nss" type="text" [(ngModel)]="afiliado.nss" readonly="true">
+						<input *ngIf="!flagDelete" class="form-control col-md-12" #nss="ngModel" required id="nss" name="nss" type="text" [(ngModel)]="afiliado.nss">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="genero">Genero <span class="required">*</span></label>
+						<div layout="row" layout-align="center center" class="col-md-12" style="border: 0px solid #CCCCCC; padding-left: 0px; padding-right: 0px;">
+								<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
+									<input *ngIf="flagDelete" type="radio" value="female" name="genero" [(ngModel)]="afiliado.generoId" disabled="true" />
+									<input *ngIf="!flagDelete" type="radio" value="female" name="genero" [(ngModel)]="afiliado.generoId" required/>
+									 Female
+								</div>
+								<div layout="column" class="col-md-2" style="padding-left: 0px; padding-right: 0px; top: 5px;">
+									<input *ngIf="flagDelete" type="radio" value="male" name="genero" [(ngModel)]="afiliado.generoId" disabled="true" />
+									<input *ngIf="!flagDelete" type="radio" value="male" name="genero" [(ngModel)]="afiliado.generoId" required/>
+									 Male <br/>
+								</div>
+								<div layout="column" class="col-md-8" style="padding-left: 0px; padding-right: 0px; top: 5px;"></div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label  class="control-label" for="beneficiario">Beneficiario <span class="required">*</span></label>
+						<div class="input-group">
+							<input *ngIf="flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}} readonly="true">
+							<input *ngIf="!flagDelete" type="text" class="form-control" placeholder="Beneficiario..." value={{beneficiarioNombre}}>
+
+							<input type="hidden" class="form-control"  name="beneficiarioId"  [(ngModel)]="afiliado.beneficiarioId" #beneficiarioId="ngModel" required>
+							<span class="input-group-btn">
+								<button *ngIf="flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario" disabled="true"><em class="fa fa-search"></em></button>
+								<button *ngIf="!flagDelete" type="button" class="btn btn-default" data-toggle="modal" data-target="#modalBeneficiario"><em class="fa fa-search"></em></button>
+							</span>
+						</div>
+					</div>
+
+					<div class="ln_solid"></div>
+					<div class="col-sm-12">
+						<div class="input-group">
+							<div *ngIf="flagDelete">
+								<button class="btn btn-danger" (click)="delete()"><span style="margin-right:10px;"  class="fa fa-trash"></span>Eliminar</button>
+								<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+							</div>
+							<div *ngIf="flag && !flagDelete">
+								<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Modificar</button>
+								<button class="btn btn-link" (click)="return(afiliadoForm)"> <span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+							</div>
+							<div *ngIf="!flag && !flagDelete">
+								<button class="btn btn-primary" [disabled]="!afiliadoForm.valid" (click)="save()"><span style="margin-right:10px;"  class="fa fa-save"></span>Agregar</button>
+								<button class="btn btn-link" (click)="return(afiliadoForm)"><span style="margin-right:10px;"  class="fa fa-arrow-left"></span>Regresar</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- end form for validation -->
+			</div>
+		</div>
+
+
+<!-- Modal beneficiario -->
+<div id="modalBeneficiario" class="modal fade"  role="dialog" data-backdrop="false" style="background: rgba(0, 0, 0, 0.31);">
+		<div class="modal-dialog" style="width:60%">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Beneficiario</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class='row'>
+						<div class="col-lg-6">
+							<br/>
+						</div>
+						<div class="col-lg-6">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Criterios de busqueda..." name="busquedabeneficiario" [(ngModel)]="busquedaBeneficiario">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button"><em class="fa fa-search"></em></button>
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row table-responsive">
+						<table class="datatable" class="table table-striped" >
+							<thead>
+								<tr>
+									<th>Apellido_materno</th>
+									<th>Curp</th>
+									<th>Fecha_nacimiento</th>
+									<th>Parentesco</th>
+									<th>Nombre</th>
+									<th>Apellido_paterno</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let beneficiario of beneficiarioList | filterBeneficiario: busquedaBeneficiario | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" data-dismiss="modal" (click)="setClickedRowBeneficiario(i, beneficiario)" >
+									<td>{{beneficiario.apellido_materno}}</td>
+									<td>{{beneficiario.curp}}</td>
+									<td>{{beneficiario.fecha_nacimiento}}</td>
+									<td>{{beneficiario.parentescoId}}</td>
+									<td>{{beneficiario.nombre}}</td>
+									<td>{{beneficiario.apellido_paterno}}</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div align="center" style="margin-top:15px;">
+							<pagination-controls (pageChange)="page = $event" id="1" maxSize="10" directionLinks="true" autoHide="false" previousLabel="<"
+								nextLabel=">" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+							</pagination-controls>
+						</div>
+
+						<div class="row">
+							<div class="text-right" style="padding-right:40px">
+								<button type="button" class="btn btn-link" data-dismiss="modal"><span style="margin-right:10px;" class="fa fa-arrow-left"></span>Regresar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

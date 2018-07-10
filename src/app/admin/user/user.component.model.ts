@@ -16,5 +16,5 @@ export class User {
 	
 	email: string = '';
 	enabled: boolean = false;
-
+	selected: number = null;
 }

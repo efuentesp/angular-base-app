@@ -11,8 +11,6 @@ import { TipopensionComponent } from './tipopension/tipopension.component';
 import { TipopensionMngComponent } from './tipopension_mgmnt/tipopension_mgmnt.component';
 import { SolicitudpensionMngComponent } from './solicitudpension_mgmnt/solicitudpension_mgmnt.component';
 import { SolicitudpensionComponent } from './solicitudpension/solicitudpension.component';
-import { AfiliadoMngComponent } from './afiliado_mgmnt/afiliado_mgmnt.component';
-import { AfiliadoComponent } from './afiliado/afiliado.component';
 
 import { AuthGuard }                from '../auth-guard.service';
 import { ManagePrivilegeComponent } from './manage/manage-privilege.component';
@@ -20,6 +18,10 @@ import { UserComponent } from './user/user.component';
 import { UserMngComponent } from './user_mgmnt/user_mgmnt.component';
 import { AuthorityComponent } from './authority/authority.component';
 import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.component';
+import { AfiliadoManageComponent } from './afiliado/manageAfiliado/afiliado-manage.component';
+import { AfiliadoCreateComponent } from './afiliado/createAfiliado/afiliado-create.component';
+import { AfiliadoEditComponent } from './afiliado/editAfiliado/afiliado-edit.component';
+
 
 const adminRoutes: Routes = [
   {
@@ -31,10 +33,16 @@ const adminRoutes: Routes = [
         path: '',
         canActivateChild: [AuthGuard],
         children: [
+          
+          // Beneficiario
           { path: 'beneficiario', component : BeneficiarioComponent},
           { path: 'beneficiario_mgmnt', component : BeneficiarioMngComponent},
-          { path: 'afiliado', component : AfiliadoComponent},
-          { path: 'afiliado_mgmnt', component : AfiliadoMngComponent},
+
+          // Afiliado
+          { path: 'createAfiliado', component : AfiliadoCreateComponent},
+          { path: 'manageAfiliado', component : AfiliadoManageComponent},
+          { path: 'editAfiliado',   component : AfiliadoEditComponent},
+            
           { path: 'solicitudpension', component : SolicitudpensionComponent},
           { path: 'solicitudpension_mgmnt', component : SolicitudpensionMngComponent},
           { path: 'tipopension', component : TipopensionComponent},
