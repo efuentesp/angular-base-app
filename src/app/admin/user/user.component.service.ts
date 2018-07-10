@@ -77,7 +77,8 @@ export class UserService {
             lastname: this.user.lastname,
             authorities: this.user.authorities,
             email: this.user.email,
-            enabled: this.user.enabled
+            enabled: this.user.enabled, 
+            selected: this.user.selected
         };
         return user;
     }
@@ -93,7 +94,8 @@ export class UserService {
         this.user.lastname= user.lastname,
         this.user.authorities = user.authorities,
         this.user.email = user.email,
-        this.user.enabled = user.enabled
+        this.user.enabled = user.enabled,
+        this.user.selected = user.selected
 
     }
 
@@ -115,6 +117,7 @@ export class UserService {
         this.user.authorities =null;
         this.user.email = '';
         this.user.enabled = false;
+        this.user.selected = null;
     }
 
     setEdit(flag){

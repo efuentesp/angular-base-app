@@ -84,7 +84,6 @@ export class UserComponent implements OnInit {
         this.selectedValue = this.selectedVal;
       }
 
-        console.log('this.passwordChange: ' + this.passwordChange);
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
@@ -145,6 +144,7 @@ export class UserComponent implements OnInit {
       console.log ("El cambio es: ", item);
       this.selectedValue = item;
       this.changeCombo = true;
+      this.user.selected = item;
     }
 
     setChange(){
