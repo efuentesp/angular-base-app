@@ -4,7 +4,7 @@
 				<h3>Administrar User</h3>
 			</div>
 		</div>
-	
+
 		<div class="x_panel">
 			<div class="x_content">
 				<form #userMngForm="ngForm" class="editForm" novalidate>
@@ -22,9 +22,9 @@
 
 						</div>
 					</div>
-	
+
 					<br/>
-	
+
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
@@ -51,10 +51,7 @@
 														<td>{{user.firstname}}</td>
 														<td>{{user.lastname}}</td>
 														<td>{{user.email}}</td>
-													
-															<td *ngIf="user.enabled">Activo</td>
-															<td *ngIf="!user.enabled">Inactivo</td>
-														
+														<td>{{user.enabled ? 'Activo' : 'Inactivo'}}</td>
 														<td>
 															<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
 															<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
@@ -64,7 +61,7 @@
 									</table>
 									<div class="row" align="right">
 										<div align="left" style="margin-top:15px; background: #DDDDDD; width: 35%; position: relative;">
-											<pagination-controls (pageChange)="page = $event" id="paginationTableUser" maxSize="10" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">	
+											<pagination-controls (pageChange)="page = $event" id="paginationTableUser" maxSize="10" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 											</pagination-controls>
 										</div>
 

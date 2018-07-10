@@ -43,7 +43,7 @@
 										<tbody>
 											<tr *ngFor="let authority of authorityList | filterAuthority : busquedaAuthority | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableAuthority'}; let i = index" (click)="setClickedRowAuthority(i, authority)" >
 													<td>{{authority.name}}</td>
-													<td>{{authority.enabled}}</td>
+													<td>{{authority.enabled ? 'Activo' : 'Inactivo'}}</td>
 													<td>
 														<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
 														<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
