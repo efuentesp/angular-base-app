@@ -41,22 +41,7 @@ export class AuthorityCreateComponent implements OnInit {
 
     ngOnInit() {
         this.authority = new Authority;
-
-        
-
-        this.flag = this.authorityService.getEdit();
-        if (this.flag){
-
-          this.authority = this.authorityService.getAuthority();
-          console.log("Valor del check:", this.authority.enabled);
-          this.isChecked = this.authority.enabled;
-        
-        }
-
-        
-        this.flagDelete = this.authorityService.getDelete();
-        console.log("Delete",this.flagDelete );
-        this.habilita();
+        this.isChecked = this.authority.enabled;
     }
 
     save(){  
@@ -104,23 +89,6 @@ export class AuthorityCreateComponent implements OnInit {
 	
 	return(authority){
       this.location.back();
-  }
-
-  habilita(){
-    this.userAdmin.authorities.forEach(element => {
-      if (element.authority == 'ROLE_AUTHORITYDELETE'){
-        this.deleteActive = true;
-      }
-      if (element.authority == 'ROLE_AUTHORITYCREATE'){
-        this.createActive = true;
-      }
-      if (element.authority == 'ROLE_AUTHORITYUPDATE'){
-        this.updateActive = true;
-      }
-      if (element.authority == 'ROLE_AUTHORITYSEARCH'){
-        this.searchActive = true;
-      }
-    });
   }
 
   isSelected(val: boolean): boolean   {  

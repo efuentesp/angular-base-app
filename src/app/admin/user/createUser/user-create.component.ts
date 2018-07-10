@@ -58,21 +58,8 @@ export class UserCreateComponent implements OnInit {
     ngOnInit() {
 
          this.user = new User();
-         this.flag = this.userService.getEdit();
-
-         if (this.flag){
-
-           this.user = this.userService.getUser();  
-           this.isChecked = this.user.enabled;
-
-           var obj = JSON.parse(JSON.stringify(this.user.authorities));
-           var idAuthority = obj[0]['idAuthority'];
-           this.selectedVal = idAuthority;
-         }
-
+         this.isChecked = this.user.enabled;
          this.loadAuthority();
-         this.flagDelete = this.userService.getDelete();
-         this.habilita();
 
     }
 
@@ -94,31 +81,6 @@ export class UserCreateComponent implements OnInit {
            swal('Error...', 'User save unsuccessfully.', 'error');
          }
        } );
-    }
-
-    delete(){
-      swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this user!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!"
-      }).then((isConfirm) => {
-        if (isConfirm.value) {
-          this.userService.deleteUser(this.user).subscribe(res => {
-            if (res.status == 201 || res.status == 200){
-              swal('Success...', 'User item has been deleted successfully.', 'success');
-              this.router.navigate([ '../manageUser' ], { relativeTo: this.route })
-            }else{
-              swal('Error...', 'User deleted unsuccessfully.', 'error');
-            }
-          });
-        } else {
-          //swal("Cancelled", "User deleted unsuccessfully", "error");
-        }
-      });
     }
 
     loadUsers(){
@@ -155,27 +117,6 @@ export class UserCreateComponent implements OnInit {
 
 	return(beneficiario){
       this.location.back();
-  }
-
-  habilita(){
-
-    this.userAdmin.authorities.forEach(element => {
-
-      console.log("Permisos: User", element.authority);
-
-      if (element.authority == 'ROLE_USERDELETE'){
-        this.deleteActive = true;
-      }
-      if (element.authority == 'ROLE_USERCREATE'){
-        this.createActive = true;
-      }
-      if (element.authority == 'ROLE_USERUPDATE'){
-        this.updateActive = true;
-      }
-      if (element.authority == 'ROLE_USERSEARCH'){
-        this.searchActive = true;
-      }
-    });
   }
 
 }

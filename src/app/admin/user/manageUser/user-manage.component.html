@@ -41,7 +41,7 @@
 														<th>Firstname</th>
 														<th>Lastname</th>
 														<th>Email</th>
-														<th>Activo</th> 
+														<th>Activo</th>
 														<th class="col-md-2"> </th>
 												</tr>
 											</thead>
@@ -51,7 +51,9 @@
 														<td>{{user.firstname}}</td>
 														<td>{{user.lastname}}</td>
 														<td>{{user.email}}</td>
-														<td>{{user.enabled}}</td>
+													
+															<td *ngIf="user.enabled">Activo</td>
+															<td *ngIf="!user.enabled">Inactivo</td>
 														
 														<td>
 															<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
