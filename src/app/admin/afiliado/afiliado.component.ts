@@ -63,6 +63,8 @@ export class AfiliadoComponent implements OnInit {
         this.flag = this.afiliadoService.getEdit();
         if (this.flag){
           this.afiliado = this.afiliadoService.getAfiliado();
+          console.log("Numero de Beneficiario: ", this.afiliado.beneficiarioId);
+
           this.loadNameBeneficiario(this.afiliado);
         }
 		    this.loadBeneficiarios();
@@ -131,7 +133,7 @@ export class AfiliadoComponent implements OnInit {
         this.beneficiarioNombre   = this.beneficiario.nombre + " " + this.beneficiario.apellido_paterno;
       }
     }, error => {
-      swal('Error...', 'An error occurred while calling the afiliados.', 'error');
+      swal('Error...', 'Can´t found Beneficiario, change the Beneficiario.', 'error');
     });
   }
 

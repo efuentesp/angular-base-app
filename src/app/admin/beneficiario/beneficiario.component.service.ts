@@ -48,15 +48,18 @@ export class BeneficiarioService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        return this.http.delete(this.env.api + "/beneficiario/"+beneficiario.beneficiarioId, beneficiario).pipe(map(res => res));
+        return this.http.delete(this.env.api + "/beneficiario/"+beneficiario.beneficiarioId, opts).pipe(map(res => res));
     }
 
     getBeneficiarioById(beneficiarioId){
+
+        console.log("Id Beneficiario", beneficiarioId);
+
         let headers = new Headers;
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        return this.http.get(this.env.api + "/beneficiario/"+beneficiarioId, opts).pipe(map(res => res.json()));
+        return this.http.get(this.env.api + "/idbeneficiario/"+beneficiarioId, opts).pipe(map(res => res.json()));
     }
 
     resetBeneficiario(): Beneficiario {
