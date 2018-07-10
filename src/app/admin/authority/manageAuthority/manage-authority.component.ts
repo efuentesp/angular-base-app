@@ -3,18 +3,18 @@ import { ActivatedRoute, Router }                                          from 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
-import { AuthorityService }                                  from '../authority/authority.component.service';
-import { Authority }                                         from '../authority/authority.component.model';
-import { SearchAuthorityPipe }                               from "../pipe/authority.filter.pipe";
-import { User } from '../user/user.component.model';
+import { AuthorityService }                                  from '../../authority/authority.component.service';
+import { Authority }                                         from '../../authority/authority.component.model';
+import { SearchAuthorityPipe }                               from "../../pipe/authority.filter.pipe";
+import { User } from '../../user/user.component.model';
 
 //import { SearchAuthorityPipe }                               from "../pipe/authority.filter.pipe";
 @Component ({
     selector: 'app-view',
-    templateUrl: './authority_mgmnt.component.html'
+    templateUrl: './manage-authority.component.html'
 })
 
-export class AuthorityMngComponent implements OnInit {
+export class AuthorityManageComponent implements OnInit {
 
     public title = 'Authority';
     public authorityList: Authority;
@@ -93,7 +93,7 @@ export class AuthorityMngComponent implements OnInit {
      this.authorityService.setAuthority(authority);
      console.log("Radio:", authority);
      this.authorityService.setEdit(true);
-    this.router.navigate([ '../authority' ], { relativeTo: this.route })
+    this.router.navigate([ '../editAuthority' ], { relativeTo: this.route })
   }
 
   habilita(){

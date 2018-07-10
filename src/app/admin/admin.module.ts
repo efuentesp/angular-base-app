@@ -28,17 +28,20 @@ import { AfiliadoService } from './afiliado/afiliado.component.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ManagePrivilegeComponent } from './manage/manage-privilege.component';
 import { ManagePrivilegeService } from './manage/manage-privilege.component.service';
-import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.component.service';
-import { UserMngComponent } from './user_mgmnt/user_mgmnt.component';
+
 import { SearchUserPipe } from './pipe/user.filter.pipe';
-import { AuthorityComponent } from './authority/authority.component';
-import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.component';
 import { AuthorityService } from './authority/authority.component.service';
 import { SearchAuthorityPipe } from './pipe/authority.filter.pipe';
 import { AfiliadoManageComponent } from './afiliado/manageAfiliado/afiliado-manage.component';
 import { AfiliadoCreateComponent } from './afiliado/createAfiliado/afiliado-create.component';
 import { AfiliadoEditComponent } from './afiliado/editAfiliado/afiliado-edit.component';
+import { UserManageComponent } from './user/manageUser/user-managecomponent';
+import { UserEditComponent } from './user/editUser/user-edit.component';
+import { UserCreateComponent } from './user/createUser/user-create.component';
+import { AuthorityCreateComponent } from './authority/createAuthority/authority-create.component';
+import { AuthorityManageComponent } from './authority/manageAuthority/manage-authority.component';
+import { AuthorityEditComponent } from './authority/editAuthority/authority-edit.component';
 
 @NgModule({
   imports: [
@@ -68,12 +71,14 @@ import { AfiliadoEditComponent } from './afiliado/editAfiliado/afiliado-edit.com
 		SolicitudpensionComponent,
     SolicitudpensionMngComponent,
     ManagePrivilegeComponent,
-    UserComponent,
-    UserMngComponent,
-    AuthorityComponent, 
-    AuthorityMngComponent,
+    UserManageComponent,
+    AuthorityCreateComponent, 
+    AuthorityManageComponent,
+    AuthorityEditComponent,
     SearchAuthorityPipe,
-    SearchUserPipe
+    SearchUserPipe,
+    UserEditComponent,
+    UserCreateComponent
   ],
   providers: [ 
     AfiliadoService,

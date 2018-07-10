@@ -3,17 +3,17 @@ import { Router, ActivatedRoute }                          from '@angular/router
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
-import { AuthorityService }                                  from '../authority/authority.component.service';
-import { Authority }                                         from '../authority/authority.component.model';
+import { AuthorityService }                                  from '../../authority/authority.component.service';
+import { Authority }                                         from '../../authority/authority.component.model';
 import { Location } from '@angular/common';
-import { User } from '../user/user.component.model';
+import { User } from '../../user/user.component.model';
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './authority.component.html'
+    templateUrl: './authority-edit.component.html'
 })
 
-export class AuthorityComponent implements OnInit {
+export class AuthorityEditComponent implements OnInit {
 
     public title = 'Nuevo Authority';
     public authority: Authority;
@@ -70,7 +70,7 @@ export class AuthorityComponent implements OnInit {
       this.authorityService.saveAuthority(this.authority).subscribe(res => {
         if (res.status == 201 || res.status == 200){
           swal('Success...', 'Authority save successfully.', 'success');
-          this.router.navigate([ '../authority_mgmnt' ], { relativeTo: this.route })
+          this.router.navigate([ '../manageAuthority' ], { relativeTo: this.route })
         }else{
           swal('Error...', 'Authority save unsuccessfully.', 'error');
         }
@@ -91,7 +91,7 @@ export class AuthorityComponent implements OnInit {
           this.authorityService.deleteAuthority(this.authority).subscribe(res => {
             if (res.status == 201 || res.status == 200){
               swal('Success...', 'Authority item has been deleted successfully.', 'success');
-              this.router.navigate([ '../authority_mgmnt' ], { relativeTo: this.route })
+              this.router.navigate([ '../manageAuthority' ], { relativeTo: this.route })
             }else{
               swal('Error...', 'Authority deleted unsuccessfully.', 'error');
             }

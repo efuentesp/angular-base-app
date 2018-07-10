@@ -3,20 +3,20 @@ import { Router, ActivatedRoute }                          from '@angular/router
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
-import { UserService }                                  from '../user/user.component.service';
-import { User }                                         from '../user/user.component.model';
+import { UserService }                                  from '../../user/user.component.service';
+import { User }                                         from '../../user/user.component.model';
 
 import { Location } from '@angular/common';
-import { AuthorityService } from '../authority/authority.component.service';
-import { Authority } from '../authority/authority.component.model';
+import { AuthorityService } from '../../authority/authority.component.service';
+import { Authority } from '../../authority/authority.component.model';
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './user.component.html',
-    styleUrls: ['./user.component.css']
+    templateUrl: './user-create.component.html',
+    styleUrls: ['./user-create.component.css']
 })
 
-export class UserComponent implements OnInit {
+export class UserCreateComponent implements OnInit {
 
     public title = 'Nuevo User';
     public userList: User;
@@ -87,7 +87,7 @@ export class UserComponent implements OnInit {
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
-           this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
+           this.router.navigate([ '../manageUser' ], { relativeTo: this.route })
          }else if (res.status == 406) {
           swal('Error...', 'User duplicated.', 'error');
          }else{
@@ -110,7 +110,7 @@ export class UserComponent implements OnInit {
           this.userService.deleteUser(this.user).subscribe(res => {
             if (res.status == 201 || res.status == 200){
               swal('Success...', 'User item has been deleted successfully.', 'success');
-              this.router.navigate([ '../user_mgmnt' ], { relativeTo: this.route })
+              this.router.navigate([ '../manageUser' ], { relativeTo: this.route })
             }else{
               swal('Error...', 'User deleted unsuccessfully.', 'error');
             }

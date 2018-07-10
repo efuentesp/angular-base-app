@@ -14,13 +14,16 @@ import { SolicitudpensionComponent } from './solicitudpension/solicitudpension.c
 
 import { AuthGuard }                from '../auth-guard.service';
 import { ManagePrivilegeComponent } from './manage/manage-privilege.component';
-import { UserComponent } from './user/user.component';
-import { UserMngComponent } from './user_mgmnt/user_mgmnt.component';
-import { AuthorityComponent } from './authority/authority.component';
-import { AuthorityMngComponent } from './authority_mgmnt/authority_mgmnt.component';
 import { AfiliadoManageComponent } from './afiliado/manageAfiliado/afiliado-manage.component';
 import { AfiliadoCreateComponent } from './afiliado/createAfiliado/afiliado-create.component';
 import { AfiliadoEditComponent } from './afiliado/editAfiliado/afiliado-edit.component';
+import { UserManageComponent } from './user/manageUser/user-managecomponent';
+import { UserEditComponent } from './user/editUser/user-edit.component';
+import { UserCreateComponent } from './user/createUser/user-create.component';
+
+import { AuthorityManageComponent } from './authority/manageAuthority/manage-authority.component';
+import { AuthorityCreateComponent } from './authority/createAuthority/authority-create.component';
+import { AuthorityEditComponent } from './authority/editAuthority/authority-edit.component';
 
 
 const adminRoutes: Routes = [
@@ -33,7 +36,7 @@ const adminRoutes: Routes = [
         path: '',
         canActivateChild: [AuthGuard],
         children: [
-          
+
           // Beneficiario
           { path: 'beneficiario', component : BeneficiarioComponent},
           { path: 'beneficiario_mgmnt', component : BeneficiarioMngComponent},
@@ -49,10 +52,16 @@ const adminRoutes: Routes = [
           { path: 'tipopension_mgmnt', component : TipopensionMngComponent},
 
           { path: 'manage', component: ManagePrivilegeComponent },
-          { path: 'user', component: UserComponent },
-          { path: 'user_mgmnt', component: UserMngComponent },
-          { path: 'authority', component: AuthorityComponent },
-          { path: 'authority_mgmnt', component: AuthorityMngComponent },
+          
+          // User
+          { path: 'editUser', component: UserEditComponent},
+          { path: 'createUser', component: UserCreateComponent},
+          { path: 'manageUser', component: UserManageComponent },
+          
+          // Authority
+          { path: 'createAuthority', component: AuthorityCreateComponent },
+          { path: 'manageAuthority', component: AuthorityManageComponent },
+          { path: 'editAuthority',   component: AuthorityEditComponent },
           { path: '', component: AdminDashboardComponent }
         ]
       }
