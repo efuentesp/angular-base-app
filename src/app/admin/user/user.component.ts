@@ -62,7 +62,7 @@ export class UserComponent implements OnInit {
 
          if (this.flag){
 
-           this.user = this.userService.getUser();  
+           this.user = this.userService.getUser();
            this.isChecked = this.user.enabled;
 
            var obj = JSON.parse(JSON.stringify(this.user.authorities));
@@ -77,6 +77,7 @@ export class UserComponent implements OnInit {
     }
 
     save(){
+      console.log('En el metodo save...');
 
       if (!this.changeCombo){
         console.log("this.selectedVal", this.selectedVal);
@@ -84,7 +85,6 @@ export class UserComponent implements OnInit {
         this.selectedValue = this.selectedVal;
       }
 
-        console.log('this.passwordChange: ' + this.passwordChange);
        this.userService.saveUser(this.user, this.selectedValue, this.passwordChange).subscribe(res => {
          if (res.status == 201 || res.status == 200){
            swal('Success...', 'User save successfully.', 'success');
@@ -148,9 +148,7 @@ export class UserComponent implements OnInit {
     }
 
     setChange(){
-      console.log("Antes de modififcar: " + this.passwordChange)
       this.passwordChange = true;
-      console.log("Despues de modififcar: " + this.passwordChange)
     }
 
 	return(beneficiario){
