@@ -32,10 +32,10 @@
                 <h3>General</h3>
 
                 <ul class="nav side-menu">{{user.authority}}
-                  <li *ngIf="afiliado_mgmnt"><a routerLink="./afiliado_mgmnt" routerLinkActive="active">
+                  <li *ngIf="afiliado_mgmnt"><a routerLink="./manageAfiliado" routerLinkActive="active">
                     <i class="fa fa-edit"></i> Administrar Afiliado </a>
                   </li>
-                  <li *ngIf="afiliado"><a routerLink="./afiliado" routerLinkActive="active">
+                  <li *ngIf="afiliado"><a routerLink="./createAfiliado" routerLinkActive="active" >
                     <i class="fa fa-edit"></i> Agregar Afiliado </a>
                   </li>
                   <li *ngIf="beneficiario_mgmnt"><a routerLink="./beneficiario_mgmnt" routerLinkActive="active">

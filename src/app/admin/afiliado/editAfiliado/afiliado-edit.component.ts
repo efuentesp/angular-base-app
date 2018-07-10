@@ -3,23 +3,23 @@ import { Router, ActivatedRoute }                                          from 
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 
-import { AfiliadoService }                                  from '../afiliado/afiliado.component.service';
-import { Afiliado }                                         from '../afiliado/afiliado.component.model';
+import { AfiliadoService }                                  from '../../afiliado/afiliado.component.service';
+import { Afiliado }                                         from '../../afiliado/afiliado.component.model';
 
-import { BeneficiarioService }                                  from '../beneficiario/beneficiario.component.service';
-import { Beneficiario }                                         from '../beneficiario/beneficiario.component.model';
+import { BeneficiarioService }                                  from '../../beneficiario/beneficiario.component.service';
+import { Beneficiario }                                         from '../../beneficiario/beneficiario.component.model';
 import { Location } from '@angular/common';
-import { User } from '../user/user.component.model';
+import { User } from '../../user/user.component.model';
 
 @Component ({
     selector: 'app-view',
-    templateUrl: './afiliado.component.html',
-    styleUrls: ['./afiliado.component.css']
+    templateUrl: './afiliado-edit.component.html',
+    styleUrls: ['./afiliado-edit.component.css']
 })
 
-export class AfiliadoComponent implements OnInit {
+export class AfiliadoEditComponent implements OnInit {
 
-    public title = 'Nuevo Afiliado';
+    public title = 'Edit Afiliado';
     public afiliadoList: Afiliado;
     public afiliado: Afiliado;
     public beneficiario: Beneficiario;
@@ -30,14 +30,6 @@ export class AfiliadoComponent implements OnInit {
     public user: User;
     public valueName: string;
     public token: string;
-
-    public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    
-    // Buttons 
-    private searchActive: boolean = false;
-    private updateActive: boolean = false;
-    private createActive: boolean = false;
-    private deleteActive: boolean = false;
 
 	  beneficiarioList: Beneficiario;
 
@@ -60,23 +52,21 @@ export class AfiliadoComponent implements OnInit {
 
         this.afiliado = new Afiliado;
         this.beneficiario = new Beneficiario;
-        this.flag = this.afiliadoService.getEdit();
-        if (this.flag){
-          this.afiliado = this.afiliadoService.getAfiliado();
-          console.log("Numero de Beneficiario: ", this.afiliado.beneficiarioId);
 
-          this.loadNameBeneficiario(this.afiliado);
-        }
-		    this.loadBeneficiarios();
+        this.flag = this.afiliadoService.getEdit();
+      
+        this.afiliado = this.afiliadoService.getAfiliado();
+        this.loadNameBeneficiario(this.afiliado);
+        
+        this.loadBeneficiarios();
         this.flagDelete = this.afiliadoService.getDelete();
-        this.habilita();
     }
 
     save(){
        this.afiliadoService.saveAfiliado(this.afiliado).subscribe(res => {
          if (res.status == 201 || res.status == 200){
             swal('Success...', 'Afiliado save successfully.', 'success');
-            this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
+            this.router.navigate([ '../manageAfiliado' ], { relativeTo: this.route })
          }else if (res.status == 403){
             swal('Error...', 'Usuario no tiene permiso para guardar Afiliado.', 'error');
          }else{
@@ -99,7 +89,7 @@ export class AfiliadoComponent implements OnInit {
           this.afiliadoService.deleteAfiliado(this.afiliado).subscribe(res => {
             if (res.status == 201 || res.status == 200){
               swal('Success...', 'Afiliado item has been deleted successfully.', 'success');
-              this.router.navigate([ '../afiliado_mgmnt' ], { relativeTo: this.route })
+              this.router.navigate([ '../manageAfiliado' ], { relativeTo: this.route })
             }else if (res.status == 403){
               swal('Error...', 'Usuario no tiene permiso para guardar Afiliado.', 'error');
             }else{
@@ -133,30 +123,13 @@ export class AfiliadoComponent implements OnInit {
         this.beneficiarioNombre   = this.beneficiario.nombre + " " + this.beneficiario.apellido_paterno;
       }
     }, error => {
-      swal('Error...', 'Can´t found Beneficiario, change the Beneficiario.', 'error');
+      swal('Warning...', 'Can´t found Beneficiario, change Beneficiario.', 'warning');
     });
   }
 
   setClickedRowBeneficiario(index, beneficiario){
     this.afiliado.beneficiarioId                   = beneficiario.beneficiarioId;
     this.beneficiarioNombre                        = beneficiario.nombre + " " + beneficiario.apellido_paterno;
-  }
-
-  habilita(){
-    this.userAdmin.authorities.forEach(element => {
-      if (element.authority == 'ROLE_AFILIADODELETE'){
-        this.deleteActive = true;
-      }
-      if (element.authority == 'ROLE_AFILIADOCREATE'){
-        this.createActive = true;
-      }
-      if (element.authority == 'ROLE_AFILIADOUPDATE'){
-        this.updateActive = true;
-      }
-      if (element.authority == 'ROLE_AFILIADOSEARCH'){
-        this.searchActive = true;
-      }
-    });
   }
 
 }

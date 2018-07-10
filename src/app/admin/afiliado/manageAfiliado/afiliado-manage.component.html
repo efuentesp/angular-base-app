@@ -44,7 +44,7 @@
 														<th style="max-width:10%">Monto_pension</th>
 														<th style="max-width:10%">Apellido_paterno</th>
 														<th style="max-width:10%">Nombre</th>
-														<th style="max-width:20%"> </th>
+														<th style="max-width:20%">Acciones</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -60,8 +60,8 @@
 													<td style="max-width: 10%">{{afiliado.apellido_paterno}}</td>
 													<td style="max-width: 10%">{{afiliado.nombre}}</td>
 													<td style="max-width: 20%">															<div class="container">
-															<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
-															<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>
+															<button *ngIf="updateActive" class="btn btn-default" (click)="editar(afiliado)"><span class="fa fa-pencil"></span></button>
+															<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar(afiliado)"><span class="fa fa-trash"></span></button>
 														  </div>
 														</td>
 												</tr>
