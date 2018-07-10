@@ -41,7 +41,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr *ngFor="let authority of authorityList | filterAuthority : busquedaAuthority |paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setClickedRowAuthority(i, authority)" >
+											<tr *ngFor="let authority of authorityList | filterAuthority : busquedaAuthority | paginate: {itemsPerPage: 10, currentPage:page, id: 'paginationTableAuthority'}; let i = index" (click)="setClickedRowAuthority(i, authority)" >
 													<td>{{authority.name}}</td>
 													<td>{{authority.enabled}}</td>
 													<td>
@@ -53,7 +53,7 @@
 								</table>
 								<div align="row" align="right">
 									<div align="left" style="margin-top:15px; background: #DDDDDD; width: 35%; position: relative;">
-										<pagination-controls (pageChange)="page = $event" id="paginationTableAfiliado" maxSize="10" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+										<pagination-controls (pageChange)="page = $event" id="paginationTableAuthority" maxSize="10" directionLinks="true" autoHide="false" previousLabel="Anterior" nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
 										</pagination-controls>
 									</div>
 								</div>
