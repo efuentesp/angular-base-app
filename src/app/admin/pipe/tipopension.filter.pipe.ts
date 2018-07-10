@@ -9,9 +9,9 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 export class SearchTipopensionPipe implements PipeTransform {
       transform(items: any[], busquedaTipopension): any {
         return busquedaTipopension && items ? items.filter(item =>
-	(item.nombre.toLowerCase().indexOf(busquedaTipopension.toLowerCase()) !== -1) 
+	((item.nombre+"").toLowerCase().indexOf(busquedaTipopension.toLowerCase()) !== -1) 
 ||	((item.tipopensionId+"").indexOf(busquedaTipopension) !== -1) 
-||	(item.clave.indexOf(busquedaTipopension) !== -1) 
+||	((item.clave+"").indexOf(busquedaTipopension) !== -1) 
         ): items;
     }
 }

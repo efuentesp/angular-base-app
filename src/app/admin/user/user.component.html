@@ -68,14 +68,14 @@
 				<div >
 					<br/>
 					<label class="control-label" for="authority">Authority <span class="required">*</span></label>
-					<select *ngIf="flagDelete" id="selectElem" name="selectElem" #selectElem (change)="setRole(selectElem.value)" class="form-control col-md-12" disabled>
-						<option [ngValue]="null">Selecciona...</option>
+					<select *ngIf="flagDelete" name="selectElem" #selectElem (change)="setRole(selectElem.value)" class="form-control col-md-12" disabled >
+						<option [ngValue]="0">Selecciona...</option>
 						<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}">
 							{{ authority.name }}
 						</option>
 					</select>
-					<select *ngIf="!flagDelete" id="selectElem" name="selectElem" #selectElem (change)="setRole(selectElem.value)"  class="form-control col-md-12" required>
-						<option [ngValue]="null">Selecciona...</option>
+					<select *ngIf="!flagDelete" name="selectElem" #selectElem (change)="setRole(selectElem.value)"  class="form-control col-md-12" required>
+						<option [ngValue]="0">Selecciona...</option>
 						<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}" [selected]="selectedVal === authority.idAuthority ">
 							{{ authority.name }}
 						</option>
