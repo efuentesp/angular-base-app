@@ -75,7 +75,7 @@ export class AuthorityManageComponent implements OnInit {
     this.authorityService.setEdit(false);
     this.authorityService.setDelete(false);
     this.authorityService.clear();
-    this.router.navigate([ '../authority' ], { relativeTo: this.route })  
+    this.router.navigate([ '../createAuthority' ], { relativeTo: this.route })  
   }
 
   editar(){

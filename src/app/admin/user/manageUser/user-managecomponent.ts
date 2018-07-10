@@ -85,7 +85,7 @@ export class UserManageComponent implements OnInit {
     this.userService.setEdit(false);
     this.userService.setDelete(false);
     this.userService.clear();
-    this.router.navigate([ '../user' ], { relativeTo: this.route })
+    this.router.navigate([ '../createUser' ], { relativeTo: this.route })
   }
 
   editar(){
@@ -115,18 +115,6 @@ export class UserManageComponent implements OnInit {
     userAux.idUser = user.idUser;
 
     this.userService.setUser(userAux);
-    
-    console.log("user.authorities",userAux.authorities);
-
-    // userAux.authorities.forEach(element => {
-
-    //   this.authority = element.authority;
-    //   console.log("Elemento: ", element.authority);
-    // });
-
-
-    //this.userServiceAux.setAuth(userAux.authorities);
-    
     this.userService.setEdit(true);
     this.router.navigate([ '../editUser' ], { relativeTo: this.route })
   }
