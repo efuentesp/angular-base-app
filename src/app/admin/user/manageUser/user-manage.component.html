@@ -51,7 +51,8 @@
 														<td>{{user.firstname}}</td>
 														<td>{{user.lastname}}</td>
 														<td>{{user.email}}</td>
-														<td>{{user.enabled}}</td> 
+														<td>{{user.enabled}}</td>
+														
 														<td>
 															<button *ngIf="updateActive" class="btn btn-default" (click)="editar()"><span class="fa fa-pencil"></span></button>
 															<button *ngIf="deleteActive" class="btn btn-default" (click)="eliminar()"><span class="fa fa-trash"></span></button>

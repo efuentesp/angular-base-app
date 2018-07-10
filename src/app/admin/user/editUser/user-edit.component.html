@@ -75,14 +75,13 @@
 						</option>
 					</select>
 					<select *ngIf="!flagDelete" id="selectElem" name="selectElem" ng-model="selectElem" #selectElem (change)="setRole(selectElem.value)"  class="form-control col-md-12">
-						<option [ngValue]="0">Selecciona...</option>
 						<option *ngFor="let authority of authorityList" value="{{authority.idAuthority}}" [selected]="selectedVal === authority.idAuthority ">
 							{{ authority.name }}
 						</option>
 						
 					</select>
 
-					<input class="form-control" #selectedElement="ngModel" selectedElement="selectedElement" name="selectedElement" type="hidden" [(ngModel)]="user.selected" required>
+					<input class="form-control" #selectedElement="ngModel" selectedElement="selectedElement" name="selectedElement" type="hidden" [(ngModel)]="user.selected">
 					
 				</div>
 
