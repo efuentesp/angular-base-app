@@ -23,18 +23,18 @@ export class AuthorityEditComponent implements OnInit {
     public isChecked: boolean;
 
     public userAdmin: User = JSON.parse(localStorage.getItem('currentUser'));
-    
-    // Buttons 
+
+    // Buttons
     private searchActive: boolean = false;
     private updateActive: boolean = false;
     private createActive: boolean = false;
     private deleteActive: boolean = false;
 
-    private selectedLink: boolean= true; 
+    private selectedLink: boolean= true;
 
-    constructor(  
-                private authorityService: AuthorityService, 
-                private location: Location, 
+    constructor(
+                private authorityService: AuthorityService,
+                private location: Location,
                 private router: Router,
                 private route: ActivatedRoute
     ) {}
@@ -42,7 +42,7 @@ export class AuthorityEditComponent implements OnInit {
     ngOnInit() {
         this.authority = new Authority;
 
-        
+
 
         this.flag = this.authorityService.getEdit();
         if (this.flag){
@@ -50,16 +50,16 @@ export class AuthorityEditComponent implements OnInit {
           this.authority = this.authorityService.getAuthority();
           console.log("Valor del check:", this.authority.enabled);
           this.isChecked = this.authority.enabled;
-        
+
         }
 
-        
+
         this.flagDelete = this.authorityService.getDelete();
         console.log("Delete",this.flagDelete );
         this.habilita();
     }
 
-    save(){  
+    save(){
 
 
       // Change to uppercase
@@ -76,7 +76,7 @@ export class AuthorityEditComponent implements OnInit {
         }
       } );
     }
-  
+
     delete(){
       swal({
         title: "Are you sure?",
@@ -95,13 +95,17 @@ export class AuthorityEditComponent implements OnInit {
             }else{
               swal('Error...', 'Authority deleted unsuccessfully.', 'error');
             }
+          }, error => {
+            if( error.status = 412 ){
+              swal('Warning...', 'El Authority no se puede eliminar debido a que esta asociado con usuarios.', 'warning');
+            }
           });
         } else {
           //swal("Cancelled", "Authority deleted unsuccessfully", "error");
         }
       });
     }
-	
+
 	return(authority){
       this.location.back();
   }
@@ -123,20 +127,19 @@ export class AuthorityEditComponent implements OnInit {
     });
   }
 
-  isSelected(val: boolean): boolean   {  
+  isSelected(val: boolean): boolean   {
 
     console.log('isSelected:', val);
 
-        if (!this.selectedLink) {  
-            return false;  
-        }    
-    return (this.selectedLink === val); // if current radio button is selected, return true, else return false  
-  }  
+        if (!this.selectedLink) {
+            return false;
+        }
+    return (this.selectedLink === val); // if current radio button is selected, return true, else return false
+  }
 
-  setradio(e: boolean): void   {  
+  setradio(e: boolean): void   {
     console.log('Valor:', e);
-    this.selectedLink = e;       
-  } 
-  
-}
+    this.selectedLink = e;
+  }
 
+}

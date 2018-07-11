@@ -16,7 +16,7 @@ export class AuthorityService {
     private authority = new Authority();
     private flag :boolean = false;
     private flagDelete :boolean = false;
-    
+
     public user: User = JSON.parse(localStorage.getItem('currentUser'));
 
     constructor(private http: Http) {}
@@ -55,7 +55,7 @@ export class AuthorityService {
         headers.append('Content-Type','application/json');
         headers.append('Authorization','Bearer ' + this.user.token+'');
         let opts = new RequestOptions({ headers: headers });
-        return this.http.delete(this.env.api + "/authority/"+authority.idAuthority, opts).pipe(map(res => res));
+        return this.http.delete(this.env.api + "/authority/"+authority.idAuthority, opts).pipe(map(res => res, error => error));
     }
 
     getAuthorityById(idRol){
@@ -73,19 +73,19 @@ export class AuthorityService {
 
     getAuthority(): Authority {
         var authority: Authority = {
-                    
+
             enabled: this.authority.enabled,
             idAuthority: this.authority.idAuthority,
             name: this.authority.name,
             creationDate:this.authority.creationDate,
             modifiedDate:this.authority.modifiedDate
-				
+
         };
         return authority;
     }
 
     setAuthority(authority: Authority) {
-       
+
             this.isAuthorityFormValid = true;
             this.authority.idAuthority = authority.idAuthority;
             this.authority.enabled = authority.enabled;
@@ -117,7 +117,7 @@ export class AuthorityService {
     setDelete(flagDelete){
         this.flagDelete = flagDelete;
       }
-    
+
     getDelete(){
         return this.flagDelete;
     }
