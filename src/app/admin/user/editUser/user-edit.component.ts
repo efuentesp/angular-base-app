@@ -73,19 +73,6 @@ export class UserEditComponent implements OnInit {
          this.loadAuthority();
          this.flagDelete = this.userService.getDelete();
          this.habilita();
-         //this.checkAuthority();
-
-    }
-
-    checkAuthority(){
-
-      for (let i = 0; i < this.authorityList.length; i++) {
-          if(this.authorityList[i].idAuthority == this.selectedVal){
-            this.selectedValue = this.selectedVal;
-          }else{
-            swal('Success...', 'The assigned role is inactive, please chege role.', 'warning');
-          }
-      }
     }
 
 
@@ -148,6 +135,7 @@ export class UserEditComponent implements OnInit {
       this.authorityService.getAllAuthority().subscribe( data => {
         if (data) {
           this.authorityList = data;
+          this.parseData(data);
         }}, error => {
           swal('Error...', 'An error occurred while calling the authorities.', 'error');
         });
@@ -189,6 +177,23 @@ export class UserEditComponent implements OnInit {
         this.searchActive = true;
       }
     });
+  }
+
+  parseData(jsonData: string) {
+
+    let countMerge = 0;
+
+    for (let i = 0; i < jsonData.length; i++) {
+         if(jsonData[i]['idAuthority'] === this.selectedVal){
+            this.user.selected = this.selectedVal;
+            countMerge++;
+        }
+    }
+
+    if(countMerge == 0) {
+        swal('Success...', 'The assigned role is inactive, please change role.', 'warning');
+    }
+
   }
 
 }
