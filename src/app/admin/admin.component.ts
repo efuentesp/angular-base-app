@@ -7,6 +7,9 @@ import { Authority } from '../user/authorities.component.model';
 import { AfiliadoService } from './afiliado/afiliado.component.service';
 import { Afiliado } from './afiliado/afiliado.component.model';
 
+declare var jQuery:any;
+declare var $:any;
+
 @Component({
   templateUrl: 'admin.components.html'
 })
@@ -57,10 +60,10 @@ export class AdminComponent {
 
   ngOnInit() {
 
-    
+
     // Get token from user object
     this.userAdmin = JSON.parse(localStorage.getItem('currentUser'));
-    
+
 
     this.authService.getMenu(this.userAdmin.token).subscribe(result => {
     // Fill the user object
@@ -118,7 +121,7 @@ export class AdminComponent {
       if (element.authority == 'ROLE_TIPOPENSIONCREATE'){
         this.tipopension = true;
       }
- 
+
       // Manage  --> (6)
       if (element.authority == 'ROLE_MANAGESEARCH'){
       this.manage = true;
@@ -164,8 +167,13 @@ export class AdminComponent {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
-    this.router.navigate(['login']); 
-}
+    this.router.navigate(['login']);
+  }
 
+  resetVerticalScroll(): void {
+    $('html, body').animate({
+        scrollTop: $("#pnlMain").offset().top
+    }, 20);
+  }
 
 }
