@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   //api: "http://localhost:8081/SADF"
-  api: "http://172.16.70.0:8080/SADF"
+  //api: "http://172.16.70.0:8080/SADF"
+  api: "http://172.16.70.91:8082/SADF"  
 };
 
 /*
